@@ -1,2 +1,2 @@
-# SDA - Sistema de Diagnosticos Automaticos
+# SAD - Sistema Automatico de Diagnosticos
 Projeto de PLP
