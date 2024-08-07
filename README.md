@@ -1,2 +1,2 @@
-# SAD - Sistema Automatico de Diagnosticos
+# SAD - Sistema Automático de Diagnosticos
 Projeto de PLP
