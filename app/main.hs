@@ -4,4 +4,4 @@ import UserIO
 
 main::IO()
 main = do
-    UserIO.startMenu
+    showStartMenu
