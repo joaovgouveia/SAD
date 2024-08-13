@@ -2,6 +2,18 @@
 module UserIO where
 import Controller
 
-startMenu::IO()
-startMenu =
-    print "palce_holder"
+showStartMenu::IO()
+showStartMenu = do
+    putStrLn "place_holder"
+    showMenu
+
+showMenu::IO()
+showMenu = do
+    command <- getLine
+    putStrLn ("> " ++ execute command)
+    showMenu
+    
+execute::String -> String
+execute c
+    | c == "duck" = duck
+    | otherwise = "Funcao nao existe"
