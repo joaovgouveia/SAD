@@ -1,19 +1,29 @@
 -- Interface do usuário, pega entrada e mostra saída. Se comunica com o controller
 module UserIO where
 import Controller
+import System.Exit ( exitSuccess )
 
 showStartMenu::IO()
 showStartMenu = do
-    putStrLn "place_holder"
+    putStrLn "=====================================================\nBem vindo ao SAD (Sistema Automático de diagnósticos)\n=====================================================\ndigite 'help' para abrir a lista de funções do programa."
     showMenu
 
 showMenu::IO()
 showMenu = do
-    command <- getLine
-    putStrLn ("> " ++ execute command)
+    putStrLn "----------------------------------\n> Opção:"
+    line <- getLine
+    if line == "exit" then exit
+    else putStrLn ("Resposta:\n" ++ execute (splitLine ' ' line))
     showMenu
-    
-execute::String -> String
-execute c
-    | c == "duck" = duck
-    | otherwise = "Funcao nao existe"
+
+splitLine :: Eq a => a -> [a] -> [[a]]
+splitLine x y = func x y [[]]
+    where
+        func x [] z = reverse $ map reverse z
+        func x (y:ys) (z:zs) = if y==x then 
+            func x ys ([]:(z:zs)) 
+        else 
+            func x ys ((y:z):zs)
+
+exit::IO()
+exit = exitSuccess
