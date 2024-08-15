@@ -1,0 +1,1 @@
+module SymptomController where
