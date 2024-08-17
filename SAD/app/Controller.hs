@@ -1,6 +1,6 @@
 module Controller where
 
-import qualified Medications.MedicartionController as MC
+import qualified Medications.MedicationController as MC
 
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> String

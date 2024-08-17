@@ -44,8 +44,8 @@ executable SAD-exe
   other-modules:
       Controller
       Diseases.Disease
-      Medications.MedicartionController
       Medications.Medication
+      Medications.MedicationController
       Symptons.Symptom
       Symptons.SymptomController
       UserIO

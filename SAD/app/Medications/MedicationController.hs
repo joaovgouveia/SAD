@@ -1,4 +1,4 @@
-module Medications.MedicartionController where
+module Medications.MedicationController where
 
 import Medications.Medication
 import Data.Aeson (encode)
