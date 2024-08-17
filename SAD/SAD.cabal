@@ -43,9 +43,13 @@ executable SAD-exe
   main-is: Main.hs
   other-modules:
       Controller
-      MedicationModule.MedicartionController
-      MedicationModule.Medication
+      Diseases.Disease
+      Medications.MedicartionController
+      Medications.Medication
+      Symptons.Symptom
+      Symptons.SymptomController
       UserIO
+      Users.UserModule
       Paths_SAD
   autogen-modules:
       Paths_SAD

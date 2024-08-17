@@ -1,6 +1,6 @@
-module MedicationModule.MedicartionController where
+module Medications.MedicartionController where
 
-import MedicationModule.Medication
+import Medications.Medication
 import Data.Aeson (encode)
 import qualified Data.ByteString.Lazy as B
 

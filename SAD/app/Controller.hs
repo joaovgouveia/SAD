@@ -1,6 +1,6 @@
 module Controller where
 
-import qualified MedicationModule.MedicartionController as MC
+import qualified Medications.MedicartionController as MC
 
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> String
@@ -39,7 +39,9 @@ addMedication args =
     in "Medicação adicionada: " ++ show medication
 
 viewMedication :: [String] -> String
-viewMedication args = ""
+viewMedication args =
+    let medication = MC.createMedicationFromList args
+    in "Medicação:" ++ show medication
 
 listMedications :: [String] -> String
 listMedications args = ""
