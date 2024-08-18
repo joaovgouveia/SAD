@@ -1,4 +1,3 @@
--- Inicializa a aplicação
 module Main where
 import UserIO
 
