@@ -1,28 +1,27 @@
 module UserIO where
-import Controller
-import System.Exit ( exitSuccess )
 
-showStartMenu::IO()
+import Controller (execute)
+import System.IO (hFlush, stdout)
+
+-- Função principal do menu inicial
+showStartMenu :: IO ()
 showStartMenu = do
-    putStrLn "=====================================================\nBem vindo ao SAD (Sistema Automático de diagnósticos)\n=====================================================\ndigite 'help' para abrir a lista de funções do programa."
-    showMenu
-
-showMenu::IO()
-showMenu = do
-    putStrLn "----------------------------------\n> Opção:"
+    putStrLn "> Opção: "
+    hFlush stdout
     line <- getLine
-    if line == "exit" then exit
-    else putStrLn ("Resposta:\n" ++ execute (splitLine ' ' line))
-    showMenu
+    if null line
+        then putStrLn "Nenhum comando foi digitado."
+        else do
+            resposta <- execute (splitLine ' ' line)
+            putStrLn ("Resposta:\n" ++ resposta)
+    -- Chama a função novamente para o próximo comando
+    showStartMenu
 
-splitLine :: Eq a => a -> [a] -> [[a]]
-splitLine x y = func x y [[]]
-    where
-        func x [] z = reverse $ map reverse z
-        func x (y:ys) (z:zs) = if y==x then 
-            func x ys ([]:(z:zs)) 
-        else 
-            func x ys ((y:z):zs)
-
-exit::IO()
-exit = exitSuccess
+-- Função auxiliar para dividir a linha de entrada em comandos e argumentos
+splitLine :: Char -> String -> [String]
+splitLine _ "" = []
+splitLine delimiter str = 
+    let (word, rest) = break (== delimiter) str
+    in word : case rest of
+                [] -> []
+                (_:rest') -> splitLine delimiter rest'
