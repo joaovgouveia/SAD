@@ -1,129 +1,196 @@
 {
-    "diseases": [
-        {
-            "doenca": "DIABETES",
-            "especialidade_relacionada": "CLINICO_GERAL",
-            "sintomas_associados": ["sede", "vontade de urinar", "fadiga"]
-        },
-        {
-            "doenca": "HIPERTENSAO ARTERIAL",
-            "especialidade_relacionada": "CLINICO_GERAL",
-            "sintomas_associados": ["dor de cabeca", "tontura", "dor no peito", "falta de ar"]
-        },
-        {
-            "doenca": "INFECCAO_URINARIA",
-            "especialidade_relacionada": "CLINICO_GERAL",
-            "sintomas_associados": ["dor ao urinar", "vontade de urinar", "dor abdominal", "urina com sangue", "febre"]
-        },
-        {
-            "doenca": "GASTRITE",
-            "especialidade_relacionada": "CLINICO_GERAL",
-            "sintomas_associados": ["dor estomacal", "nausea", "vomito", "indigestao"]
-        },
-        {
-            "doenca": "RESFRIADO",
-            "especialidade_relacionada": "CLINICO_GERAL",
-            "sintomas_associados": ["coriza", "dor de garganta", "tosse", "espirro", "congestao nasal", "febre"]
-        },
-        {
-            "doenca": "INFARTO",
-            "especialidade_relacionada": "CARDIOLOGISTA",
-            "sintomas_associados": ["dor no peito", "falta de ar", "nausea", "sudorese", "dor estomacal"]
-        },
-        {
-            "doenca": "INSUFICIENCIA_CARDIACA",
-            "especialidade_relacionada": "CARDIOLOGISTA",
-            "sintomas_associados": ["falta de ar", "inchaco nas pernas", "fadiga", "tosse", "ganho de peso"]
-        },
-        {
-            "doenca": "ARRITMIA",
-            "especialidade_relacionada": "CARDIOLOGISTA",
-            "sintomas_associados": ["palpitacao", "falta de ar", "cansaco", "dor no peito", "batimento irregular"]
-        },
-        {
-            "doenca": "HIPERTENSAO PULMONAR",
-            "especialidade_relacionada": "CARDIOLOGISTA",
-            "sintomas_associados": ["falta de ar", "fadiga", "dor no peito", "inchaco nas pernas", "tosse"]
-        },
-        {
-            "doenca": "DOENCA_VALVULAR_CARDIACA",
-            "especialidade_relacionada": "CARDIOLOGISTA",
-            "sintomas_associados": ["falta de ar", "dor no peito", "tontura", "palpitacao"]
-        },
-        {
-            "doenca": "TDAH",
-            "especialidade_relacionada": "NEUROLOGISTA",
-            "sintomas_associados": ["desatencao", "hiperatividade", "impulsividade", "dificuldade organizacional"]
-        },
-        {
-            "doenca": "ENXAQUECA",
-            "especialidade_relacionada": "NEUROLOGISTA",
-            "sintomas_associados": ["dor de cabeca", "nausea", "vomito", "sensibilidade a luz"]
-        },
-        {
-            "doenca": "SINDROME_DE_GUILLAIN_BARRE",
-            "especialidade_relacionada": "NEUROLOGISTA",
-            "sintomas_associados": ["fraqueza", "desconforto muscular", "reflexos diminuidos", "dificuldade respiratoria", "dor intensa"]
-        },
-        {
-            "doenca": "PARKINSON",
-            "especialidade_relacionada": "NEUROLOGISTA",
-            "sintomas_associados": ["tremores", "rigidez muscular", "dificuldade para falar"]
-        },
-        {
-            "doenca": "EPILEPSIA",
-            "especialidade_relacionada": "NEUROLOGISTA",
-            "sintomas_associados": ["convulsao", "perda de consciencia", "movimentos involuntarios", "confusao"]
-        },
-        {
-            "doenca": "TENDINITE",
-            "especialidade_relacionada": "ORTOPEDISTA",
-            "sintomas_associados": ["dor intensa", "inchaco", "dificuldade de movimento", "sensibilidade ao toque"]
-        },
-        {
-            "doenca": "OSTEOPOROSE",
-            "especialidade_relacionada": "ORTOPEDISTA",
-            "sintomas_associados": ["dor nas costas", "perda de altura", "postura encurvada", "fraturas faceis"]
-        },
-        {
-            "doenca": "ARTRITE",
-            "especialidade_relacionada": "ORTOPEDISTA",
-            "sintomas_associados": ["dor nas articulacoes", "inchaco", "dificuldade de movimento", "rigidez muscular"]
-        },
-        {
-            "doenca": "HERNIA_DE_DISCO",
-            "especialidade_relacionada": "ORTOPEDISTA",
-            "sintomas_associados": ["dor nas costas", "fraqueza", "dificuldade de movimento"]
-        },
-        {
-            "doenca": "ESCOLIOSE",
-            "especialidade_relacionada": "ORTOPEDISTA",
-            "sintomas_associados": ["dor nas costas", "desconforto muscular", "postura encurvada"]
-        },
-        {
-            "doenca": "ASMA",
-            "especialidade_relacionada": "PNEUMOLOGISTA",
-            "sintomas_associados": ["dificuldade respiratoria", "tosse", "chiado ao respirar", "pressao no peito"]
-        },
-        {
-            "doenca": "PNEUMONIA",
-            "especialidade_relacionada": "PNEUMOLOGISTA",
-            "sintomas_associados": ["febre", "tosse", "producao de muco", "falta de ar"]
-        },
-        {
-            "doenca": "FIBROSE_PULMONAR",
-            "especialidade_relacionada": "PNEUMOLOGISTA",
-            "sintomas_associados": ["falta de ar", "tosse seca", "fadiga", "dificuldade respiratoria"]
-        },
-        {
-            "doenca": "TUBERCULOSE",
-            "especialidade_relacionada": "PNEUMOLOGISTA",
-            "sintomas_associados": ["tosse", "febre", "sudorese noturna", "perda de peso"]
-        },
-        {
-            "doenca": "BRONQUITE",
-            "especialidade_relacionada": "PNEUMOLOGISTA",
-            "sintomas_associados": ["tosse", "producao de muco", "falta de ar", "chiado ao respirar", "dor no peito"]
-        }
-    ]
+  "diseases": [
+    {
+      "doenca": "DIABETES",
+      "especialidade_relacionada": "CLINICO_GERAL",
+      "sintomas_associados": ["sede", "vontade de urinar", "fadiga"]
+    },
+    {
+      "doenca": "HIPERTENSAO ARTERIAL",
+      "especialidade_relacionada": "CLINICO_GERAL",
+      "sintomas_associados": [
+        "dor de cabeca",
+        "tontura",
+        "dor no peito",
+        "falta de ar"
+      ]
+    },
+    {
+      "doenca": "INFECCAO_URINARIA",
+      "especialidade_relacionada": "CLINICO_GERAL",
+      "sintomas_associados": [
+        "dor ao urinar",
+        "vontade de urinar",
+        "dor abdominal",
+        "urina com sangue",
+        "febre"
+      ]
+    },
+    {
+      "doenca": "GASTRITE",
+      "especialidade_relacionada": "CLINICO_GERAL",
+      "sintomas_associados": ["dor estomacal", "nausea", "vomito", "indigestao"]
+    },
+    {
+      "doenca": "INSUFICIENCIA_CARDIACA",
+      "especialidade_relacionada": "CARDIOLOGISTA",
+      "sintomas_associados": [
+        "falta de ar",
+        "inchaco nas pernas",
+        "fadiga",
+        "tosse",
+        "ganho de peso"
+      ]
+    },
+    {
+      "doenca": "ARRITMIA",
+      "especialidade_relacionada": "CARDIOLOGISTA",
+      "sintomas_associados": [
+        "palpitacao",
+        "falta de ar",
+        "cansaco",
+        "dor no peito",
+        "batimento irregular"
+      ]
+    },
+    {
+      "doenca": "HIPERTENSAO PULMONAR",
+      "especialidade_relacionada": "CARDIOLOGISTA",
+      "sintomas_associados": [
+        "falta de ar",
+        "fadiga",
+        "dor no peito",
+        "inchaco nas pernas",
+        "tosse"
+      ]
+    },
+    {
+      "doenca": "DOENCA_VALVULAR_CARDIACA",
+      "especialidade_relacionada": "CARDIOLOGISTA",
+      "sintomas_associados": [
+        "falta de ar",
+        "dor no peito",
+        "tontura",
+        "palpitacao"
+      ]
+    },
+    {
+      "doenca": "TDAH",
+      "especialidade_relacionada": "NEUROLOGISTA",
+      "sintomas_associados": [
+        "desatencao",
+        "hiperatividade",
+        "impulsividade",
+        "dificuldade organizacional"
+      ]
+    },
+    {
+      "doenca": "ENXAQUECA",
+      "especialidade_relacionada": "NEUROLOGISTA",
+      "sintomas_associados": [
+        "dor de cabeca",
+        "nausea",
+        "vomito",
+        "sensibilidade a luz"
+      ]
+    },
+    {
+      "doenca": "PARKINSON",
+      "especialidade_relacionada": "NEUROLOGISTA",
+      "sintomas_associados": [
+        "tremores",
+        "rigidez muscular",
+        "dificuldade para falar"
+      ]
+    },
+    {
+      "doenca": "EPILEPSIA",
+      "especialidade_relacionada": "NEUROLOGISTA",
+      "sintomas_associados": [
+        "convulsao",
+        "perda de consciencia",
+        "movimentos involuntarios",
+        "confusao"
+      ]
+    },
+    {
+      "doenca": "TENDINITE",
+      "especialidade_relacionada": "ORTOPEDISTA",
+      "sintomas_associados": [
+        "dor intensa",
+        "inchaco",
+        "dificuldade de movimento",
+        "sensibilidade ao toque"
+      ]
+    },
+    {
+      "doenca": "OSTEOPOROSE",
+      "especialidade_relacionada": "ORTOPEDISTA",
+      "sintomas_associados": [
+        "dor nas costas",
+        "perda de altura",
+        "postura encurvada",
+        "fraturas faceis"
+      ]
+    },
+    {
+      "doenca": "HERNIA_DE_DISCO",
+      "especialidade_relacionada": "ORTOPEDISTA",
+      "sintomas_associados": [
+        "dor nas costas",
+        "fraqueza",
+        "dificuldade de movimento"
+      ]
+    },
+    {
+      "doenca": "ESCOLIOSE",
+      "especialidade_relacionada": "ORTOPEDISTA",
+      "sintomas_associados": [
+        "dor nas costas",
+        "desconforto muscular",
+        "postura encurvada"
+      ]
+    },
+    {
+      "doenca": "ASMA",
+      "especialidade_relacionada": "PNEUMOLOGISTA",
+      "sintomas_associados": [
+        "dificuldade respiratoria",
+        "tosse",
+        "chiado ao respirar",
+        "pressao no peito"
+      ]
+    },
+    {
+      "doenca": "PNEUMONIA",
+      "especialidade_relacionada": "PNEUMOLOGISTA",
+      "sintomas_associados": [
+        "febre",
+        "tosse",
+        "producao de muco",
+        "falta de ar"
+      ]
+    },
+    {
+      "doenca": "FIBROSE_PULMONAR",
+      "especialidade_relacionada": "PNEUMOLOGISTA",
+      "sintomas_associados": [
+        "falta de ar",
+        "tosse seca",
+        "fadiga",
+        "dificuldade respiratoria"
+      ]
+    },
+    {
+      "doenca": "BRONQUITE",
+      "especialidade_relacionada": "PNEUMOLOGISTA",
+      "sintomas_associados": [
+        "tosse",
+        "producao de muco",
+        "falta de ar",
+        "chiado ao respirar",
+        "dor no peito"
+      ]
+    }
+  ]
 }
