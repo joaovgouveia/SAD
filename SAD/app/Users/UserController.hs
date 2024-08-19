@@ -8,33 +8,37 @@ import qualified Data.ByteString.Lazy as B
 import Data.Maybe (fromMaybe)
 import Data.Aeson.Types (parseJSON)
 
-main :: IO ()
-main = do
-    result <- viewMedicos
-    putStrLn result
-
 data Medico = Medico {
-    nome                :: String,
+    id                  :: String,
+    funcao              :: String,
     especialidade       :: String,
-    horariosAtendimento :: [String],
-    dias_atendimento :: [String]
+    dias_atendimento    :: [String],
+    horarios_atendimento :: [String],
+    nome                :: String,
+    pacientes_atendidos :: String,
+    senha               :: String
 } deriving (Show)
 
 instance FromJSON Medico where
     parseJSON = withObject "Medico" $ \v -> Medico
-        <$> v .: fromString "nome"
+        <$> v .: fromString "id"
+        <*> v .: fromString "funcao"
         <*> v .: fromString "especialidade"
-        <*> v .: fromString "horarios_atendimento"
         <*> v .: fromString "dias_atendimento"
+        <*> v .: fromString "horarios_atendimento"
+        <*> v .: fromString "nome"
+        <*> v .: fromString "pacientes_atendidos"
+        <*> v .: fromString "senha"
 
 viewMedicos :: IO String
 viewMedicos = do
-    content <- B.readFile "./Users/Medicos.JSON"
+    content <- B.readFile "./Users/Users.JSON"
     let medicos = fromMaybe [] (decode content :: Maybe [Medico])
-        result = concatMap formatMedico medicos
+        medicosFiltrados = filter (\m -> funcao m == "MEDICO") medicos
+        result = concatMap formatMedico medicosFiltrados
     return result
   where
     formatMedico m = "Nome: " ++ nome m ++ "\n" ++
                      "Especialidade: " ++ especialidade m ++ "\n" ++
-                     "Horários de Atendimento: " ++ unwords (horariosAtendimento m) ++ "\n" ++
-                     "Dias de Atendimento: " ++ unwords (dias_atendimento m) ++ "\n\n"
+                     "Dias de Atendimento: " ++ unwords (dias_atendimento m) ++ "\n" ++
+                     "Horários de Atendimento: " ++ unwords (horarios_atendimento m) ++ "\n\n"
