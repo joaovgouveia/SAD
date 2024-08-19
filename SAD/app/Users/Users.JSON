@@ -1,116 +1,122 @@
-{
-    "users": [
-      {
-        "id": "ADMLPS",
-        "funcao": "ADMINISTRADOR",
-        "nome": "Lucas Pereira da Silva",
-        "senha": "ADMLPSSAD"
-      },
-      {
-        "id": "SECIFR",
-        "funcao": "SECRETARIA",
-        "nome": "Isabela Fernandes Rocha",
-        "senha": "SECIFRSAD"
-      },
-      {
-        "id": "MCARDGCS",
-        "funcao": "MEDICO",
-        "especialidade": "CARDIOLOGISTA",
-        "dias_atendimento": ["SEGUNDA", "TERCA", "QUARTA"],
-        "horarios_atendimento": ["08h00-12h00", "13h00-17h00"],
-        "pacientes_atendidos": "0",
-        "nome": "Gabriel Costa Santos",
-        "senha": "MCARDGCSSAD"
-      },
-      {
-        "id": "MCGROM",
-        "funcao": "MEDICO",
-        "especialidade": "CLINICO_GERAL",
-        "dias_atendimento": ["QUARTA", "QUINTA", "SEXTA"],
-        "horarios_atendimento": ["09h00-13h00", "13h00-18h00"],
-        "pacientes_atendidos": "0",
-        "nome": "Rafael Oliveria Martins",
-        "senha": "MCGROMSAD"
-      },
-      {
-        "id": "MNEULSNF",
-        "funcao": "MEDICO",
-        "especialidade": "NEUROLOGISTA",
-        "dias_atendimento": ["SEGUNDA", "QUARTA", "SEXTA"],
-        "horarios_atendimento": ["08h30-12h30", "13h30-17h30"],
-        "pacientes_atendidos": "0",
-        "nome": "Luciano Souza do Nascimento Filho",
-        "senha": "MNEULSNFSAD"
-      },
-      {
-        "id": "MORTTCL",
-        "funcao": "MEDICO",
-        "especialidade": "ORTOPEDISTA",
-        "dias_atendimento": ["TERCA", "QUINTA"],
-        "horarios_atendimento": ["10h00-14h00", "15h00-19h00"],
-        "pacientes_atendidos": "0",
-        "nome": "Thiago Carvalho Lima",
-        "senha": "MORTTCLSAD"
-      },
-      {
-        "id": "MPNEULGA",
-        "funcao": "MEDICO",
-        "especialidade": "PNEUMOLOGISTA",
-        "dias_atendimento": ["SEGUNDA", "TERCA", "QUARTA", "QUINTA", "SEXTA"],
-        "horarios_atendimento": ["07h00-11h00", "12h00-16h00"],
-        "pacientes_atendidos": "0",
-        "nome": "Leonardo Gomes Andrade",
-        "senha": "MPNEULGASAD"
-      },
-      {
-        "id": "MCARDACS",
-        "funcao": "MEDICO",
-        "especialidade": "CARDIOLOGISTA",
-        "dias_atendimento": ["SEGUNDA", "QUARTA"],
-        "horarios_atendimento": ["08h30-12h00", "13h00-16h30"],
-        "pacientes_atendidos": "0",
-        "nome": "Ana Carolina Silva",
-        "senha": "MCARDACSSAD"
-      },
-      {
-        "id": "MCGBOS",
-        "funcao": "MEDICO",
-        "especialidade": "CLINICO_GERAL",
-        "dias_atendimento": ["TERCA", "QUINTA"],
-        "horarios_atendimento": ["09h00-12h30", "13h30-17h00"],
-        "pacientes_atendidos": "0",
-        "nome": "Beatriz Oliveira Santos",
-        "senha": "MCGBOSSAD"
-      },
-      {
-        "id": "MNEUMCP",
-        "funcao": "MEDICO",
-        "especialidade": "NEUROLOGISTA",
-        "dias_atendimento": ["SEGUNDA", "QUARTA", "SEXTA"],
-        "horarios_atendimento": ["08h00-12h00", "13h00-16h00"],
-        "pacientes_atendidos": "0",
-        "nome": "Mariana Costa Pereira",
-        "senha": "MNEUMCPSAD"
-      },
-      {
-        "id": "MORTRAS",
-        "funcao": "MEDICO",
-        "especialidade": "ORTOPEDISTA",
-        "dias_atendimento": ["TERCA", "SEXTA"],
-        "horarios_atendimento": ["10h00-13h00", "14h00-17h00"],
-        "pacientes_atendidos": "0",
-        "nome": "Rafael Almeida Souza",
-        "senha": "MORTRASSAD"
-      },
-      {
-        "id": "MPNEUGHL",
-        "funcao": "MEDICO",
-        "especialidade": "PNEUMOLOGISTA",
-        "dias_atendimento": ["QUARTA", "QUINTA"],
-        "horarios_atendimento": ["09h30-13h00", "14h00-17h30"],
-        "pacientes_atendidos": "0",
-        "nome": "Gabriel Henrique Lima",
-        "senha": "MPNEUGHLSAD"
-      }
-    ]
+[
+  {
+    "id": "ADMLPS",
+    "funcao": "ADMINISTRADOR",
+    "especialidade": "null",
+    "dias_atendimento": [],
+    "horarios_atendimento": [],
+    "nome": "Lucas Pereira da Silva",
+    "pacientes_atendidos": "null",
+    "senha": "ADMLPSSAD"
+  },
+  {
+    "id": "SECIFR",
+    "funcao": "SECRETARIA",
+    "especialidade": "null",
+    "dias_atendimento": [],
+    "horarios_atendimento": [],
+    "nome": "Isabela Fernandes Rocha",
+    "pacientes_atendidos": "null",
+    "senha": "SECIFRSAD"
+  },
+  {
+    "id": "MCARDGCS",
+    "funcao": "MEDICO",
+    "especialidade": "CARDIOLOGISTA",
+    "dias_atendimento": ["SEGUNDA", "TERCA", "QUARTA"],
+    "horarios_atendimento": ["08h00-12h00", "13h00-17h00"],
+    "pacientes_atendidos": "0",
+    "nome": "Gabriel Costa Santos",
+    "senha": "MCARDGCSSAD"
+  },
+  {
+    "id": "MCGROM",
+    "funcao": "MEDICO",
+    "especialidade": "CLINICO_GERAL",
+    "dias_atendimento": ["QUARTA", "QUINTA", "SEXTA"],
+    "horarios_atendimento": ["09h00-13h00", "13h00-18h00"],
+    "pacientes_atendidos": "0",
+    "nome": "Rafael Oliveria Martins",
+    "senha": "MCGROMSAD"
+  },
+  {
+    "id": "MNEULSNF",
+    "funcao": "MEDICO",
+    "especialidade": "NEUROLOGISTA",
+    "dias_atendimento": ["SEGUNDA", "QUARTA", "SEXTA"],
+    "horarios_atendimento": ["08h30-12h30", "13h30-17h30"],
+    "pacientes_atendidos": "0",
+    "nome": "Luciano Souza do Nascimento Filho",
+    "senha": "MNEULSNFSAD"
+  },
+  {
+    "id": "MORTTCL",
+    "funcao": "MEDICO",
+    "especialidade": "ORTOPEDISTA",
+    "dias_atendimento": ["TERCA", "QUINTA"],
+    "horarios_atendimento": ["10h00-14h00", "15h00-19h00"],
+    "pacientes_atendidos": "0",
+    "nome": "Thiago Carvalho Lima",
+    "senha": "MORTTCLSAD"
+  },
+  {
+    "id": "MPNEULGA",
+    "funcao": "MEDICO",
+    "especialidade": "PNEUMOLOGISTA",
+    "dias_atendimento": ["SEGUNDA", "TERCA", "QUARTA", "QUINTA", "SEXTA"],
+    "horarios_atendimento": ["07h00-11h00", "12h00-16h00"],
+    "pacientes_atendidos": "0",
+    "nome": "Leonardo Gomes Andrade",
+    "senha": "MPNEULGASAD"
+  },
+  {
+    "id": "MCARDACS",
+    "funcao": "MEDICO",
+    "especialidade": "CARDIOLOGISTA",
+    "dias_atendimento": ["SEGUNDA", "QUARTA"],
+    "horarios_atendimento": ["08h30-12h00", "13h00-16h30"],
+    "pacientes_atendidos": "0",
+    "nome": "Ana Carolina Silva",
+    "senha": "MCARDACSSAD"
+  },
+  {
+    "id": "MCGBOS",
+    "funcao": "MEDICO",
+    "especialidade": "CLINICO_GERAL",
+    "dias_atendimento": ["TERCA", "QUINTA"],
+    "horarios_atendimento": ["09h00-12h30", "13h30-17h00"],
+    "pacientes_atendidos": "0",
+    "nome": "Beatriz Oliveira Santos",
+    "senha": "MCGBOSSAD"
+  },
+  {
+    "id": "MNEUMCP",
+    "funcao": "MEDICO",
+    "especialidade": "NEUROLOGISTA",
+    "dias_atendimento": ["SEGUNDA", "QUARTA", "SEXTA"],
+    "horarios_atendimento": ["08h00-12h00", "13h00-16h00"],
+    "pacientes_atendidos": "0",
+    "nome": "Mariana Costa Pereira",
+    "senha": "MNEUMCPSAD"
+  },
+  {
+    "id": "MORTRAS",
+    "funcao": "MEDICO",
+    "especialidade": "ORTOPEDISTA",
+    "dias_atendimento": ["TERCA", "SEXTA"],
+    "horarios_atendimento": ["10h00-13h00", "14h00-17h00"],
+    "pacientes_atendidos": "0",
+    "nome": "Rafael Almeida Souza",
+    "senha": "MORTRASSAD"
+  },
+  {
+    "id": "MPNEUGHL",
+    "funcao": "MEDICO",
+    "especialidade": "PNEUMOLOGISTA",
+    "dias_atendimento": ["QUARTA", "QUINTA"],
+    "horarios_atendimento": ["09h30-13h00", "14h00-17h30"],
+    "pacientes_atendidos": "0",
+    "nome": "Gabriel Henrique Lima",
+    "senha": "MPNEUGHLSAD"
   }
+]
