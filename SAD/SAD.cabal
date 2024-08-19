@@ -49,6 +49,7 @@ executable SAD-exe
       Symptons.Symptom
       Symptons.SymptomController
       UserIO
+      Users.UserController
       Users.UserModule
       Paths_SAD
   autogen-modules:

@@ -1,0 +1,62 @@
+[
+  {
+    "especialidade": "CARDIOLOGISTA",
+    "dias_atendimento": ["SEGUNDA", "TERCA", "QUARTA"],
+    "horarios_atendimento": ["08h00-12h00", "13h00-17h00"],
+    "nome": "Gabriel Costa Santos"
+  },
+  {
+    "especialidade": "CLINICO_GERAL",
+    "dias_atendimento": ["QUARTA", "QUINTA", "SEXTA"],
+    "horarios_atendimento": ["09h00-13h00", "13h00-18h00"],
+    "nome": "Rafael Oliveria Martins"
+  },
+  {
+    "especialidade": "NEUROLOGISTA",
+    "dias_atendimento": ["SEGUNDA", "QUARTA", "SEXTA"],
+    "horarios_atendimento": ["08h30-12h30", "13h30-17h30"],
+    "nome": "Luciano Souza do Nascimento Filho"
+  },
+  {
+    "especialidade": "ORTOPEDISTA",
+    "dias_atendimento": ["TERCA", "QUINTA"],
+    "horarios_atendimento": ["10h00-14h00", "15h00-19h00"],
+    "nome": "Thiago Carvalho Lima"
+  },
+  {
+    "especialidade": "PNEUMOLOGISTA",
+    "dias_atendimento": ["SEGUNDA", "TERCA", "QUARTA", "QUINTA", "SEXTA"],
+    "horarios_atendimento": ["07h00-11h00", "12h00-16h00"],
+    "nome": "Leonardo Gomes Andrade"
+  },
+  {
+    "especialidade": "CARDIOLOGISTA",
+    "dias_atendimento": ["SEGUNDA", "QUARTA"],
+    "horarios_atendimento": ["08h30-12h00", "13h00-16h30"],
+    "nome": "Ana Carolina Silva"
+  },
+  {
+    "especialidade": "CLINICO_GERAL",
+    "dias_atendimento": ["TERCA", "QUINTA"],
+    "horarios_atendimento": ["09h00-12h30", "13h30-17h00"],
+    "nome": "Beatriz Oliveira Santos"
+  },
+  {
+    "especialidade": "NEUROLOGISTA",
+    "dias_atendimento": ["SEGUNDA", "QUARTA", "SEXTA"],
+    "horarios_atendimento": ["08h00-12h00", "13h00-16h00"],
+    "nome": "Mariana Costa Pereira"
+  },
+  {
+    "especialidade": "ORTOPEDISTA",
+    "dias_atendimento": ["TERCA", "SEXTA"],
+    "horarios_atendimento": ["10h00-13h00", "14h00-17h00"],
+    "nome": "Rafael Almeida Souza"
+  },
+  {
+    "especialidade": "PNEUMOLOGISTA",
+    "dias_atendimento": ["QUARTA", "QUINTA"],
+    "horarios_atendimento": ["09h30-13h00", "14h00-17h30"],
+    "nome": "Gabriel Henrique Lima"
+  }
+]
