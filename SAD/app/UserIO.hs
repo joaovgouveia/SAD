@@ -10,7 +10,7 @@ import Data.Aeson.Types (parseJSON)
 import Data.Maybe (fromMaybe)
 
 data Usuario = Usuario {
-    id                  :: String,
+    usuarioId           :: String,
     funcao              :: String,
     especialidade       :: String,
     dias_atendimento    :: [String],
@@ -32,32 +32,37 @@ instance FromJSON Usuario where
         <*> v .: fromString "senha"
 
 
-showLogin::IO()
+showLogin :: IO ()
 showLogin = do
     putStrLn "> ID: "
     hFlush stdout
-    idUser <- getLine    
-    putStrLn "> SENHA: "
-    hFlush stdout
-    senhaUser <- getLine
-
-    content <- B.readFile "./Users/Users.JSON"
-    let id = decode content :: Maybe Usuario
-        senha = decode content :: Maybe Usuario
-        -- idFiltrados = filter (\login -> id login == idUser) id
+    idUser <- getLine   
+    if idUser == "exit" then exit
+    else do 
+        putStrLn "> SENHA: "
+        hFlush stdout
+        senhaUser <- getLine
+        if senhaUser == "exit" then exit
+        else do 
+            -- Lê o conteúdo do arquivo JSON
+            content <- B.readFile "./Users/Users.JSON"
     
-    case id of
-       Just u -> if idUser == id u 
-                    then putStrLn "Tem id"
-                    else putStrLn "Sem id"
-       Nothing -> putStrLn "Falha ao decodificar o JSON."
-    -- content <- B.readFile "./Users/Users.JSON"
-    -- let id = fromMaybe [] (decode content :: Maybe [id])
-    --     senha = fromMaybe [] (decode content :: Maybe [senha])
-    --     idFiltrados = filter (\login -> id login == idUser) id
-    --     senhaFiltrados = filter (\s -> senha s == senhaUser) senha
-    -- if length idFiltrados == 1 && length senhaFiltrados == 1 then showStartMenu
-    -- else "x x x Usuário Inválido! x x x\n Verifique seu ID e SENHA e tente novamente." showLogin 
+            -- Decodifica o JSON para uma lista de usuários
+            let mUsuarios = decode content :: Maybe [Usuario]
+        
+            case mUsuarios of
+                Just usuarios -> 
+                    -- Filtra os usuários que correspondem ao ID e senha fornecidos
+                    let fUsuarios = filter (\u -> usuarioId u == idUser && senha u == senhaUser) usuarios
+                    in if null fUsuarios
+                        then do
+                        putStrLn "ID ou senha incorretos.\n"
+                        showLogin
+                        else do
+                        putStrLn "Login bem-sucedido!\n"
+                        showStartMenu
+                Nothing -> putStrLn "Falha ao decodificar o JSON."
+
 
 
 showStartMenu::IO()
