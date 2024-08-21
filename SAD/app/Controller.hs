@@ -1,9 +1,11 @@
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 module Controller where
 
 import qualified Medications.MedicationController as MC
 import qualified Users.UserController as US
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as B
+import Analytics ( dashboard ) 
 
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
@@ -22,6 +24,7 @@ execute (cmd:args)
     | cmd == "addSymptom"      = return $ addSymptom args
     | cmd == "viewSymptom"     = return $ viewSymptom args
     | cmd == "listSymptoms"    = return $ listSymptoms args
+    | cmd == "viewDashBoard"   = viewDashBoard args
     | otherwise                = return "Função não existe"
 
 -- Funções do sistema
@@ -70,6 +73,9 @@ viewSymptom args = ""
 
 listSymptoms :: [String] -> String
 listSymptoms args = ""
+
+viewDashBoard :: [String] -> IO String 
+viewDashBoard args = Analytics.dashboard
 
 -- TODO: Consultas
 duck :: String
