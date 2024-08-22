@@ -5,7 +5,8 @@ import qualified Medications.MedicationController as MC
 import qualified Users.UserController as US
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as B
-import Analytics ( dashboard ) 
+import Analytics ( dashboard )
+import Appointments.AppointmentController as AP
 
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
@@ -18,6 +19,7 @@ execute (cmd:args)
     | cmd == "viewMedication"  = return $ viewMedication args
     | cmd == "listMedications" = return $ listMedications args
     | cmd == "viewMedicos"     = viewMedicos args
+    | cmd == "addAppointment"  = addAppointment args
     | cmd == "addDisease"      = return $ addDisease args
     | cmd == "viewDisease"     = return $ viewDisease args
     | cmd == "listDiseases"    = return $ listDiseases args
@@ -55,6 +57,10 @@ listMedications args = ""
 
 viewMedicos :: [String] -> IO String
 viewMedicos args = US.viewMedicos
+
+addAppointment :: [String] -> IO String
+addAppointment [a, b, c, d] = AP.writeAppointment "./Appointments/Appointments.JSON" a b c d
+addAppointment _ = return "Necessário exatamente 4 informações para cadastro"
 
 addDisease :: [String] -> String
 addDisease args = ""

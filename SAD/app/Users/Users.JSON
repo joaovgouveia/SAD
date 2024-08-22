@@ -5,7 +5,7 @@
     "especialidade": "null",
     "dias_atendimento": [],
     "horarios_atendimento": [],
-    "nome": "Lucas Pereira da Silva",
+    "nome": "Lucas_Pereira_da_Silva",
     "pacientes_atendidos": "null",
     "senha": "ADMLPSSAD"
   },
@@ -15,7 +15,7 @@
     "especialidade": "null",
     "dias_atendimento": [],
     "horarios_atendimento": [],
-    "nome": "Isabela Fernandes Rocha",
+    "nome": "Isabela_Fernandes_Rocha",
     "pacientes_atendidos": "null",
     "senha": "SECIFRSAD"
   },
@@ -24,9 +24,9 @@
     "funcao": "MEDICO",
     "especialidade": "CARDIOLOGISTA",
     "dias_atendimento": ["SEGUNDA", "TERCA", "QUARTA"],
-    "horarios_atendimento": ["08h00-12h00", "13h00-17h00"],
+    "horarios_atendimento": ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00"],
     "pacientes_atendidos": "0",
-    "nome": "Gabriel Costa Santos",
+    "nome": "Gabriel_Costa_Santos",
     "senha": "MCARDGCSSAD"
   },
   {
@@ -34,9 +34,9 @@
     "funcao": "MEDICO",
     "especialidade": "CLINICO_GERAL",
     "dias_atendimento": ["QUARTA", "QUINTA", "SEXTA"],
-    "horarios_atendimento": ["09h00-13h00", "13h00-18h00"],
+    "horarios_atendimento": ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"],
     "pacientes_atendidos": "0",
-    "nome": "Rafael Oliveria Martins",
+    "nome": "Rafael_Oliveria_Martins",
     "senha": "MCGROMSAD"
   },
   {
@@ -44,9 +44,9 @@
     "funcao": "MEDICO",
     "especialidade": "NEUROLOGISTA",
     "dias_atendimento": ["SEGUNDA", "QUARTA", "SEXTA"],
-    "horarios_atendimento": ["08h30-12h30", "13h30-17h30"],
+    "horarios_atendimento": ["08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"],
     "pacientes_atendidos": "0",
-    "nome": "Luciano Souza do Nascimento Filho",
+    "nome": "Luciano_Souza_do_Nascimento_Filho",
     "senha": "MNEULSNFSAD"
   },
   {
@@ -54,9 +54,9 @@
     "funcao": "MEDICO",
     "especialidade": "ORTOPEDISTA",
     "dias_atendimento": ["TERCA", "QUINTA"],
-    "horarios_atendimento": ["10h00-14h00", "15h00-19h00"],
+    "horarios_atendimento": ["10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"],
     "pacientes_atendidos": "0",
-    "nome": "Thiago Carvalho Lima",
+    "nome": "Thiago_Carvalho_Lima",
     "senha": "MORTTCLSAD"
   },
   {
@@ -64,9 +64,9 @@
     "funcao": "MEDICO",
     "especialidade": "PNEUMOLOGISTA",
     "dias_atendimento": ["SEGUNDA", "TERCA", "QUARTA", "QUINTA", "SEXTA"],
-    "horarios_atendimento": ["07h00-11h00", "12h00-16h00"],
+    "horarios_atendimento": ["07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00"],
     "pacientes_atendidos": "0",
-    "nome": "Leonardo Gomes Andrade",
+    "nome": "Leonardo_Gomes_Andrade",
     "senha": "MPNEULGASAD"
   },
   {
@@ -74,9 +74,9 @@
     "funcao": "MEDICO",
     "especialidade": "CARDIOLOGISTA",
     "dias_atendimento": ["SEGUNDA", "QUARTA"],
-    "horarios_atendimento": ["08h30-12h00", "13h00-16h30"],
+    "horarios_atendimento": ["09:00", "09:30", "10:00", "10:30", "11:00" , "11:30", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"],
     "pacientes_atendidos": "0",
-    "nome": "Ana Carolina Silva",
+    "nome": "Ana_Carolina_Silva",
     "senha": "MCARDACSSAD"
   },
   {
@@ -84,9 +84,9 @@
     "funcao": "MEDICO",
     "especialidade": "CLINICO_GERAL",
     "dias_atendimento": ["TERCA", "QUINTA"],
-    "horarios_atendimento": ["09h00-12h30", "13h30-17h00"],
+    "horarios_atendimento": ["09:00", "09:30", "10:00", "10:30", "11:00" , "11:30", "12:00", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00"],
     "pacientes_atendidos": "0",
-    "nome": "Beatriz Oliveira Santos",
+    "nome": "Beatriz_Oliveira_Santos",
     "senha": "MCGBOSSAD"
   },
   {
@@ -94,9 +94,9 @@
     "funcao": "MEDICO",
     "especialidade": "NEUROLOGISTA",
     "dias_atendimento": ["SEGUNDA", "QUARTA", "SEXTA"],
-    "horarios_atendimento": ["08h00-12h00", "13h00-16h00"],
+    "horarios_atendimento": ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00"],
     "pacientes_atendidos": "0",
-    "nome": "Mariana Costa Pereira",
+    "nome": "Mariana_Costa_Pereira",
     "senha": "MNEUMCPSAD"
   },
   {
@@ -104,9 +104,9 @@
     "funcao": "MEDICO",
     "especialidade": "ORTOPEDISTA",
     "dias_atendimento": ["TERCA", "SEXTA"],
-    "horarios_atendimento": ["10h00-13h00", "14h00-17h00"],
+    "horarios_atendimento": ["10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00"],
     "pacientes_atendidos": "0",
-    "nome": "Rafael Almeida Souza",
+    "nome": "Rafael_Almeida_Souza",
     "senha": "MORTRASSAD"
   },
   {
@@ -114,9 +114,9 @@
     "funcao": "MEDICO",
     "especialidade": "PNEUMOLOGISTA",
     "dias_atendimento": ["QUARTA", "QUINTA"],
-    "horarios_atendimento": ["09h30-13h00", "14h00-17h30"],
+    "horarios_atendimento": ["09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"],
     "pacientes_atendidos": "0",
-    "nome": "Gabriel Henrique Lima",
+    "nome": "Gabriel_Henrique_Lima",
     "senha": "MPNEUGHLSAD"
   }
 ]
