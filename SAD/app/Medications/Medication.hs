@@ -9,7 +9,7 @@ data Medication = Medication
     { nome        :: String
     , bula        :: String
     , dosagem     :: String
-    } deriving (Show, Generic)
+    } deriving (Show, Eq, Generic)
 
 instance FromJSON Medication
 instance ToJSON Medication
