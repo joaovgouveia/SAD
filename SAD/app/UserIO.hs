@@ -61,40 +61,36 @@ showLogin = do
                         else do
                             let usuarioLogado = head fUsuarios
                             putStrLn "Login bem-sucedido!\n"
-                            showStartMenu
                             case funcao usuarioLogado of
-                                "MEDICO" -> showMenuMedico
-                                "ADMINISTRADOR" -> showMenuAdm
-                                "SECRETARIA" -> showMenuSec
+                                "MEDICO" -> showStartMenuMedico
+                                "ADMINISTRADOR" -> showStartMenuAdm
+                                "SECRETARIA" -> showStartMenuSec
                                 _ -> putStrLn "Função desconhecida."
                 Nothing -> putStrLn "Falha ao decodificar o JSON."
 
 
-showStartMenu::IO()
-showStartMenu = do
-    sadMenu <- readFile "./showMenu.txt"
+showStartMenuMedico::IO()
+showStartMenuMedico = do
+    sadMenu <- readFile "./startMenuMedico.txt"
     putStrLn (sadMenu)
-    --putStrLn "=====================================================\nBem vindo ao SAD (Sistema Automático de diagnósticos)\n=====================================================\ndigite 'help' para abrir a lista de funções do programa.\n"
-    --showMenu
+    showMenuMedico
 
--- Função principal do menu inicial
--- showMenu :: IO ()
--- showMenu = do
---     putStrLn "> Opção: "
---     hFlush stdout
---     line <- getLine
---     if line == "exit" then exit
---     else if null line then putStrLn "Nenhum comando foi digitado."
---     else do 
---         resposta <- execute (splitLine ' ' line)
---         putStrLn ("Resposta:\n" ++ resposta)
 
---     -- Chama a função novamente para o próximo comando
---     showMenu
+showStartMenuAdm::IO()
+showStartMenuAdm = do
+    sadMenu <- readFile "./startMenuAdm.txt"
+    putStrLn (sadMenu)
+    showMenuAdm
+
+showStartMenuSec::IO()
+showStartMenuSec = do
+    sadMenu <- readFile "./startMenuSec.txt"
+    putStrLn (sadMenu)
+    showMenuSec
+
 
 showMenuMedico :: IO ()
 showMenuMedico = do
-    putStrLn "              MÉDICO\n╚══════════════════════════════════╝"
     putStrLn "> Escolha a opção: "
     hFlush stdout
     line <- getLine
@@ -113,7 +109,6 @@ showMenuMedico = do
 
 showMenuAdm :: IO ()
 showMenuAdm = do
-    putStrLn "           ADMINISTRADOR\n╚══════════════════════════════════╝"
     putStrLn "> Escolha a opção: "
     hFlush stdout
     line <- getLine
@@ -132,7 +127,6 @@ showMenuAdm = do
 
 showMenuSec :: IO ()
 showMenuSec = do
-    putStrLn "            SECRETÁRIA\n╚══════════════════════════════════╝"
     putStrLn "> Escolha a opção: "
     hFlush stdout
     line <- getLine
