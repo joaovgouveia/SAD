@@ -53,6 +53,7 @@ executable SAD-exe
       Users.UserController
       Users.UserModule
       Paths_SAD
+      Appointments.AppointmentController
   autogen-modules:
       Paths_SAD
   hs-source-dirs:
