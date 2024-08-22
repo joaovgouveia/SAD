@@ -3,6 +3,7 @@ module Controller where
 
 import qualified Medications.MedicationController as MC
 import qualified Users.UserController as US
+import qualified Symptons.SymptomController as SC
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as B
 import Analytics ( dashboard ) 
@@ -22,7 +23,7 @@ execute (cmd:args)
     | cmd == "viewDisease"     = return $ viewDisease args
     | cmd == "listDiseases"    = return $ listDiseases args
     | cmd == "addSymptom"      = return $ addSymptom args
-    | cmd == "viewSymptom"     = return $ viewSymptom args
+    | cmd == "viewSymptom"     = viewSymptom args
     | cmd == "listSymptoms"    = return $ listSymptoms args
     | cmd == "viewDashBoard"   = viewDashBoard args
     | otherwise                = return "Função não existe"
@@ -68,8 +69,8 @@ listDiseases args = ""
 addSymptom :: [String] -> String
 addSymptom args = ""
 
-viewSymptom :: [String] -> String
-viewSymptom args = ""
+viewSymptom :: [String] -> IO String
+viewSymptom args = SC.viewSymptom
 
 listSymptoms :: [String] -> String
 listSymptoms args = ""
