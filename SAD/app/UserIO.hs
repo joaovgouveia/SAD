@@ -72,7 +72,9 @@ showLogin = do
 
 showStartMenu::IO()
 showStartMenu = do
-    putStrLn "=====================================================\nBem vindo ao SAD (Sistema Automático de diagnósticos)\n=====================================================\ndigite 'help' para abrir a lista de funções do programa.\n"
+    sadMenu <- readFile "./showMenu.txt"
+    putStrLn (sadMenu)
+    --putStrLn "=====================================================\nBem vindo ao SAD (Sistema Automático de diagnósticos)\n=====================================================\ndigite 'help' para abrir a lista de funções do programa.\n"
     --showMenu
 
 -- Função principal do menu inicial
@@ -92,7 +94,8 @@ showStartMenu = do
 
 showMenuMedico :: IO ()
 showMenuMedico = do
-    putStrLn "\n> Médico, escolha a opção: "
+    putStrLn "              MÉDICO\n╚══════════════════════════════════╝"
+    putStrLn "> Escolha a opção: "
     hFlush stdout
     line <- getLine
     if line == "help" then do
@@ -110,7 +113,8 @@ showMenuMedico = do
 
 showMenuAdm :: IO ()
 showMenuAdm = do
-    putStrLn "\n> Administrador, escolha a opção: "
+    putStrLn "           ADMINISTRADOR\n╚══════════════════════════════════╝"
+    putStrLn "> Escolha a opção: "
     hFlush stdout
     line <- getLine
     if line == "help" then do
@@ -128,7 +132,8 @@ showMenuAdm = do
 
 showMenuSec :: IO ()
 showMenuSec = do
-    putStrLn "\n> Secretário, escolha a opção: "
+    putStrLn "            SECRETÁRIA\n╚══════════════════════════════════╝"
+    putStrLn "> Escolha a opção: "
     hFlush stdout
     line <- getLine
     if line == "help" then do
