@@ -111,20 +111,20 @@ writeAppointment data_consult horario medico diagnostico idPaciente = do
 
 
 -- Verifica se o novo Status é válido
-ehStatuValido :: String -> Bool
-ehStatuValido a = a `elem` ["Cancelada", "Concluída"]
+ehStatusValido :: String -> Bool
+ehStatusValido a = a `elem` ["Cancelada", "Concluída"]
 
 -- Altera o status da Consulta
 updateAppointment :: String -> String -> IO String
 updateAppointment idConsulta novoStatus = do
     consultas <- fromMaybe [] <$> readJsonFile "./Appointments/Appointments.JSON"
 
-    if not (ehStatusValido novoStatus) then
+    if not (ehStatusValido (removeChars novoStatus)) then
         return "NOVO STATUS INVÁLIDO"
     else
         case find (\c -> id_consulta c == removeChars idConsulta && status_consulta c == "Em andamento") consultas of
             Just consulta -> do
-                let updatedAppoints = map (\c -> if id_consulta c == removeChars idConsulta then consulta {status_consulta = novoStatus} else c) consultas
+                let updatedAppoints = map (\c -> if id_consulta c == removeChars idConsulta then consulta {status_consulta = (removeChars novoStatus)} else c) consultas
                 writeJsonFile "./Appointments/Appointments.JSON" updatedAppoints
                 return "STATUS DA CONSULTA ATUALIZADO COM SUCESSO"
             Nothing -> return "ID DA CONSULTA INVÁLIDO/CONSULTA NÃO EXISTE OU CONSULTA JÁ FINALIZADA"
