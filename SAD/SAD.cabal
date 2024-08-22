@@ -24,7 +24,7 @@ source-repository head
   location: https://github.com/githubuser/SAD
 
 library
- exposed-modules:
+  exposed-modules:
       Lib
   other-modules:
       Paths_SAD
