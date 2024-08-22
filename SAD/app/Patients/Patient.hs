@@ -10,7 +10,7 @@ data Patient = Patient
   , nome                :: String
   , idade               :: String
   , consultas           :: [String]
-  } deriving (Show, Generic)
+  } deriving (Show, Generic, ToJSON)
 
 -- Instâncias para conversão de JSON para Json
 instance FromJSON Patient

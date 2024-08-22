@@ -11,9 +11,7 @@ import Analytics ( dashboard )
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
 execute (cmd:args)
-    | cmd == "addUser"         = return $ addUser args
     | cmd == "viewUser"        = return $ viewUser args
-    | cmd == "deleteUser"      = return $ deleteUser args
     | cmd == "listUsers"       = return $ listUsers args
     | cmd == "addMedication"   = return $ addMedication args
     | cmd == "viewMedication"  = return $ viewMedication args
@@ -27,6 +25,7 @@ execute (cmd:args)
     | cmd == "listSymptoms"    = return $ listSymptoms args
     | cmd == "viewDashBoard"   = viewDashBoard args
     | cmd == "viewPatients"    = viewPatients args
+    | cmd == "addPatient"      = addPatient args
     | otherwise                = return "Função não existe"
 
 -- Funções do sistema
@@ -81,6 +80,9 @@ viewDashBoard args = Analytics.dashboard
 
 viewPatients :: [String] -> IO String 
 viewPatients args = PC.viewPatients
+
+addPatient :: [String] -> IO String 
+addPatient (name:age) = PC.addPatient name (take 1 age)
 
 -- TODO: Consultas
 duck :: String
