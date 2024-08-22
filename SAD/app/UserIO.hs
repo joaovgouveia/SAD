@@ -34,12 +34,12 @@ instance FromJSON Usuario where
 
 showLogin :: IO ()
 showLogin = do
-    putStrLn "> ID: "
+    putStrLn "[ID]: "
     hFlush stdout
     idUser <- getLine   
     if idUser == "exit" then exit
     else do 
-        putStrLn "> SENHA: "
+        putStrLn "[SENHA]: "
         hFlush stdout
         senhaUser <- getLine
         if senhaUser == "exit" then exit
@@ -56,34 +56,92 @@ showLogin = do
                     let fUsuarios = filter (\u -> usuarioId u == idUser && senha u == senhaUser) usuarios
                     in if null fUsuarios
                         then do
-                        putStrLn "ID ou senha incorretos.\n"
-                        showLogin
+                            putStrLn "x x x ID ou senha incorretos. x x x \n"
+                            showLogin
                         else do
-                        putStrLn "Login bem-sucedido!\n"
-                        showStartMenu
+                            let usuarioLogado = head fUsuarios
+                            putStrLn "Login bem-sucedido!\n"
+                            showStartMenu
+                            case funcao usuarioLogado of
+                                "MEDICO" -> showMenuMedico
+                                "ADMINISTRADOR" -> showMenuAdm
+                                "SECRETARIA" -> showMenuSec
+                                _ -> putStrLn "Função desconhecida."
                 Nothing -> putStrLn "Falha ao decodificar o JSON."
-
 
 
 showStartMenu::IO()
 showStartMenu = do
     putStrLn "=====================================================\nBem vindo ao SAD (Sistema Automático de diagnósticos)\n=====================================================\ndigite 'help' para abrir a lista de funções do programa.\n"
-    showMenu
+    --showMenu
 
 -- Função principal do menu inicial
-showMenu :: IO ()
-showMenu = do
-    putStrLn "> Opção: "
+-- showMenu :: IO ()
+-- showMenu = do
+--     putStrLn "> Opção: "
+--     hFlush stdout
+--     line <- getLine
+--     if line == "exit" then exit
+--     else if null line then putStrLn "Nenhum comando foi digitado."
+--     else do 
+--         resposta <- execute (splitLine ' ' line)
+--         putStrLn ("Resposta:\n" ++ resposta)
+
+--     -- Chama a função novamente para o próximo comando
+--     showMenu
+
+showMenuMedico :: IO ()
+showMenuMedico = do
+    putStrLn "> Médico, escolha a opção: "
     hFlush stdout
     line <- getLine
-    if line == "exit" then exit
+    if line == "help" then do
+        help <- readFile "./funcoesHELP.txt"
+        putStrLn ("\n" ++ help)
+    else if line == "exit" then exit
     else if null line then putStrLn "Nenhum comando foi digitado."
     else do 
         resposta <- execute (splitLine ' ' line)
         putStrLn ("Resposta:\n" ++ resposta)
 
     -- Chama a função novamente para o próximo comando
-    showMenu
+    showMenuMedico
+
+
+showMenuAdm :: IO ()
+showMenuAdm = do
+    putStrLn "> Administrador, escolha a opção: "
+    hFlush stdout
+    line <- getLine
+    if line == "help" then do
+        help <- readFile "./funcoesHELP.txt"
+        putStrLn ("\n" ++ help)
+    else if line == "exit" then exit
+    else if null line then putStrLn "Nenhum comando foi digitado."
+    else do 
+        resposta <- execute (splitLine ' ' line)
+        putStrLn ("Resposta:\n" ++ resposta)
+
+    -- Chama a função novamente para o próximo comando
+    showMenuAdm
+
+
+showMenuSec :: IO ()
+showMenuSec = do
+    putStrLn "> Secretário, escolha a opção: "
+    hFlush stdout
+    line <- getLine
+    if line == "help" then do
+        help <- readFile "./funcoesHELP.txt"
+        putStrLn ("\n" ++ help)
+    else if line == "exit" then exit
+    else if null line then putStrLn "Nenhum comando foi digitado."
+    else do 
+        resposta <- execute (splitLine ' ' line)
+        putStrLn ("Resposta:\n" ++ resposta)
+
+    -- Chama a função novamente para o próximo comando
+    showMenuSec
 
 -- Função auxiliar para dividir a linha de entrada em comandos e argumentos
 splitLine :: Char -> String -> [String]
