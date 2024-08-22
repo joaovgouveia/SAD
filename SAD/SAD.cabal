@@ -42,17 +42,20 @@ library
 executable SAD-exe
   main-is: Main.hs
   other-modules:
-      Appointments.AppointmentController
+      Analytics
       Controller
       Diseases.Disease
+      Diseases.DiseasesController
       Medications.Medication
       Medications.MedicationController
       Symptons.Symptom
       Symptons.SymptomController
       UserIO
+      Users.User
       Users.UserController
       Users.UserModule
       Paths_SAD
+      Appointments.AppointmentController
   autogen-modules:
       Paths_SAD
   hs-source-dirs:
