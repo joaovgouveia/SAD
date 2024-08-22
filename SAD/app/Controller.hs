@@ -17,9 +17,11 @@ execute (cmd:args)
     | cmd == "viewUser"        = return $ viewUser args
     | cmd == "deleteUser"      = return $ deleteUser args
     | cmd == "listUsers"       = return $ listUsers args
-    | cmd == "createMedication"   = createMedication args
-    | cmd == "viewMedication"  = return $ viewMedication args
-    | cmd == "listMedications" = return $ listMedications args
+    | cmd == "addMedication"   = addMedication args
+    | cmd == "viewMedication"  = viewMedication args
+    | cmd == "listMedications" = listMedications args
+    | cmd == "updateMedication" = updateMedication args
+    | cmd == "deleteMedication" = deleteMedication args
     | cmd == "viewMedicos"     = viewMedicos args
     | cmd == "viewMedicosAtuation" = viewMedicosAtuation args
     | cmd == "addAppointment"  = addAppointment args
@@ -46,15 +48,21 @@ deleteUser args = ""
 listUsers :: [String] -> String
 listUsers args = ""
 
-createMedication :: [String] -> IO String
-createMedication [a, b, c] = MC.createMedication a b c
+addMedication :: [String] -> IO String
+addMedication [a, b, c] = MC.createMedication a b c
 createMedication _ = return "Necessário exatamente 3 informações para cadastro da Medicação"
 
-viewMedication :: [String] -> String
-viewMedication args = ""
+viewMedication :: [String] -> IO String
+viewMedication [a] = MC.viewMedication a
 
-listMedications :: [String] -> String
-listMedications args = ""
+listMedications :: [String] -> IO String
+listMedications args = MC.readMedications
+
+updateMedication :: [String] -> IO String
+updateMedication [a, b, c] = MC.updateMedication a b c
+
+deleteMedication :: [String] -> IO String
+deleteMedication [a, b] = MC.deleteMedication a b
 
 viewMedicos :: [String] -> IO String
 viewMedicos args = US.viewMedicos

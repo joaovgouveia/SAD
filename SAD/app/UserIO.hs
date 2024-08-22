@@ -85,14 +85,14 @@ showStartMenu = do
 --     else if null line then putStrLn "Nenhum comando foi digitado."
 --     else do 
 --         resposta <- execute (splitLine ' ' line)
---         putStrLn ("Resposta:\n" ++ resposta)
+--         putStrLn ("\nResposta:\n" ++ resposta)
 
 --     -- Chama a função novamente para o próximo comando
 --     showMenu
 
 showMenuMedico :: IO ()
 showMenuMedico = do
-    putStrLn "> Médico, escolha a opção: "
+    putStrLn "\n> Médico, escolha a opção: "
     hFlush stdout
     line <- getLine
     if line == "help" then do
@@ -102,7 +102,7 @@ showMenuMedico = do
     else if null line then putStrLn "Nenhum comando foi digitado."
     else do 
         resposta <- execute (splitLine ' ' line)
-        putStrLn ("Resposta:\n" ++ resposta)
+        putStrLn ("\nResposta:\n" ++ resposta)
 
     -- Chama a função novamente para o próximo comando
     showMenuMedico
@@ -110,7 +110,7 @@ showMenuMedico = do
 
 showMenuAdm :: IO ()
 showMenuAdm = do
-    putStrLn "> Administrador, escolha a opção: "
+    putStrLn "\n> Administrador, escolha a opção: "
     hFlush stdout
     line <- getLine
     if line == "help" then do
@@ -120,7 +120,7 @@ showMenuAdm = do
     else if null line then putStrLn "Nenhum comando foi digitado."
     else do 
         resposta <- execute (splitLine ' ' line)
-        putStrLn ("Resposta:\n" ++ resposta)
+        putStrLn ("\nResposta:\n" ++ resposta)
 
     -- Chama a função novamente para o próximo comando
     showMenuAdm
@@ -128,7 +128,7 @@ showMenuAdm = do
 
 showMenuSec :: IO ()
 showMenuSec = do
-    putStrLn "> Secretário, escolha a opção: "
+    putStrLn "\n> Secretário, escolha a opção: "
     hFlush stdout
     line <- getLine
     if line == "help" then do
@@ -138,7 +138,7 @@ showMenuSec = do
     else if null line then putStrLn "Nenhum comando foi digitado."
     else do 
         resposta <- execute (splitLine ' ' line)
-        putStrLn ("Resposta:\n" ++ resposta)
+        putStrLn ("\nResposta:\n" ++ resposta)
 
     -- Chama a função novamente para o próximo comando
     showMenuSec
