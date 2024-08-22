@@ -2,7 +2,8 @@
 module Controller where
 
 import qualified Medications.MedicationController as MC
-import qualified Users.UserController as US
+import qualified Users.UserController as UC
+import qualified Patients.PatitentController as PC
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as B
 import Analytics ( dashboard ) 
@@ -25,6 +26,7 @@ execute (cmd:args)
     | cmd == "viewSymptom"     = return $ viewSymptom args
     | cmd == "listSymptoms"    = return $ listSymptoms args
     | cmd == "viewDashBoard"   = viewDashBoard args
+    | cmd == "viewPatients"    = viewPatients args
     | otherwise                = return "Função não existe"
 
 -- Funções do sistema
@@ -54,7 +56,7 @@ listMedications :: [String] -> String
 listMedications args = ""
 
 viewMedicos :: [String] -> IO String
-viewMedicos args = US.viewMedicos
+viewMedicos args = UC.viewMedicos
 
 addDisease :: [String] -> String
 addDisease args = ""
@@ -76,6 +78,9 @@ listSymptoms args = ""
 
 viewDashBoard :: [String] -> IO String 
 viewDashBoard args = Analytics.dashboard
+
+viewPatients :: [String] -> IO String 
+viewPatients args = PC.viewPatients
 
 -- TODO: Consultas
 duck :: String
