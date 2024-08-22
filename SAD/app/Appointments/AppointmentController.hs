@@ -53,7 +53,7 @@ ehIdUnico consultas idConsulta = not $ any (\c -> id_consulta c == idConsulta) c
 ehPacienteValido :: String -> IO Bool
 ehPacienteValido idPaciente = do
     pacientes <- fromMaybe [] <$> readJsonFile "./Patients/Patients.JSON"
-    return $ any (\p -> id_paciente p == idPaciente) pacientes
+    return $ any (\p -> id_patient p == idPaciente) pacientes
 
 -- Função para ler JSON de um arquivo
 readJsonFile :: (FromJSON a) => FilePath -> IO (Maybe [a])
@@ -107,7 +107,7 @@ writeAppointment data_consult horario medico diagnostico idPaciente = do
                     atualizaAtendimentos (removeChars medico)
                     return "CONSULTA REGISTRADA"
                 else
-                    return "JÁ EXISTE UMA CONSULTA PARA ESSE DIA E HORÁRIO"
+                    return "JÁ EXISTE UMA CONSULTA DESSE MÉDICO PARA ESSE DIA E HORÁRIO"
         Nothing -> return "MÉDICO NÃO ENCONTRADO OU NÃO É MÉDICO"
 
 

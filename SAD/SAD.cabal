@@ -1,6 +1,6 @@
 cabal-version: 2.2
 
--- This file has been generated from package.yaml by hpack version 0.36.0.
+-- This file has been generated from package.yaml by hpack version 0.37.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -41,6 +41,8 @@ executable SAD-exe
   main-is: Main.hs
   other-modules:
       Analytics
+      Appointments.Appointment
+      Appointments.AppointmentController
       Controller
       Diseases.Disease
       Diseases.DiseasesController
@@ -53,7 +55,6 @@ executable SAD-exe
       Users.UserController
       Users.UserModule
       Paths_SAD
-      Appointments.AppointmentController
   autogen-modules:
       Paths_SAD
   hs-source-dirs:
