@@ -101,7 +101,7 @@ showMenuMedico = do
     else if null line then putStrLn "Nenhum comando foi digitado."
     else do 
         resposta <- execute (splitLine ' ' line)
-        putStrLn ("Resposta:\n" ++ resposta)
+        putStrLn ("\nResposta:\n" ++ resposta)
 
     -- Chama a função novamente para o próximo comando
     showMenuMedico
@@ -119,7 +119,7 @@ showMenuAdm = do
     else if null line then putStrLn "Nenhum comando foi digitado."
     else do 
         resposta <- execute (splitLine ' ' line)
-        putStrLn ("Resposta:\n" ++ resposta)
+        putStrLn ("\nResposta:\n" ++ resposta)
 
     -- Chama a função novamente para o próximo comando
     showMenuAdm
@@ -137,7 +137,7 @@ showMenuSec = do
     else if null line then putStrLn "Nenhum comando foi digitado."
     else do 
         resposta <- execute (splitLine ' ' line)
-        putStrLn ("Resposta:\n" ++ resposta)
+        putStrLn ("\nResposta:\n" ++ resposta)
 
     -- Chama a função novamente para o próximo comando
     showMenuSec
