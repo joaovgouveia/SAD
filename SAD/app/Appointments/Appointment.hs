@@ -11,6 +11,7 @@ data Consulta = Consulta
     , horario_consulta        :: String
     , medico_responsavel      :: String
     , diagnostico             :: String
+    , id_paciente             :: String
     , status_consulta         :: String
     } deriving (Show, Generic)
 

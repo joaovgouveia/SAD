@@ -7,6 +7,7 @@ import qualified Symptons.SymptomController as SC
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as B
 import Analytics ( dashboard )
+import qualified Diseases.DiseasesController as DC
 import Appointments.AppointmentController as AP
 
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
@@ -20,10 +21,11 @@ execute (cmd:args)
     | cmd == "viewMedication"  = return $ viewMedication args
     | cmd == "listMedications" = return $ listMedications args
     | cmd == "viewMedicos"     = viewMedicos args
+    | cmd == "viewMedicosAtuation" = viewMedicosAtuation args
     | cmd == "addAppointment"  = addAppointment args
     | cmd == "changeStatusAppointment" = changeStatusAppointment args
     | cmd == "addDisease"      = return $ addDisease args
-    | cmd == "viewDisease"     = return $ viewDisease args
+    | cmd == "viewDisease"     = viewDisease args
     | cmd == "listDiseases"    = return $ listDiseases args
     | cmd == "addSymptom"      = return $ addSymptom args
     | cmd == "viewSymptom"     = viewSymptom args
@@ -60,9 +62,12 @@ listMedications args = ""
 viewMedicos :: [String] -> IO String
 viewMedicos args = US.viewMedicos
 
+viewMedicosAtuation :: [String] -> IO String
+viewMedicosAtuation args = US.viewAtuation
+
 addAppointment :: [String] -> IO String
-addAppointment [a, b, c, d] = AP.writeAppointment a b c d
-addAppointment _ = return "Necessário exatamente 4 informações para cadastro da Consulta"
+addAppointment [a, b, c, d, e] = AP.writeAppointment a b c d e
+addAppointment _ = return "Necessário exatamente 5 informações para cadastro da Consulta"
 
 changeStatusAppointment :: [String] -> IO String
 changeStatusAppointment [a, b] = AP.updateAppointment a b
@@ -72,7 +77,7 @@ addDisease :: [String] -> String
 addDisease args = ""
 
 viewDisease :: [String] -> String
-viewDisease args = ""
+viewDisease args = DC.viewDisease
 
 listDiseases :: [String] -> String
 listDiseases args = ""
