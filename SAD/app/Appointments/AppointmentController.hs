@@ -49,12 +49,13 @@ ehIdUnico :: [Consulta] -> String -> Bool
 ehIdUnico consultas idConsulta = not $ any (\c -> id_consulta c == idConsulta) consultas
 
 -- Função principal para cadastrar a consulta
-writeAppointment :: FilePath -> String -> String -> String -> String -> IO String
-writeAppointment pathConsultas data_consult horario medico diagnostico = do
+writeAppointment :: String -> String -> String -> String -> IO String
+writeAppointment data_consult horario medico diagnostico = do
     -- Lê o Json de usuários e cria uma lista com todos
     let pathUsers = "./Users/Users.JSON"
     profJson <- B.readFile pathUsers
     let profissionais = decode profJson :: Maybe [User]
+    let pathConsultas = "./Appointments/Appointments.JSON"
 
     -- Verifica se o médico existe e é um médico
     case profissionais of
@@ -93,10 +94,11 @@ ehStatuValido :: String -> Bool
 ehStatuValido a = a `elem` ["Cancelada", "Concluída"]
 
 -- Altera o status da Consulta
-updateAppointment :: FilePath -> String -> String -> IO String
-updateAppointment path a b = do
+updateAppointment :: String -> String -> IO String
+updateAppointment a b = do
     
     -- Lê o Json de consultas e converte todas para uma lista
+    let path = "./Appointments/Appointments.JSON"
     consultJson <- B.readFile path
     let consultas = decode consultJson :: Maybe [Consulta]
 

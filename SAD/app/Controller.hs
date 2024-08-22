@@ -61,11 +61,11 @@ viewMedicos :: [String] -> IO String
 viewMedicos args = US.viewMedicos
 
 addAppointment :: [String] -> IO String
-addAppointment [a, b, c, d] = AP.writeAppointment "./Appointments/Appointments.JSON" a b c d
+addAppointment [a, b, c, d] = AP.writeAppointment a b c d
 addAppointment _ = return "Necessário exatamente 4 informações para cadastro da Consulta"
 
 changeStatusAppointment :: [String] -> IO String
-changeStatusAppointment [a, b] = AP.updateAppointment "./Appointments/Appointments.JSON" a b
+changeStatusAppointment [a, b] = AP.updateAppointment a b
 changeStatusAppointment _ = return "Necessário exatamente 2 informações para atualização de status da Consulta"
 
 addDisease :: [String] -> String
