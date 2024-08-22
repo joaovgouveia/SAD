@@ -48,7 +48,7 @@ listUsers args = ""
 
 addMedication :: [String] -> String
 addMedication args =
-    let medication = MC.createMedicationFromList args
+    let medication = MC.createMedication args
     in "Medicação adicionada: " ++ show medication
 
 viewMedication :: [String] -> String

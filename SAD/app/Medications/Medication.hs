@@ -4,16 +4,14 @@ import Data.Aeson (ToJSON, toJSON, object, (.=))
 import Data.String (fromString)
 
 data Medication = Medication
-    { medName        :: String
-    , medDescription :: String
-    , medDose        :: String
-    , medRoute       :: String
+    { nome        :: String
+    , bula        :: String
+    , dosagem     :: String
     } deriving (Show, Eq)
 
 instance ToJSON Medication where
-    toJSON (Medication medName medDescription medDose medRoute) =
-        object [ fromString "name" .= medName
-               , fromString "description" .= medDescription
-               , fromString "dose" .= medDose
-               , fromString "route" .= medRoute
+    toJSON (Medication nome bula dosagem) =
+        object [ fromString "nome" .= nome
+               , fromString "bula" .= bula
+               , fromString "dosagem" .= dosagem
                ]
