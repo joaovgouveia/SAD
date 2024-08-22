@@ -37,8 +37,8 @@ diaDeAtendimento diaDaSemana = case diaDaSemana of
     _           -> ""
 
 -- Gera o ID da consulta
-geraId :: String -> String -> String
-geraId dataConsulta horarioConsulta = dataConsulta ++ "/" ++ horarioConsulta
+geraId :: String -> String -> String -> String
+geraId dataConsulta horarioConsulta medicoConsulta = dataConsulta ++ "/" ++ horarioConsulta ++ "/" ++ medicoConsulta
 
 -- Remove caracteres indesejáveis por receber uma lista como parâmetro
 removeChars :: String -> String
@@ -71,7 +71,7 @@ writeAppointment pathConsultas data_consult horario medico diagnostico = do
                     let consultasAntigas = decode consultas :: Maybe [Consulta]
 
                     -- Verifica se o ID da consulta é único
-                    let idConsulta = geraId (removeChars data_consult) (removeChars horario)
+                    let idConsulta = geraId (removeChars data_consult) (removeChars horario) (removeChars medico)
                     case consultasAntigas of
                         Just cs ->
                             if ehIdUnico cs idConsulta then do
