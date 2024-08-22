@@ -20,6 +20,7 @@ execute (cmd:args)
     | cmd == "viewMedication"  = return $ viewMedication args
     | cmd == "listMedications" = return $ listMedications args
     | cmd == "viewMedicos"     = viewMedicos args
+    | cmd == "viewMedicosAtuation"    = viewMedicosAtuation args
     | cmd == "addDisease"      = return $ addDisease args
     | cmd == "viewDisease"     = viewDisease args
     | cmd == "listDiseases"    = return $ listDiseases args
@@ -57,6 +58,9 @@ listMedications args = ""
 
 viewMedicos :: [String] -> IO String
 viewMedicos args = US.viewMedicos
+
+viewMedicosAtuation :: [String] -> IO String
+viewMedicosAtuation args = US.viewAtuation
 
 addDisease :: [String] -> String
 addDisease args = ""
