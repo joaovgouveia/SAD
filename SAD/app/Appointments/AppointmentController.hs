@@ -71,7 +71,7 @@ atualizaAtendimentos medico = do
     usuarios <- fromMaybe [] <$> readJsonFile "./Users/Users.JSON"
     case find (\p -> nome p == removeChars medico && funcao p == "MEDICO") usuarios of
         Just doctor -> do
-            let updateConsultas = map (\u -> if nome u == removeChars medico then doctor {pacientes_atendidos = show (((read pacientes_atendidos u :: Int) + 1) )} else u) usuarios
+            let updateConsultas = map (\u -> if nome u == removeChars medico then doctor {pacientes_atendidos = show ((read pacientes_atendidos u :: Int) + 1)} else u) usuarios
             writeJsonFile "./Users/Users.JSON" updateConsultas
             return ""
         Nothing -> return "MÉDICO DESAPARECEU EM TEMPO DE EXECUÇÃO"
@@ -124,7 +124,7 @@ updateAppointment idConsulta novoStatus = do
     else
         case find (\c -> id_consulta c == removeChars idConsulta && status_consulta c == "Em andamento") consultas of
             Just consulta -> do
-                let updatedAppoints = map (\c -> if id_consulta c == removeChars idConsulta then consulta {status_consulta = (removeChars novoStatus)} else c) consultas
+                let updatedAppoints = map (\c -> if id_consulta c == removeChars idConsulta then consulta {status_consulta = removeChars novoStatus} else c) consultas
                 writeJsonFile "./Appointments/Appointments.JSON" updatedAppoints
                 return "STATUS DA CONSULTA ATUALIZADO COM SUCESSO"
             Nothing -> return "ID DA CONSULTA INVÁLIDO/CONSULTA NÃO EXISTE OU CONSULTA JÁ FINALIZADA"
