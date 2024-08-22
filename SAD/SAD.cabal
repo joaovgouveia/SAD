@@ -24,8 +24,6 @@ source-repository head
   location: https://github.com/githubuser/SAD
 
 library
-  exposed-modules:
-      Lib
   other-modules:
       Paths_SAD
   autogen-modules:
@@ -42,13 +40,16 @@ library
 executable SAD-exe
   main-is: Main.hs
   other-modules:
+      Analytics
       Controller
       Diseases.Disease
+      Diseases.DiseasesController
       Medications.Medication
       Medications.MedicationController
       Symptons.Symptom
       Symptons.SymptomController
       UserIO
+      Users.User
       Users.UserController
       Users.UserModule
       Paths_SAD

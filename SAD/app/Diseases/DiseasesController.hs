@@ -1,4 +1,4 @@
-module Symptons.SymptomController where
+module Diseases.DiseasesController where
 
 import Data.Aeson (FromJSON, decode, withObject, (.:))
 import Data.Aeson.Key (fromString)
@@ -7,26 +7,26 @@ import qualified Data.ByteString.Lazy as B
 import Data.Maybe (fromMaybe)
 import Data.Aeson.Types (parseJSON)
 
-data Symptom = Symptom {
+data Diseases = Diseases {
     doenca                    :: String,
     especialidadeRelacionada  :: String,
     sintomasAssociados        :: [String],
     possivel_causa            :: String
 } deriving (Show)
 
-instance FromJSON Symptom where
-    parseJSON = withObject "Symptom" $ \v -> Symptom
+instance FromJSON Diseases where
+    parseJSON = withObject "Diseases" $ \v -> Diseases
         <$> v .: fromString "doenca"
         <*> v .: fromString "especialidade_relacionada"
         <*> v .: fromString "sintomas_associados"
         <*> v .: fromString "possivel_causa"
 
-viewSymptom :: IO String
-viewSymptom = do
+viewDisease :: IO String
+viewDisease = do
     content <- B.readFile "./Diseases/Diseases.JSON"
-    let symptoms = fromMaybe [] (decode content :: Maybe [Symptom])
-        result = concatMap formatSymptom symptoms
+    let diseases = fromMaybe [] (decode content :: Maybe [Diseases])
+        result = concatMap formatDiseases diseases
     return result
   where
-    formatSymptom s = "Doença: " ++ doenca s ++ "\n" ++
-                      "Sintomas Associados: " ++ unwords (sintomasAssociados s) ++ "\n\n"
+    formatDiseases s = "Doença: " ++ doenca s ++ "\n" ++
+                      "Possíveis Causas: " ++ possivel_causa s ++ "\n\n"
