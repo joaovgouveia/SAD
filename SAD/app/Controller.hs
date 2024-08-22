@@ -17,7 +17,7 @@ execute (cmd:args)
     | cmd == "viewUser"        = return $ viewUser args
     | cmd == "deleteUser"      = return $ deleteUser args
     | cmd == "listUsers"       = return $ listUsers args
-    | cmd == "addMedication"   = return $ addMedication args
+    | cmd == "createMedication"   = createMedication args
     | cmd == "viewMedication"  = return $ viewMedication args
     | cmd == "listMedications" = return $ listMedications args
     | cmd == "viewMedicos"     = viewMedicos args
@@ -46,15 +46,12 @@ deleteUser args = ""
 listUsers :: [String] -> String
 listUsers args = ""
 
-addMedication :: [String] -> String
-addMedication args =
-    let medication = MC.createMedication args
-    in "Medicação adicionada: " ++ show medication
+createMedication :: [String] -> IO String
+createMedication [a, b, c] = MC.createMedication a b c
+createMedication _ = return "Necessário exatamente 3 informações para cadastro da Medicação"
 
 viewMedication :: [String] -> String
-viewMedication args =
-    let medication = MC.createMedicationFromList args
-    in "Medicação:" ++ show medication
+viewMedication args = ""
 
 listMedications :: [String] -> String
 listMedications args = ""
@@ -76,7 +73,7 @@ changeStatusAppointment _ = return "Necessário exatamente 2 informações para 
 addDisease :: [String] -> String
 addDisease args = ""
 
-viewDisease :: [String] -> String
+viewDisease :: [String] -> IO String
 viewDisease args = DC.viewDisease
 
 listDiseases :: [String] -> String

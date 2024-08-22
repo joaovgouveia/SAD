@@ -1,27 +1,35 @@
 module Medications.MedicationController where
 
 import Medications.Medication
-import Data.Aeson (encode)
+import Data.Maybe (fromMaybe)
+import Data.Aeson (decode, encode, FromJSON, ToJSON)
 import qualified Data.ByteString.Lazy as B
-import Medications.Medication (Medication (..))
-import Appointments.AppointmentController as AC
 
-
--- Função para criar um Medication a partir de uma lista
-createMedication :: [String] -> IO String
-createMedication [name, bula, dosagem] = do
-    let medication = Medication name bula dosagem
+createMedication :: String -> String -> String -> IO String
+createMedication nome bula dosagem = do
+    let medication = Medication (removeChars nome) (removeChars bula) (removeChars dosagem)
     saveMedicationToFile medication
-createMedicationFromList _ = error "Lista inválida. Deve conter exatamente 3 elementos."
 
--- Função para salvar o Medication em um arquivo
 saveMedicationToFile :: Medication -> IO String
-saveMedicationToFile medication = do
+saveMedicationToFile novaMedication = do
     let pathMedications = "./Medications/Medications.JSON"
+
     medicacoesAntigas <- fromMaybe [] <$> readJsonFile pathMedications
-    let existe = any (\m -> name m == name medication && dosagem m == dosagem medication) medicacoesAntigas
-    if not existe
-        then do
-            writeJsonFile pathMedications (medicacoesAntigas ++ [medication])
-            return $ "Medicação criada: " ++ show medication
-        else return "Medicação existente"
+
+    let existe = any (\m -> nome m == nome novaMedication && dosagem m == dosagem novaMedication) medicacoesAntigas
+    if existe
+        then return "Medicação já existe."
+        else do
+            writeJsonFile pathMedications (medicacoesAntigas ++ [novaMedication])
+            return $ "Medicação criada: " ++ show novaMedication
+
+writeJsonFile :: (ToJSON a) => FilePath -> a -> IO ()
+writeJsonFile path = B.writeFile path . encode
+
+removeChars :: String -> String
+removeChars = filter (`notElem` "[]\",")
+
+readJsonFile :: (FromJSON a) => FilePath -> IO (Maybe [a])
+readJsonFile path = do
+    content <- B.readFile path
+    return (decode content)
