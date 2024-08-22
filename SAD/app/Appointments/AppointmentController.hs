@@ -86,3 +86,32 @@ writeAppointment pathConsultas data_consult horario medico diagnostico = do
                             return "CONSULTA REGISTRADA"
             Nothing -> return "MÉDICO NÃO ENCONTRADO OU NÃO É MÉDICO"
         Nothing -> return "ERRO AO LER O ARQUIVO DE USUÁRIOS"
+
+
+-- Verifica se o novo Status é válido
+ehStatuValido :: String -> Bool
+ehStatuValido a = a `elem` ["Cancelada", "Concluída"]
+
+-- Altera o status da Consulta
+updateAppointment :: FilePath -> String -> String -> IO String
+updateAppointment path a b = do
+    
+    -- Lê o Json de consultas e converte todas para uma lista
+    consultJson <- B.readFile path
+    let consultas = decode consultJson :: Maybe [Consulta]
+
+    -- Remove caracteres inválidos dos parametros
+    let id_appointment = removeChars a
+    let novo_status = removeChars b
+
+    case consultas of
+        Just appoint -> case find (\c -> id_consulta c == id_appointment && status_consulta c == "Em andamento") appoint of
+            Just consulta -> if not (ehStatuValido novo_status) then
+                return "NOVO STATUS INVÁLIDO"
+            else do
+                let updatedAppoints = map (\c -> if id_consulta c == id_appointment then consulta {status_consulta = novo_status} else c) appoint
+                let updatedJson = encode updatedAppoints
+                B.writeFile path updatedJson
+                return "STATUS DA CONSULTA ATUALIZADO COM SUCESSO"
+            Nothing -> return "ID DA CONSULTA INVÁLIDO/CONSULTA NÃO EXISTE OU CONSULTA JÁ FINALIZADA"
+        Nothing -> return "ERRO AO LER O ARQUIVO DE CONSULTAS"
