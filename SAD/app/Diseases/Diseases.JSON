@@ -2,7 +2,8 @@
   {
     "doenca": "DIABETES",
     "especialidade_relacionada": "CLINICO_GERAL",
-    "sintomas_associados": ["sede", "vontade de urinar", "fadiga"]
+    "sintomas_associados": ["sede", "vontade de urinar", "fadiga"],
+    "possivel_causa": "Fatores genéticos, obesidade, sedentarismo"
   },
   {
     "doenca": "HIPERTENSAO ARTERIAL",
@@ -12,7 +13,8 @@
       "tontura",
       "dor no peito",
       "falta de ar"
-    ]
+    ],
+    "possivel_causa": "Fatores genéticos, dieta rica em sal, obesidade"
   },
   {
     "doenca": "INFECCAO_URINARIA",
@@ -23,12 +25,14 @@
       "dor abdominal",
       "urina com sangue",
       "febre"
-    ]
+    ],
+    "possivel_causa": "Bactérias, má higiene, imunidade baixa"
   },
   {
     "doenca": "GASTRITE",
     "especialidade_relacionada": "CLINICO_GERAL",
-    "sintomas_associados": ["dor estomacal", "nausea", "vomito", "indigestao"]
+    "sintomas_associados": ["dor estomacal", "nausea", "vomito", "indigestao"],
+    "possivel_causa": "Infecção por H. pylori, uso excessivo de anti-inflamatórios, estresse"
   },
   {
     "doenca": "INSUFICIENCIA_CARDIACA",
@@ -39,7 +43,8 @@
       "fadiga",
       "tosse",
       "ganho de peso"
-    ]
+    ],
+    "possivel_causa": "Doença arterial coronariana, hipertensão, diabetes"
   },
   {
     "doenca": "ARRITMIA",
@@ -50,7 +55,8 @@
       "cansaco",
       "dor no peito",
       "batimento irregular"
-    ]
+    ],
+    "possivel_causa": "Doença cardíaca, estresse, consumo de cafeína"
   },
   {
     "doenca": "HIPERTENSAO PULMONAR",
@@ -61,7 +67,8 @@
       "dor no peito",
       "inchaco nas pernas",
       "tosse"
-    ]
+    ],
+    "possivel_causa": "Doenças cardíacas ou pulmonares, genética"
   },
   {
     "doenca": "DOENCA_VALVULAR_CARDIACA",
@@ -71,7 +78,8 @@
       "dor no peito",
       "tontura",
       "palpitacao"
-    ]
+    ],
+    "possivel_causa": "Degeneração valvular, febre reumática, infecções"
   },
   {
     "doenca": "TDAH",
@@ -81,7 +89,8 @@
       "hiperatividade",
       "impulsividade",
       "dificuldade organizacional"
-    ]
+    ],
+    "possivel_causa": "Fatores genéticos, desequilíbrios químicos no cérebro"
   },
   {
     "doenca": "ENXAQUECA",
@@ -91,7 +100,8 @@
       "nausea",
       "vomito",
       "sensibilidade a luz"
-    ]
+    ],
+    "possivel_causa": "Fatores genéticos, estresse, alterações hormonais"
   },
   {
     "doenca": "PARKINSON",
@@ -100,7 +110,8 @@
       "tremores",
       "rigidez muscular",
       "dificuldade para falar"
-    ]
+    ],
+    "possivel_causa": "Degeneração de células nervosas, fatores genéticos"
   },
   {
     "doenca": "EPILEPSIA",
@@ -110,7 +121,8 @@
       "perda de consciencia",
       "movimentos involuntarios",
       "confusao"
-    ]
+    ],
+    "possivel_causa": "Lesões cerebrais, genética, distúrbios do desenvolvimento"
   },
   {
     "doenca": "TENDINITE",
@@ -120,7 +132,8 @@
       "inchaco",
       "dificuldade de movimento",
       "sensibilidade ao toque"
-    ]
+    ],
+    "possivel_causa": "Esforço repetitivo, envelhecimento, lesões"
   },
   {
     "doenca": "OSTEOPOROSE",
@@ -130,7 +143,8 @@
       "perda de altura",
       "postura encurvada",
       "fraturas faceis"
-    ]
+    ],
+    "possivel_causa": "Deficiência de cálcio, alterações hormonais, idade avançada"
   },
   {
     "doenca": "HERNIA_DE_DISCO",
@@ -139,7 +153,8 @@
       "dor nas costas",
       "fraqueza",
       "dificuldade de movimento"
-    ]
+    ],
+    "possivel_causa": "Degeneração dos discos, esforço excessivo, lesões"
   },
   {
     "doenca": "ESCOLIOSE",
@@ -148,7 +163,8 @@
       "dor nas costas",
       "desconforto muscular",
       "postura encurvada"
-    ]
+    ],
+    "possivel_causa": "Fatores genéticos, distúrbios neuromusculares"
   },
   {
     "doenca": "ASMA",
@@ -158,7 +174,8 @@
       "tosse",
       "chiado ao respirar",
       "pressao no peito"
-    ]
+    ],
+    "possivel_causa": "Alergias, fatores genéticos, poluição"
   },
   {
     "doenca": "PNEUMONIA",
@@ -168,7 +185,8 @@
       "tosse",
       "producao de muco",
       "falta de ar"
-    ]
+    ],
+    "possivel_causa": "Infecções bacterianas ou virais"
   },
   {
     "doenca": "FIBROSE_PULMONAR",
@@ -178,7 +196,8 @@
       "tosse seca",
       "fadiga",
       "dificuldade respiratoria"
-    ]
+    ],
+    "possivel_causa": "Doenças autoimunes, exposição a poluentes, genética"
   },
   {
     "doenca": "BRONQUITE",
@@ -189,6 +208,7 @@
       "falta de ar",
       "chiado ao respirar",
       "dor no peito"
-    ]
+    ],
+    "possivel_causa": "Infecções virais, tabagismo, poluição"
   }
 ]

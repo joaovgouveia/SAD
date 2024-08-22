@@ -7,6 +7,7 @@ import qualified Symptons.SymptomController as SC
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as B
 import Analytics ( dashboard ) 
+import qualified Diseases.DiseasesController as DC
 
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
@@ -20,7 +21,7 @@ execute (cmd:args)
     | cmd == "listMedications" = return $ listMedications args
     | cmd == "viewMedicos"     = viewMedicos args
     | cmd == "addDisease"      = return $ addDisease args
-    | cmd == "viewDisease"     = return $ viewDisease args
+    | cmd == "viewDisease"     = viewDisease args
     | cmd == "listDiseases"    = return $ listDiseases args
     | cmd == "addSymptom"      = return $ addSymptom args
     | cmd == "viewSymptom"     = viewSymptom args
@@ -60,8 +61,8 @@ viewMedicos args = US.viewMedicos
 addDisease :: [String] -> String
 addDisease args = ""
 
-viewDisease :: [String] -> String
-viewDisease args = ""
+viewDisease :: [String] -> IO String
+viewDisease args = DC.viewDisease
 
 listDiseases :: [String] -> String
 listDiseases args = ""
