@@ -1,6 +1,6 @@
 module Appointments.AppointmentController where
 
-import Data.Aeson (decode, encode)
+import Data.Aeson (decode, encode, ToJSON, FromJSON)
 import qualified Data.ByteString.Lazy as B
 import Appointments.Appointment
 import Data.Maybe (fromMaybe)
@@ -56,13 +56,13 @@ ehPacienteValido idPaciente = do
     return $ any (\p -> id_paciente p == idPaciente) pacientes
 
 -- Função para ler JSON de um arquivo
-readJsonFile :: FilePath -> IO (Maybe a)
+readJsonFile :: (FromJSON a) => FilePath -> IO (Maybe [a])
 readJsonFile path = do
     content <- B.readFile path
     return (decode content)
 
 -- Função para escrever JSON em um arquivo
-writeJsonFile :: FilePath -> a -> IO ()
+writeJsonFile :: (ToJSON a) => FilePath -> a -> IO ()
 writeJsonFile path = B.writeFile path . encode
 
 -- Funcão para atualizar a quantidade de consultas do médico
@@ -71,7 +71,7 @@ atualizaAtendimentos medico = do
     usuarios <- fromMaybe [] <$> readJsonFile "./Users/Users.JSON"
     case find (\p -> nome p == removeChars medico && funcao p == "MEDICO") usuarios of
         Just doctor -> do
-            let updateConsultas = map (\u -> if nome u == removeChars medico then doctor {pacientes_atendidos = show ((read pacientes_atendidos u :: Int) + 1)} else u) usuarios
+            let updateConsultas = map (\u -> if nome u == removeChars medico then doctor {pacientes_atendidos = show ((read (pacientes_atendidos u) :: Int) + 1)} else u) usuarios
             writeJsonFile "./Users/Users.JSON" updateConsultas
             return ""
         Nothing -> return "MÉDICO DESAPARECEU EM TEMPO DE EXECUÇÃO"
@@ -89,12 +89,13 @@ writeAppointment data_consult horario medico diagnostico idPaciente = do
             -- Verifica se o horário e a data são válidos
             let horarioLimpo = removeChars horario
             let dataLimpa = removeChars data_consult
+            paciente <- not <$> ehPacienteValido (removeChars idPaciente)
 
             if not (ehValidoHorario horarioLimpo (horarios_atendimento medicoInfo)) then
                 return "HORÁRIO INVÁLIDO OU NÃO É UM HORÁRIO DE ATENDIMENTO, HORÁRIOS NO PADRÃO HH:MM"
             else if not (ehDiaValido dataLimpa (dias_atendimento medicoInfo)) then
                 return "DATA INVÁLIDA OU NÃO É UM DIA DE ATENDIMENTO, DATA NO PADRÃO AAAA-MM-DD"
-            else if not <$> ehPacienteValido (removeChars idPaciente) then
+            else if paciente then
                 return "PACIENTE NÃO CADASTRADO NO SISTEMA"
             else do
                 -- Lê o JSON de consultas e cria uma lista com todas
