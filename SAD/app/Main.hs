@@ -3,4 +3,4 @@ import UserIO
 
 main::IO()
 main = do
-    showStartMenu
+    showLogin

@@ -1,6 +1,6 @@
 cabal-version: 2.2
 
--- This file has been generated from package.yaml by hpack version 0.36.0.
+-- This file has been generated from package.yaml by hpack version 0.37.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -24,8 +24,6 @@ source-repository head
   location: https://github.com/githubuser/SAD
 
 library
-  exposed-modules:
-      Lib
   other-modules:
       Paths_SAD
   autogen-modules:
@@ -42,13 +40,18 @@ library
 executable SAD-exe
   main-is: Main.hs
   other-modules:
+      Analytics
+      Appointments.Appointment
+      Appointments.AppointmentController
       Controller
       Diseases.Disease
+      Diseases.DiseasesController
       Medications.Medication
       Medications.MedicationController
       Symptons.Symptom
       Symptons.SymptomController
       UserIO
+      Users.User
       Users.UserController
       Users.UserModule
       Paths_SAD

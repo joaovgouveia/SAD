@@ -1,19 +1,15 @@
+{-# LANGUAGE DeriveGeneric #-}
+
 module Medications.Medication where
 
-import Data.Aeson (ToJSON, toJSON, object, (.=))
-import Data.String (fromString)
+import GHC.Generics (Generic)
+import Data.Aeson (ToJSON, FromJSON)
 
 data Medication = Medication
-    { medName        :: String
-    , medDescription :: String
-    , medDose        :: String
-    , medRoute       :: String
-    } deriving (Show, Eq)
+    { nome        :: String
+    , bula        :: String
+    , dosagem     :: String
+    } deriving (Show, Eq, Generic)
 
-instance ToJSON Medication where
-    toJSON (Medication medName medDescription medDose medRoute) =
-        object [ fromString "name" .= medName
-               , fromString "description" .= medDescription
-               , fromString "dose" .= medDose
-               , fromString "route" .= medRoute
-               ]
+instance FromJSON Medication
+instance ToJSON Medication

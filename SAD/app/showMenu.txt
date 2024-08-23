@@ -1,0 +1,9 @@
+╔══════════ Bem vindo ao ══════════╗
+
+          ███   ███   ███
+          █     █ █   █  █
+          ███   ███   █  █
+            █   █ █   █  █
+          ███   █ █   ███
+
+(Sistema Automático de Diagnósticos)

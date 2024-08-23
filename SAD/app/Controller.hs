@@ -4,24 +4,32 @@ module Controller where
 import qualified Medications.MedicationController as MC
 import qualified Users.UserController as UC
 import qualified Patients.PatitentController as PC
+import qualified Symptons.SymptomController as SC
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as B
-import Analytics ( dashboard ) 
+import Analytics ( dashboard )
+import qualified Diseases.DiseasesController as DC
+import Appointments.AppointmentController as AP
 
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
 execute (cmd:args)
     | cmd == "viewUser"        = return $ viewUser args
     | cmd == "listUsers"       = return $ listUsers args
-    | cmd == "addMedication"   = return $ addMedication args
-    | cmd == "viewMedication"  = return $ viewMedication args
-    | cmd == "listMedications" = return $ listMedications args
+    | cmd == "addMedication"   = addMedication args
+    | cmd == "viewMedication"  = viewMedication args
+    | cmd == "listMedications" = listMedications args
+    | cmd == "updateMedication" = updateMedication args
+    | cmd == "deleteMedication" = deleteMedication args
     | cmd == "viewMedicos"     = viewMedicos args
+    | cmd == "viewMedicosAtuation" = viewMedicosAtuation args
+    | cmd == "addAppointment"  = addAppointment args
+    | cmd == "changeStatusAppointment" = changeStatusAppointment args
     | cmd == "addDisease"      = return $ addDisease args
-    | cmd == "viewDisease"     = return $ viewDisease args
+    | cmd == "viewDisease"     = viewDisease args
     | cmd == "listDiseases"    = return $ listDiseases args
     | cmd == "addSymptom"      = return $ addSymptom args
-    | cmd == "viewSymptom"     = return $ viewSymptom args
+    | cmd == "viewSymptom"     = viewSymptom args
     | cmd == "listSymptoms"    = return $ listSymptoms args
     | cmd == "viewDashBoard"   = viewDashBoard args
     | cmd == "viewPatients"    = viewPatients args
@@ -41,27 +49,41 @@ deleteUser args = ""
 listUsers :: [String] -> String
 listUsers args = ""
 
-addMedication :: [String] -> String
-addMedication args =
-    let medication = MC.createMedicationFromList args
-    in "Medicação adicionada: " ++ show medication
+addMedication :: [String] -> IO String
+addMedication [a, b, c] = MC.createMedication a b c
+createMedication _ = return "Necessário exatamente 3 informações para cadastro da Medicação"
 
-viewMedication :: [String] -> String
-viewMedication args =
-    let medication = MC.createMedicationFromList args
-    in "Medicação:" ++ show medication
+viewMedication :: [String] -> IO String
+viewMedication [a] = MC.viewMedication a
 
-listMedications :: [String] -> String
-listMedications args = ""
+listMedications :: [String] -> IO String
+listMedications args = MC.readMedications
+
+updateMedication :: [String] -> IO String
+updateMedication [a, b, c] = MC.updateMedication a b c
+
+deleteMedication :: [String] -> IO String
+deleteMedication [a, b] = MC.deleteMedication a b
 
 viewMedicos :: [String] -> IO String
-viewMedicos args = UC.viewMedicos
+viewMedicos args = US.viewMedicos
+
+viewMedicosAtuation :: [String] -> IO String
+viewMedicosAtuation args = US.viewAtuation
+
+addAppointment :: [String] -> IO String
+addAppointment [a, b, c, d, e] = AP.writeAppointment a b c d e
+addAppointment _ = return "Necessário exatamente 5 informações para cadastro da Consulta"
+
+changeStatusAppointment :: [String] -> IO String
+changeStatusAppointment [a, b] = AP.updateAppointment a b
+changeStatusAppointment _ = return "Necessário exatamente 2 informações para atualização de status da Consulta"
 
 addDisease :: [String] -> String
 addDisease args = ""
 
-viewDisease :: [String] -> String
-viewDisease args = ""
+viewDisease :: [String] -> IO String
+viewDisease args = DC.viewDisease
 
 listDiseases :: [String] -> String
 listDiseases args = ""
@@ -69,8 +91,8 @@ listDiseases args = ""
 addSymptom :: [String] -> String
 addSymptom args = ""
 
-viewSymptom :: [String] -> String
-viewSymptom args = ""
+viewSymptom :: [String] -> IO String
+viewSymptom args = SC.viewSymptom
 
 listSymptoms :: [String] -> String
 listSymptoms args = ""
