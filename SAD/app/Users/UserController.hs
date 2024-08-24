@@ -9,33 +9,12 @@ import Data.Maybe (fromMaybe)
 import Data.Aeson.Types (parseJSON)
 import Data.List (groupBy, sortOn)
 import Data.Function (on)
-
-data Medico = Medico {
-    id                  :: String,
-    funcao              :: String,
-    especialidade       :: String,
-    dias_atendimento    :: [String],
-    horarios_atendimento :: [String],
-    nome                :: String,
-    pacientes_atendidos :: String,
-    senha               :: String
-} deriving (Show)
-
-instance FromJSON Medico where
-    parseJSON = withObject "Medico" $ \v -> Medico
-        <$> v .: fromString "id"
-        <*> v .: fromString "funcao"
-        <*> v .: fromString "especialidade"
-        <*> v .: fromString "dias_atendimento"
-        <*> v .: fromString "horarios_atendimento"
-        <*> v .: fromString "nome"
-        <*> v .: fromString "pacientes_atendidos"
-        <*> v .: fromString "senha"
+import Users.User (User(..))
 
 viewMedicos :: IO String
 viewMedicos = do
     content <- B.readFile "./Users/Users.JSON"
-    let medicos = fromMaybe [] (decode content :: Maybe [Medico])
+    let medicos = fromMaybe [] (decode content :: Maybe [User])
         medicosFiltrados = filter (\m -> funcao m == "MEDICO") medicos
         result = concatMap formatMedico medicosFiltrados
     return result
@@ -48,13 +27,13 @@ viewMedicos = do
 viewAtuation :: IO String
 viewAtuation = do
     content <- B.readFile "./Users/Users.JSON"
-    let medicos = fromMaybe [] (decode content :: Maybe [Medico])
+    let medicos = fromMaybe [] (decode content :: Maybe [User])
         medicosFiltrados = filter (\m -> funcao m == "MEDICO") medicos
         agrupadosPorEspecialidade = groupBy ((==) `on` especialidade) $ sortOn especialidade medicosFiltrados
         resultado = concatMap formatEspecialidade agrupadosPorEspecialidade
     return resultado
   where
-    formatEspecialidade :: [Medico] -> String
+    formatEspecialidade :: [User] -> String
     formatEspecialidade [] = ""
     formatEspecialidade (m:ms) = especialidade m ++ ":\n" ++ 
                                  unlines (map nome (m:ms)) ++ "\n"

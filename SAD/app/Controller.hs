@@ -2,20 +2,19 @@
 module Controller where
 
 import qualified Medications.MedicationController as MC
-import qualified Users.UserController as US
+import qualified Users.UserController as UC
+import qualified Patients.PatitentController as PC
 import qualified Symptons.SymptomController as SC
-import Data.ByteString.Lazy (ByteString)
-import qualified Data.ByteString.Lazy as B
-import Analytics ( dashboard )
 import qualified Diseases.DiseasesController as DC
 import Appointments.AppointmentController as AP
+import Analytics ( dashboard )
+import Data.ByteString.Lazy (ByteString)
+import qualified Data.ByteString.Lazy as B
 
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
 execute (cmd:args)
-    | cmd == "addUser"         = return $ addUser args
     | cmd == "viewUser"        = return $ viewUser args
-    | cmd == "deleteUser"      = return $ deleteUser args
     | cmd == "listUsers"       = return $ listUsers args
     | cmd == "addMedication"   = addMedication args
     | cmd == "viewMedication"  = viewMedication args
@@ -33,6 +32,10 @@ execute (cmd:args)
     | cmd == "viewSymptom"     = viewSymptom args
     | cmd == "listSymptoms"    = return $ listSymptoms args
     | cmd == "viewDashBoard"   = viewDashBoard args
+    | cmd == "addPatient"    = addPatient args
+    | cmd == "viewPatient"    = viewPatient args
+    | cmd == "viewPatients"    = viewPatients args
+    | cmd == "addPatient"      = addPatient args
     | otherwise                = return "Função não existe"
 
 -- Funções do sistema
@@ -65,10 +68,10 @@ deleteMedication :: [String] -> IO String
 deleteMedication [a, b] = MC.deleteMedication a b
 
 viewMedicos :: [String] -> IO String
-viewMedicos args = US.viewMedicos
+viewMedicos args = UC.viewMedicos
 
 viewMedicosAtuation :: [String] -> IO String
-viewMedicosAtuation args = US.viewAtuation
+viewMedicosAtuation args = UC.viewAtuation
 
 addAppointment :: [String] -> IO String
 addAppointment [a, b, c, d, e] = AP.writeAppointment a b c d e
@@ -98,6 +101,15 @@ listSymptoms args = ""
 
 viewDashBoard :: [String] -> IO String 
 viewDashBoard args = Analytics.dashboard
+
+viewPatients :: [String] -> IO String 
+viewPatients args = PC.viewPatients
+
+viewPatient :: [String] -> IO String 
+viewPatient args = PC.viewPatient (head args)
+
+addPatient :: [String] -> IO String 
+addPatient (cpf:name) = PC.createPatient cpf (head name)
 
 -- TODO: Consultas
 duck :: String

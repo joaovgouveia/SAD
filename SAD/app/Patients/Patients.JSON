@@ -1,6 +1,1 @@
-[
-    {
-        "id_patient": "312.234.456-23",
-        "nome_patient": "Leocadimo_Rodrigues_Rocha"
-    }
-]
+[{"consultas":[],"id_patient":"312.234.456-23","nome_patient":"Leocadimo_Rodrigues_Rocha"},{"consultas":[],"id_patient":"111.111.111-11","nome_patient":"Joca_Silva_Oliveira"}]
