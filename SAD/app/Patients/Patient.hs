@@ -6,8 +6,9 @@ import GHC.Generics (Generic)
 import Data.Aeson (FromJSON, ToJSON)
 
 data Patient = Patient 
-    { id_patient             :: String
-    , nome_patient               :: String
+    { id_patient       :: String
+    , nome_patient     :: String
+    , consultas        :: [String]
     } deriving (Show, Generic)
 
 instance FromJSON Patient where
