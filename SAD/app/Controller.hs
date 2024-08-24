@@ -10,6 +10,7 @@ import Appointments.AppointmentController as AP
 import Analytics ( dashboard )
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as B
+import Prescriptions.PrescriptionsController as PRE
 
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
@@ -25,6 +26,8 @@ execute (cmd:args)
     | cmd == "viewMedicosAtuation" = viewMedicosAtuation args
     | cmd == "addAppointment"  = addAppointment args
     | cmd == "changeStatusAppointment" = changeStatusAppointment args
+    | cmd == "enumerateSymptons" = enumerateSymptons
+    | cmd == "generatePrescription" = generatePrescrip args
     | cmd == "addDisease"      = return $ addDisease args
     | cmd == "viewDisease"     = viewDisease args
     | cmd == "listDiseases"    = return $ listDiseases args
@@ -81,6 +84,13 @@ changeStatusAppointment :: [String] -> IO String
 changeStatusAppointment [a, b] = AP.updateAppointment a b
 changeStatusAppointment _ = return "Necessário exatamente 2 informações para atualização de status da Consulta"
 
+enumerateSymptons :: IO String
+enumerateSymptons = PRE.enumerate
+
+generatePrescrip :: [String] -> IO String
+generatePrescrip a = if length a > 10 then
+    return "Necessário respeitar o limite cadastrado no sistema, até 10 sintomas" else PRE.generatePrescription a
+
 addDisease :: [String] -> String
 addDisease args = ""
 
@@ -99,16 +109,16 @@ viewSymptom args = SC.viewSymptom
 listSymptoms :: [String] -> String
 listSymptoms args = ""
 
-viewDashBoard :: [String] -> IO String 
+viewDashBoard :: [String] -> IO String
 viewDashBoard args = Analytics.dashboard
 
-viewPatients :: [String] -> IO String 
+viewPatients :: [String] -> IO String
 viewPatients args = PC.viewPatients
 
-viewPatient :: [String] -> IO String 
+viewPatient :: [String] -> IO String
 viewPatient args = PC.viewPatient (head args)
 
-addPatient :: [String] -> IO String 
+addPatient :: [String] -> IO String
 addPatient (cpf:name) = PC.createPatient cpf (head name)
 
 -- TODO: Consultas
