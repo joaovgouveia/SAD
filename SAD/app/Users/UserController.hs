@@ -27,13 +27,13 @@ viewMedicos = do
 viewAtuation :: IO String
 viewAtuation = do
     content <- B.readFile "./Users/Users.JSON"
-    let medicos = fromMaybe [] (decode content :: Maybe [Medico])
+    let medicos = fromMaybe [] (decode content :: Maybe [User])
         medicosFiltrados = filter (\m -> funcao m == "MEDICO") medicos
         agrupadosPorEspecialidade = groupBy ((==) `on` especialidade) $ sortOn especialidade medicosFiltrados
         resultado = concatMap formatEspecialidade agrupadosPorEspecialidade
     return resultado
   where
-    formatEspecialidade :: [Medico] -> String
+    formatEspecialidade :: [User] -> String
     formatEspecialidade [] = ""
     formatEspecialidade (m:ms) = especialidade m ++ ":\n" ++ 
                                  unlines (map nome (m:ms)) ++ "\n"
