@@ -17,5 +17,5 @@ viewDisease = do
 
 formatDisease::Disease -> String
 formatDisease s = "Doença: " ++ doenca s ++ "\n" ++
-                  "Possíveis Causas: " ++ possivelCausa s ++
+                  "Possíveis Causas: " ++ possivel_causa s ++
                   "Medicações indicadas: " ++ unwords (medicamentos s) ++ "\n\n"

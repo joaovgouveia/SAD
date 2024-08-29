@@ -7,9 +7,9 @@ import Data.Aeson (ToJSON, FromJSON)
 
 data Disease = Disease {
     doenca                    :: String,
-    especialidadeRelacionada  :: String,
-    sintomasAssociados        :: [String],
-    possivelCausa             :: String,
+    especialidade_relacionada  :: String,
+    sintomas_associados        :: [String],
+    possivel_causa             :: String,
     medicamentos              :: [String]
 } deriving (Show, Eq, Generic)
 

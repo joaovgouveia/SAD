@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 module Diagnosis.Diagnosis where
 
 import Data.Aeson (ToJSON, FromJSON, decode)
@@ -15,7 +16,7 @@ findDisease symptons = do
     let path = "./Diseases/Diseases.JSON"
     diseases <- fromMaybe [] <$> readJsonFile path
     putStrLn (unwords (map Diseases.DiseasesController.formatDisease diseases))
-    let filterDiseases = filter (belongs symptons . sintomasAssociados) diseases
+    let filterDiseases = filter (belongs symptons . sintomas_associados) diseases
     return (unwords (map Diseases.DiseasesController.formatDisease filterDiseases))
 
 -- Utility functions
