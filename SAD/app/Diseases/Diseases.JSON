@@ -2,84 +2,96 @@
   {
     "doenca": "DIABETES",
     "especialidade_relacionada": "CLINICO_GERAL",
-    "sintomas_associados": ["sede", "vontade de urinar", "fadiga"],
-    "possivel_causa": "Fatores genéticos, obesidade, sedentarismo"
+    "sintomas_associados": [
+      "sede",
+      "vontade_de_urinar",
+      "fadiga"
+    ],
+    "possivel_causa": "Fatores genéticos, obesidade, sedentarismo",
+    "medicamentos": ["Insulina"]
   },
   {
     "doenca": "HIPERTENSAO ARTERIAL",
     "especialidade_relacionada": "CLINICO_GERAL",
     "sintomas_associados": [
-      "dor de cabeca",
+      "dor_de_cabeca",
       "tontura",
-      "dor no peito",
-      "falta de ar"
+      "dor_no_peito",
+      "falta_de_ar"
     ],
-    "possivel_causa": "Fatores genéticos, dieta rica em sal, obesidade"
+    "possivel_causa": "Fatores genéticos, dieta rica em sal, obesidade",
+    "medicamentos": ["Atenolol", "Hidroclorotiazida", "Captopril", "Losartana", "Enalapril"]
   },
   {
     "doenca": "INFECCAO_URINARIA",
     "especialidade_relacionada": "CLINICO_GERAL",
     "sintomas_associados": [
-      "dor ao urinar",
-      "vontade de urinar",
-      "dor abdominal",
-      "urina com sangue",
+      "dor_ao_urinar",
+      "vontade_de_urinar",
+      "dor_abdominal",
+      "urina_com_sangue",
       "febre"
     ],
-    "possivel_causa": "Bactérias, má higiene, imunidade baixa"
+    "possivel_causa": "Bactérias, má higiene, imunidade baixa",
+    "medicamentos": ["Nimesulida", "Ibuprofeno", "Levoflaxacino", "Ciproflaxacino"]
   },
   {
     "doenca": "GASTRITE",
     "especialidade_relacionada": "CLINICO_GERAL",
     "sintomas_associados": ["dor estomacal", "nausea", "vomito", "indigestao"],
-    "possivel_causa": "Infecção por H. pylori, uso excessivo de anti-inflamatórios, estresse"
+    "possivel_causa": "Infecção por H. pylori, uso excessivo de anti-inflamatórios, estresse",
+    "medicamentos": ["Pantoprazol", "Omeprazol"]
   },
   {
     "doenca": "INSUFICIENCIA_CARDIACA",
     "especialidade_relacionada": "CARDIOLOGISTA",
     "sintomas_associados": [
-      "falta de ar",
-      "inchaco nas pernas",
+      "falta_de_ar",
+      "inchaco_nas_pernas",
       "fadiga",
       "tosse",
-      "ganho de peso"
+      "ganho_de_peso"
     ],
-    "possivel_causa": "Doença arterial coronariana, hipertensão, diabetes"
+    "possivel_causa": "Doença arterial coronariana, hipertensão, diabetes",
+    "medicamentos": ["Sucubitril", "Valsartana"]
   },
   {
     "doenca": "ARRITMIA",
     "especialidade_relacionada": "CARDIOLOGISTA",
     "sintomas_associados": [
       "palpitacao",
-      "falta de ar",
+      "falta_de_ar",
       "cansaco",
-      "dor no peito",
-      "batimento irregular"
+      "dor_no_peito",
+      "batimento_irregular"
     ],
-    "possivel_causa": "Doença cardíaca, estresse, consumo de cafeína"
+    "possivel_causa": "Doença cardíaca, estresse, consumo de cafeína",
+    "medicamentos": ["Atenolol", "Propafenona", "Amiodarona"]
   },
   {
     "doenca": "HIPERTENSAO PULMONAR",
     "especialidade_relacionada": "CARDIOLOGISTA",
     "sintomas_associados": [
-      "falta de ar",
+      "falta_de_ar",
       "fadiga",
-      "dor no peito",
-      "inchaco nas pernas",
+      "dor_no_peito",
+      "inchaco_nas_pernas",
       "tosse"
     ],
-    "possivel_causa": "Doenças cardíacas ou pulmonares, genética"
+    "possivel_causa": "Doenças cardíacas ou pulmonares, genética",
+    "medicamentos": ["Anlodipino", "Nifedipino"]
   },
   {
     "doenca": "DOENCA_VALVULAR_CARDIACA",
     "especialidade_relacionada": "CARDIOLOGISTA",
     "sintomas_associados": [
-      "falta de ar",
-      "dor no peito",
+      "falta_de_ar",
+      "dor_no_peito",
       "tontura",
       "palpitacao"
     ],
-    "possivel_causa": "Degeneração valvular, febre reumática, infecções"
+    "possivel_causa": "Degeneração valvular, febre reumática, infecções",
+    "medicamentos": ["Digoxina", "Propanolol"]
   },
   {
     "doenca": "TDAH",
@@ -88,94 +100,103 @@
       "desatencao",
       "hiperatividade",
       "impulsividade",
-      "dificuldade organizacional"
+      "dificuldade_organizacional"
     ],
-    "possivel_causa": "Fatores genéticos, desequilíbrios químicos no cérebro"
+    "possivel_causa": "Fatores genéticos, desequilíbrios químicos no cérebro",
+    "medicamentos": ["Ritalina"]
   },
   {
     "doenca": "ENXAQUECA",
     "especialidade_relacionada": "NEUROLOGISTA",
     "sintomas_associados": [
-      "dor de cabeca",
+      "dor_de_cabeca",
       "nausea",
       "vomito",
-      "sensibilidade a luz"
+      "sensibilidade_a_luz"
     ],
-    "possivel_causa": "Fatores genéticos, estresse, alterações hormonais"
+    "possivel_causa": "Fatores genéticos, estresse, alterações hormonais",
+    "medicamentos": ["Dipirona"]
   },
   {
     "doenca": "PARKINSON",
     "especialidade_relacionada": "NEUROLOGISTA",
     "sintomas_associados": [
       "tremores",
-      "rigidez muscular",
-      "dificuldade para falar"
+      "rigidez_muscular",
+      "dificuldade_para_falar"
     ],
-    "possivel_causa": "Degeneração de células nervosas, fatores genéticos"
+    "possivel_causa": "Degeneração de células nervosas, fatores genéticos",
+    "medicamentos": ["Levodopa"]
   },
   {
     "doenca": "EPILEPSIA",
     "especialidade_relacionada": "NEUROLOGISTA",
     "sintomas_associados": [
       "convulsao",
-      "perda de consciencia",
-      "movimentos involuntarios",
+      "perda_de_conciencia",
+      "movimentos_involuntarios",
       "confusao"
     ],
-    "possivel_causa": "Lesões cerebrais, genética, distúrbios do desenvolvimento"
+    "possivel_causa": "Lesões cerebrais, genética, distúrbios do desenvolvimento",
+    "medicamentos": ["Carbamazepina", "Fenitoína", "Ácido Valpróico"]
   },
   {
     "doenca": "TENDINITE",
     "especialidade_relacionada": "ORTOPEDISTA",
     "sintomas_associados": [
-      "dor intensa",
+      "dor_intensa",
       "inchaco",
-      "dificuldade de movimento",
-      "sensibilidade ao toque"
+      "dificuldade_de_movimento",
+      "senbilidade_ao_toque"
     ],
-    "possivel_causa": "Esforço repetitivo, envelhecimento, lesões"
+    "possivel_causa": "Esforço repetitivo, envelhecimento, lesões",
+    "medicamentos": ["Paracetamol", "Ibuprofeno", "Piroxican", "Dipirona"]
   },
   {
     "doenca": "OSTEOPOROSE",
     "especialidade_relacionada": "ORTOPEDISTA",
     "sintomas_associados": [
-      "dor nas costas",
-      "perda de altura",
-      "postura encurvada",
-      "fraturas faceis"
+      "dor_nas_costas",
+      "perda_de_altura",
+      "postura_encurvada",
+      "fraturas_faceis"
     ],
-    "possivel_causa": "Deficiência de cálcio, alterações hormonais, idade avançada"
+    "possivel_causa": "Deficiência de cálcio, alterações hormonais, idade avançada",
+    "medicamentos": ["Aleandronato", "Risedronato", "Ibandronato"]
   },
   {
     "doenca": "HERNIA_DE_DISCO",
     "especialidade_relacionada": "ORTOPEDISTA",
     "sintomas_associados": [
-      "dor nas costas",
+      "dor_nas_costas",
       "fraqueza",
-      "dificuldade de movimento"
+      "dificuldade_de_movimento"
     ],
-    "possivel_causa": "Degeneração dos discos, esforço excessivo, lesões"
+    "possivel_causa": "Degeneração dos discos, esforço excessivo, lesões",
+    "medicamentos": ["Ibuprofeno", "Cetoprofeno", "Dipirona"]
   },
   {
     "doenca": "ESCOLIOSE",
     "especialidade_relacionada": "ORTOPEDISTA",
     "sintomas_associados": [
-      "dor nas costas",
-      "desconforto muscular",
-      "postura encurvada"
+      "dor_nas_costas",
+      "desconforto_muscular",
+      "postura_encurvada"
     ],
-    "possivel_causa": "Fatores genéticos, distúrbios neuromusculares"
+    "possivel_causa": "Fatores genéticos, distúrbios neuromusculares",
+    "medicamentos": ["Diclofenaco", "Ibuprofeno"]
   },
   {
     "doenca": "ASMA",
     "especialidade_relacionada": "PNEUMOLOGISTA",
     "sintomas_associados": [
-      "dificuldade respiratoria",
+      "dificuldade_respiratoria",
       "tosse",
-      "chiado ao respirar",
-      "pressao no peito"
+      "chiado_ao_respirar",
+      "pressao_no_peito"
     ],
-    "possivel_causa": "Alergias, fatores genéticos, poluição"
+    "possivel_causa": "Alergias, fatores genéticos, poluição",
+    "medicamentos": ["Sabultamol", "Budesonida", "Formoterol", "Prednisona", "Brometo de Ipratrópio"]
   },
   {
     "doenca": "PNEUMONIA",
@@ -183,32 +204,35 @@
     "sintomas_associados": [
       "febre",
       "tosse",
-      "producao de muco",
-      "falta de ar"
+      "producao_de_muco",
+      "falta_de_ar"
     ],
-    "possivel_causa": "Infecções bacterianas ou virais"
+    "possivel_causa": "Infecções bacterianas ou virais",
+    "medicamentos": ["Amoxilina", "Azitromicina", "Levoflaxacino", "Vancomicina", "Meropenem"]
   },
   {
     "doenca": "FIBROSE_PULMONAR",
     "especialidade_relacionada": "PNEUMOLOGISTA",
     "sintomas_associados": [
-      "falta de ar",
-      "tosse seca",
+      "falta_de_ar",
+      "tosse_seca",
       "fadiga",
-      "dificuldade respiratoria"
+      "dificuldade_respiratoria"
     ],
-    "possivel_causa": "Doenças autoimunes, exposição a poluentes, genética"
+    "possivel_causa": "Doenças autoimunes, exposição a poluentes, genética",
+    "medicamentos": ["Predinisona", "Nintedanibe", "Pirfenidona", "Ciclofasfamida", "Azatioprina"]
   },
   {
     "doenca": "BRONQUITE",
     "especialidade_relacionada": "PNEUMOLOGISTA",
     "sintomas_associados": [
       "tosse",
-      "producao de muco",
-      "falta de ar",
-      "chiado ao respirar",
-      "dor no peito"
+      "producao_de_muco",
+      "falta_de_ar",
+      "chiado_ao_respirar",
+      "dor_no_peito"
     ],
-    "possivel_causa": "Infecções virais, tabagismo, poluição"
+    "possivel_causa": "Infecções virais, tabagismo, poluição",
+    "medicamentos": ["Levodopropizina", "Acebrofilina", "Ambroxol", "Predinisona", "Fluticasona", "Budesonida"]
   }
 ]
