@@ -6,7 +6,8 @@ import qualified Users.UserController as UC
 import qualified Patients.PatitentController as PC
 import qualified Symptons.SymptomController as SC
 import qualified Diseases.DiseasesController as DC
-import Appointments.AppointmentController as AP
+import qualified Appointments.AppointmentController as AC
+import qualified Diagnosis.Diagnosis as D 
 import Analytics ( dashboard )
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as B
@@ -15,31 +16,32 @@ import Prescriptions.PrescriptionsController as PRE
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
 execute (cmd:args)
-    | cmd == "viewUser"        = return $ viewUser args
-    | cmd == "listUsers"       = return $ listUsers args
-    | cmd == "addMedication"   = addMedication args
-    | cmd == "viewMedication"  = viewMedication args
-    | cmd == "listMedications" = listMedications args
-    | cmd == "updateMedication" = updateMedication args
-    | cmd == "deleteMedication" = deleteMedication args
-    | cmd == "viewMedicos"     = viewMedicos args
-    | cmd == "viewMedicosAtuation" = viewMedicosAtuation args
-    | cmd == "addAppointment"  = addAppointment args
-    | cmd == "changeStatusAppointment" = changeStatusAppointment args
-    | cmd == "enumerateSymptons" = enumerateSymptons
-    | cmd == "generatePrescription" = generatePrescrip args
-    | cmd == "addDisease"      = return $ addDisease args
-    | cmd == "viewDisease"     = viewDisease args
-    | cmd == "listDiseases"    = return $ listDiseases args
-    | cmd == "addSymptom"      = return $ addSymptom args
-    | cmd == "viewSymptom"     = viewSymptom args
-    | cmd == "listSymptoms"    = return $ listSymptoms args
-    | cmd == "viewDashBoard"   = viewDashBoard args
-    | cmd == "addPatient"    = addPatient args
-    | cmd == "viewPatient"    = viewPatient args
-    | cmd == "viewPatients"    = viewPatients args
-    | cmd == "addPatient"      = addPatient args
-    | otherwise                = return "Função não existe"
+    | cmd == "viewUser"                 = return $ viewUser args
+    | cmd == "listUsers"                = return $ listUsers args
+    | cmd == "addMedication"            = addMedication args
+    | cmd == "viewMedication"           = viewMedication args
+    | cmd == "listMedications"          = listMedications args
+    | cmd == "updateMedication"         = updateMedication args
+    | cmd == "deleteMedication"         = deleteMedication args
+    | cmd == "viewMedicos"              = viewMedicos args
+    | cmd == "viewMedicosAtuation"      = viewMedicosAtuation args
+    | cmd == "addAppointment"           = addAppointment args
+    | cmd == "changeStatusAppointment"  = changeStatusAppointment args
+    | cmd == "enumerateSymptons"        = enumerateSymptons
+    | cmd == "generatePrescription"     = generatePrescrip args
+    | cmd == "addDisease"               = return $ addDisease args
+    | cmd == "viewDisease"              = viewDisease args
+    | cmd == "listDiseases"             = return $ listDiseases args
+    | cmd == "addSymptom"               = return $ addSymptom args
+    | cmd == "viewSymptom"              = viewSymptom args
+    | cmd == "listSymptoms"             = return $ listSymptoms args
+    | cmd == "viewDashBoard"            = viewDashBoard args
+    | cmd == "addPatient"               = addPatient args
+    | cmd == "viewPatient"              = viewPatient args
+    | cmd == "viewPatients"             = viewPatients args
+    | cmd == "addPatient"               = addPatient args
+    | cmd == "diagnose"                 = diagnose args
+    | otherwise                         = return "Função não existe"
 
 -- Funções do sistema
 addUser :: [String] -> String
@@ -77,11 +79,11 @@ viewMedicosAtuation :: [String] -> IO String
 viewMedicosAtuation args = UC.viewAtuation
 
 addAppointment :: [String] -> IO String
-addAppointment [a, b, c, d, e] = AP.writeAppointment a b c d e
+addAppointment [a, b, c, d, e] = AC.writeAppointment a b c d e
 addAppointment _ = return "Necessário exatamente 5 informações para cadastro da Consulta"
 
 changeStatusAppointment :: [String] -> IO String
-changeStatusAppointment [a, b] = AP.updateAppointment a b
+changeStatusAppointment [a, b] = AC.updateAppointment a b
 changeStatusAppointment _ = return "Necessário exatamente 2 informações para atualização de status da Consulta"
 
 enumerateSymptons :: IO String
@@ -121,6 +123,15 @@ viewPatient args = PC.viewPatient (head args)
 addPatient :: [String] -> IO String
 addPatient (cpf:name) = PC.createPatient cpf (head name)
 
--- TODO: Consultas
+diagnose :: [String] -> IO String
+diagnose = D.findDisease
+
 duck :: String
 duck = "quack"
+
+-- Util
+(+++) :: Monad m => m [a] -> m [a] -> m [a]
+ms1 +++ ms2 = do
+    s1 <- ms1
+    s2 <- ms2
+    return $ s1 ++ s2

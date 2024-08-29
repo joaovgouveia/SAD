@@ -12,9 +12,10 @@ viewDisease :: IO String
 viewDisease = do
     content <- B.readFile "./Diseases/Diseases.JSON"
     let diseases = fromMaybe [] (decode content :: Maybe [Disease])
-        result = concatMap formatDiseases diseases
+        result = concatMap formatDisease diseases
     return result
-  where
-    formatDiseases s = "Doença: " ++ doenca s ++ "\n" ++
-                      "Possíveis Causas: " ++ possivelCausa s ++ 
-                      "Medicações indicadas: " ++ unwords (medicamentos s) ++ "\n\n"
+
+formatDisease::Disease -> String
+formatDisease s = "Doença: " ++ doenca s ++ "\n" ++
+                  "Possíveis Causas: " ++ possivelCausa s ++
+                  "Medicações indicadas: " ++ unwords (medicamentos s) ++ "\n\n"
