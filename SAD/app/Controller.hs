@@ -7,11 +7,11 @@ import qualified Patients.PatitentController as PC
 import qualified Symptons.SymptomController as SC
 import qualified Diseases.DiseasesController as DC
 import qualified Appointments.AppointmentController as AC
+import Prescriptions.PrescriptionsController as PRE
 import qualified Diagnosis.Diagnosis as D 
 import Analytics ( dashboard )
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as B
-import Prescriptions.PrescriptionsController as PRE
 
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
@@ -29,10 +29,8 @@ execute (cmd:args)
     | cmd == "changeStatusAppointment"  = changeStatusAppointment args
     | cmd == "enumerateSymptons"        = enumerateSymptons
     | cmd == "generatePrescription"     = generatePrescrip args
-    | cmd == "addDisease"               = return $ addDisease args
     | cmd == "viewDisease"              = viewDisease args
-    | cmd == "listDiseases"             = return $ listDiseases args
-    | cmd == "addSymptom"               = return $ addSymptom args
+    | cmd == "listDiseases"             = listDiseases args
     | cmd == "viewSymptom"              = viewSymptom args
     | cmd == "listSymptoms"             = return $ listSymptoms args
     | cmd == "viewDashBoard"            = viewDashBoard args
@@ -40,25 +38,19 @@ execute (cmd:args)
     | cmd == "viewPatient"              = viewPatient args
     | cmd == "viewPatients"             = viewPatients args
     | cmd == "addPatient"               = addPatient args
-    | cmd == "diagnose"                 = diagnose args
+    | cmd == "diagnosticar"                 = diagnosticar args
     | otherwise                         = return "Função não existe"
 
 -- Funções do sistema
-addUser :: [String] -> String
-addUser args = ""
-
 viewUser :: [String] -> String
 viewUser args = ""
-
-deleteUser :: [String] -> String
-deleteUser args = ""
 
 listUsers :: [String] -> String
 listUsers args = ""
 
 addMedication :: [String] -> IO String
 addMedication [a, b, c] = MC.createMedication a b c
-createMedication _ = return "Necessário exatamente 3 informações para cadastro da Medicação"
+addMedication _ = return "Necessário exatamente 3 informações para cadastro da Medicação"
 
 viewMedication :: [String] -> IO String
 viewMedication [a] = MC.viewMedication a
@@ -93,17 +85,11 @@ generatePrescrip :: [String] -> IO String
 generatePrescrip a = if length a > 10 then
     return "Necessário respeitar o limite cadastrado no sistema, até 10 sintomas" else PRE.generatePrescription a
 
-addDisease :: [String] -> String
-addDisease args = ""
-
 viewDisease :: [String] -> IO String
-viewDisease args = DC.viewDisease
+viewDisease args = DC.viewDisease (head args)
 
-listDiseases :: [String] -> String
-listDiseases args = ""
-
-addSymptom :: [String] -> String
-addSymptom args = ""
+listDiseases :: [String] -> IO String
+listDiseases args = DC.viewDiseases
 
 viewSymptom :: [String] -> IO String
 viewSymptom args = SC.viewSymptom
@@ -121,17 +107,12 @@ viewPatient :: [String] -> IO String
 viewPatient args = PC.viewPatient (head args)
 
 addPatient :: [String] -> IO String
-addPatient (cpf:name) = PC.createPatient cpf (head name)
+addPatient [cpf, name] = PC.createPatient cpf name
+addPatient _ = return "Nessessário CPF e Nome do Paciente para cadastra-lo"
 
-diagnose :: [String] -> IO String
-diagnose = D.findDisease
+diagnosticar :: [String] -> IO String
+diagnosticar = D.findDisease
 
+-- Nothing to see here
 duck :: String
 duck = "quack"
-
--- Util
-(+++) :: Monad m => m [a] -> m [a] -> m [a]
-ms1 +++ ms2 = do
-    s1 <- ms1
-    s2 <- ms2
-    return $ s1 ++ s2
