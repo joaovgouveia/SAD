@@ -16,6 +16,7 @@ viewDisease = do
     return result
 
 formatDisease::Disease -> String
-formatDisease s = "Doença: " ++ doenca s ++
-                  "\nPossíveis Causas: " ++ possivel_causa s ++
-                  "\nMedicações indicadas: " ++ unwords (medicamentos s) ++ "\n"
+formatDisease d = "Doença: " ++ doenca d ++
+                  "\nPossíveis Causas: " ++ possivel_causa d ++
+                  "\nEspecialidade Médica Indicada: " ++ especialidade_relacionada d ++
+                  "\nMedicações Indicadas: " ++ unwords (medicamentos d) ++ "\n\n"
