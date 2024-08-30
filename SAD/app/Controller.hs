@@ -10,7 +10,7 @@ import Appointments.AppointmentController as AP
 import Analytics ( dashboard )
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as B
-
+ 
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
 execute (cmd:args)
@@ -32,12 +32,15 @@ execute (cmd:args)
     | cmd == "viewSymptom"     = viewSymptom args
     | cmd == "listSymptoms"    = return $ listSymptoms args
     | cmd == "viewDashBoard"   = viewDashBoard args
-    | cmd == "addPatient"    = addPatient args
-    | cmd == "viewPatient"    = viewPatient args
+    | cmd == "addPatient"      = addPatient args
+    | cmd == "viewPatient"     = viewPatient args
     | cmd == "viewPatients"    = viewPatients args
     | cmd == "addPatient"      = addPatient args
+    | cmd == "viewAvailableAppointment" = viewAvailableAppointment args
     | otherwise                = return "Função não existe"
 
+viewAvailableAppointment :: [String] -> IO String
+viewAvailableAppointment args = AP.checkSchedule args
 -- Funções do sistema
 addUser :: [String] -> String
 addUser args = ""
