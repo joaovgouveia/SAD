@@ -2,6 +2,8 @@ module Utils.Utils where
 
 import Data.Aeson (ToJSON, FromJSON, decode, encode)
 import qualified Data.ByteString.Lazy as B
+import Data.List (nub, maximumBy)
+import Data.Function (on)
 
 -- Lê de um JSON
 readJsonFile :: (FromJSON a) => FilePath -> IO (Maybe [a])
@@ -38,3 +40,15 @@ intersect x y
 removeDuplicates :: Eq a => [a] -> [a]
 removeDuplicates [] = []
 removeDuplicates (x:xs) = x : removeDuplicates (filter (/= x) xs)
+
+-- Retorna o maior valor da lista
+maxValue :: Ord a => [a] -> a
+maxValue [a] = a
+maxValue (h:t)
+    | maxValue t > h = maxValue t
+    | otherwise = h
+
+-- Retorna o Valor mais comum da lista
+mostCommonElem :: Eq a => [a] -> a
+mostCommonElem list = fst $ maximumBy (compare `on` snd) elemCounts 
+    where elemCounts = nub [(element, count) | element <- list, let count = length (filter (==element) list)]
