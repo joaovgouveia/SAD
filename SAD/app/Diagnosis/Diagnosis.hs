@@ -5,18 +5,27 @@ import Data.Aeson (ToJSON, FromJSON, decode)
 import Data.Maybe (fromMaybe)
 import Data.Function ( on )
 import qualified Data.ByteString.Lazy as B
-import Utils.Utils (readJsonFile, belongs, intersect, intersectionList)
+import Utils.Utils (readJsonFile, belongs, intersect, intersectionList, maxValue, removeDuplicates, mostCommonElem)
 import Diseases.Disease (Disease(..))
-import Medications.Medication(Medication(..))
+import Users.User(User(..))
 import qualified Diseases.DiseasesController as DC
+import Diseases.DiseasesController (formatDisease)
 
 findDisease :: [String] -> IO String
 findDisease symptons = do
-    let path = "./Diseases/Diseases.JSON"
-    diseases <- fromMaybe [] <$> readJsonFile path
+    let pathDiseases = "./Diseases/Diseases.JSON"
+    diseases <- fromMaybe [] <$> readJsonFile pathDiseases
+
     let filterDiseases = filter (intersect symptons . sintomas_associados) diseases
+    let maxPercent = maxValue (map calculateProp filterDiseases)
+    let mostLikely = filter (\x -> calculateProp x == maxPercent) filterDiseases
+    let chosenDoctor = mostCommonElem (map especialidade_relacionada mostLikely)
+    let response = "\nDiagnóstico:\n" ++ unwords (map formatDisease mostLikely) ++ "Certeza: " ++ show maxPercent ++ "%\nTipo de Médico Indicado: " ++ chosenDoctor ++"\n"
+
     if null filterDiseases then return "Diagnóstico incerto"
-    else return (unwords (map description filterDiseases))
-    where description d = DC.formatDisease d ++ "Probabilidade: " ++ show (calculateProp d) ++ "%\n\n"
-          calculateProp glob = divide (length (intersectionList symptons (sintomas_associados glob))) (length (sintomas_associados glob)) * 100
+    else return response
+
+    where calculateProp x = round (factor_a x * 100)
+          factor_a x = divide (length (intersecSD x)) (length (sintomas_associados x))
+          intersecSD x = intersectionList symptons (sintomas_associados x)
           divide = (/) `on` fromIntegral
