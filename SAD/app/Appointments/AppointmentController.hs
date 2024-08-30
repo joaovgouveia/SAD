@@ -105,11 +105,23 @@ writeAppointment data_consult horario medico diagnostico idPaciente = do
                     let novaConsulta = Consulta idConsulta dataLimpa horarioLimpo (removeChars medico) (removeChars diagnostico) (removeChars idPaciente) "Em andamento"
                     writeJsonFile pathConsultas (consultasAntigas ++ [novaConsulta])
                     atualizaAtendimentos (removeChars medico)
+                    insertAppointment (removeChars idPaciente) idConsulta
                     return "CONSULTA REGISTRADA"
                 else
                     return "JÁ EXISTE UMA CONSULTA DESSE MÉDICO PARA ESSE DIA E HORÁRIO"
         Nothing -> return "MÉDICO NÃO ENCONTRADO OU NÃO É MÉDICO"
 
+
+-- Adiciona uma consulta ao paciente
+insertAppointment :: String -> String -> IO String
+insertAppointment idPaciente consulta = do
+    patients <- fromMaybe [] <$> readJsonFile "./Patients/Patients.JSON"
+    case find (\p -> id_patient p == idPaciente) patients of
+        Just patient -> do
+            let updatedPatients = map (\p -> if id_patient p == idPaciente then patient {consultas = consultas patient ++ [consulta]} else p) patients
+            writeJsonFile "./Patients/Patients.JSON" updatedPatients
+            return "\n"
+        Nothing -> return "Paciente não cadastrado no sistema"
 
 -- Verifica se o novo Status é válido
 ehStatusValido :: String -> Bool
