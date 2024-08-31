@@ -38,7 +38,8 @@ execute (cmd:args)
     | cmd == "viewPatient"              = viewPatient args
     | cmd == "viewPatients"             = viewPatients args
     | cmd == "addPatient"               = addPatient args
-    | cmd == "diagnosticar"                 = diagnosticar args
+    | cmd == "diagnosticar"             = diagnosticar args
+    | cmd == "viewPatientHistory"       = viewPatientHistory args
     | otherwise                         = return "Função não existe"
 
 -- Funções do sistema
@@ -112,6 +113,10 @@ addPatient _ = return "Nessessário CPF e Nome do Paciente para cadastra-lo"
 
 diagnosticar :: [String] -> IO String
 diagnosticar = D.findDisease
+
+viewPatientHistory :: [String] -> IO String
+viewPatientHistory [] = return "Id inválido"  
+viewPatientHistory (id:s) = PC.viewPatientHistory id
 
 -- Nothing to see here
 duck :: String
