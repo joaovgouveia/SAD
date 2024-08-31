@@ -141,3 +141,28 @@ updateAppointment idConsulta novoStatus = do
                 writeJsonFile "./Appointments/Appointments.JSON" updatedAppoints
                 return "STATUS DA CONSULTA ATUALIZADO COM SUCESSO"
             Nothing -> return "ID DA CONSULTA INVÁLIDO/CONSULTA NÃO EXISTE OU CONSULTA JÁ FINALIZADA"
+
+
+-- Visualizar Consultas do Paciente
+viewPatientAppointment :: [String] -> IO String
+viewPatientAppointment idsConsultas = do
+    -- Lê o arquivo JSON de consultas
+    consultas <- fromMaybe [] <$> readJsonFile "./Appointments/Appointments.JSON"
+    
+    -- Filtra as consultas correspondentes aos IDs fornecidos
+    let consultasFiltradas = filter (\c -> id_consulta c `elem` idsConsultas) consultas
+    
+    -- Verifica se há consultas filtradas e retorna a mensagem apropriada
+    if null consultasFiltradas
+        then return "O Paciente não possui consultas."
+        else return $ concatMap formatConsulta consultasFiltradas
+
+-- Função para formatar uma consulta
+formatConsulta :: Consulta -> String
+formatConsulta c =
+    "\nID da Consulta: " ++ id_consulta c ++
+    "\nData: " ++ data_consulta c ++
+    "\nHorário: " ++ horario_consulta c ++
+    "\nMédico Responsável: " ++ medico_responsavel c ++
+    "\nDiagnóstico: " ++ diagnostico c ++
+    "\nStatus: " ++ status_consulta c ++ "\n"
