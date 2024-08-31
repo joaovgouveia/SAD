@@ -120,6 +120,7 @@ viewSymptoms args = SC.viewSymptoms
 viewSymptomsByArea :: [String] -> IO String
 viewSymptomsByArea [] = return "Necessário um Sistema para listar os Sintomas qe o afetam."
 viewSymptomsByArea args = SC.viewSymptomsByArea (head args)
+
 -- Disease
 viewDisease :: [String] -> IO String
 viewDisease args = DC.viewDisease (head args)
