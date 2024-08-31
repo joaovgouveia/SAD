@@ -1,9 +1,8 @@
 module Medications.MedicationController where
 
-import Medications.Medication
+import Medications.Medication (Medication(..))
 import Data.Maybe (fromMaybe)
-import Data.Aeson (decode, encode, FromJSON, ToJSON)
-import qualified Data.ByteString.Lazy as B
+import Utils.Utils (removeChars, readJsonFile, writeJsonFile)
 
 -- CREATE
 createMedication :: String -> String -> String -> IO String
@@ -94,15 +93,3 @@ deleteMedication nomeBusca dosagemBusca = do
 formatMedication :: Medication -> String
 formatMedication med =
     nome med ++ ", " ++ bula med ++ ", " ++ dosagem med
-
--- Utility functions
-writeJsonFile :: (ToJSON a) => FilePath -> a -> IO ()
-writeJsonFile path = B.writeFile path . encode
-
-removeChars :: String -> String
-removeChars = filter (`notElem` "[]\",")
-
-readJsonFile :: (FromJSON a) => FilePath -> IO (Maybe [a])
-readJsonFile path = do
-    content <- B.readFile path
-    return (decode content)

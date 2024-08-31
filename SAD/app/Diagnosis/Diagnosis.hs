@@ -1,14 +1,11 @@
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 module Diagnosis.Diagnosis where
 
-import Data.Aeson (ToJSON, FromJSON, decode)
 import Data.Maybe (fromMaybe)
 import Data.Function ( on )
-import qualified Data.ByteString.Lazy as B
 import Utils.Utils (readJsonFile, belongs, intersect, intersectionList, maxValue, removeDuplicates, mostCommonElem)
 import Diseases.Disease (Disease(..))
 import Users.User(User(..))
-import qualified Diseases.DiseasesController as DC
 import Diseases.DiseasesController (formatDisease)
 
 findDisease :: [String] -> IO String

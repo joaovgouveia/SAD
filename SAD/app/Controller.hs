@@ -7,58 +7,87 @@ import qualified Patients.PatitentController as PC
 import qualified Symptons.SymptomController as SC
 import qualified Diseases.DiseasesController as DC
 import qualified Appointments.AppointmentController as AC
-import Prescriptions.PrescriptionsController as PRE
-import qualified Diagnosis.Diagnosis as D 
+import qualified Prescriptions.PrescriptionsController as PRE
+import qualified Diagnosis.Diagnosis as D
 import Analytics ( dashboard )
-import Data.ByteString.Lazy (ByteString)
-import qualified Data.ByteString.Lazy as B
- 
+
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
 execute (cmd:args)
-    | cmd == "viewUser"        = return $ viewUser args
-    | cmd == "listUsers"       = return $ listUsers args
-    | cmd == "addMedication"   = addMedication args
-    | cmd == "viewMedication"  = viewMedication args
-    | cmd == "listMedications" = listMedications args
-    | cmd == "updateMedication" = updateMedication args
-    | cmd == "deleteMedication" = deleteMedication args
-    | cmd == "viewMedicos"     = viewMedicos args
-    | cmd == "viewMedicosAtuation" = viewMedicosAtuation args
-    | cmd == "addAppointment"  = addAppointment args
-    | cmd == "changeStatusAppointment" = changeStatusAppointment args
-    | cmd == "enumerateSymptons"        = enumerateSymptons
-    | cmd == "generatePrescription"     = generatePrescrip args
-    | cmd == "addDisease"      = return $ addDisease args
-    | cmd == "viewDisease"     = viewDisease args
-    | cmd == "listDiseases"    = return $ listDiseases args
-    | cmd == "viewSymptom"     = viewSymptom args
-    | cmd == "listSymptoms"    = return $ listSymptoms args
-    | cmd == "viewDashBoard"   = viewDashBoard args
-    | cmd == "addPatient"      = addPatient args
-    | cmd == "viewPatient"     = viewPatient args
-    | cmd == "viewPatients"    = viewPatients args
-    | cmd == "addPatient"      = addPatient args
-    | cmd == "diagnosticar"             = diagnosticar args
-    | cmd == "viewPatientHistory"       = viewPatientHistory args
-    | cmd == "viewAvailableAppointment" = viewAvailableAppointment args
-    | otherwise                = return "Função não existe"
+    | cmd == "verUser"                      = viewUser args
+    | cmd == "listaUsers"                   = viewUsers args
+    | cmd == "listaUsersPorFuncao"          = viewUsersByFunction args
+    | cmd == "addMed"                       = addMedication args
+    | cmd == "verMed"                       = viewMedication args
+    | cmd == "listaMeds"                    = listMedications args
+    | cmd == "mudaMed"                      = updateMedication args
+    | cmd == "deletaMed"                    = deleteMedication args
+    | cmd == "listaSintomas"                = viewSymptoms args
+    | cmd == "listaSintomasSistema"         = viewSymptomsByArea args
+    | cmd == "verDoenca"                    = viewDisease args
+    | cmd == "listaDoencas"                 = listDiseases args
+    | cmd == "gerarPrescricao"              = generatePrescrip args
+    | cmd == "listarSintomasPresc"          = enumerateSymptons
+    | cmd == "Dashboard"                    = viewDashBoard args
+    | cmd == "addPaciente"                  = addPatient args
+    | cmd == "verPaciente"                  = viewPatient args
+    | cmd == "verPacientes"                 = viewPatients args
+    | cmd == "mudaNomePaciente"             = changePatientName args
+    | cmd == "deletaPaciente"               = deletePatient args
+    | cmd == "verHistóricoPaciente"         = viewPatientHistory args
+    | cmd == "addConsulta"                  = addAppointment args
+    | cmd == "mudaStatusConsulta"           = changeStatusAppointment args
+    | cmd == "verConsultasDisponiveis"      = viewAvailableAppointment args
+    | cmd == "verEspecialidadesMedicas"     = viewMedicosAtuation args
+    | cmd == "listaMedicos"                 = viewMedicos args
+    | cmd == "diagnosticar"                 = diagnosticar args
+    | otherwise                             = return "Função não existe"
 
-viewAvailableAppointment :: [String] -> IO String
-viewAvailableAppointment args = AP.checkSchedule args
 -- Funções do sistema
-viewUser :: [String] -> String
-viewUser args = ""
 
-listUsers :: [String] -> String
-listUsers args = ""
+-- User
+viewUser :: [String] -> IO String
+viewUser [] = return "Necessário ID para exibir Usuário."
+viewUser args = UC.viewUser (head args)
 
+viewUsers :: [String] -> IO String
+viewUsers args = UC.viewUsers
+
+viewUsersByFunction :: [String] -> IO String
+viewUsersByFunction [] = return "Necessário Função para exibir os Usuários."
+viewUsersByFunction args = UC.viewUsersByFunction (head args)
+
+-- Patient
+viewPatients :: [String] -> IO String
+viewPatients args = PC.viewPatients
+
+viewPatient :: [String] -> IO String
+viewPatient [] = return "Necessário CPF para exibir Paciente."
+viewPatient args = PC.viewPatient (head args)
+
+addPatient :: [String] -> IO String
+addPatient [cpf, name, age] = PC.createPatient cpf name age
+addPatient _ = return "Nessessário CPF, Nome e Idade do Paciente para cadastra-lo."
+
+changePatientName :: [String] -> IO String
+changePatientName [cpf, name] = PC.changePatientName cpf name
+changePatientName _ = return "Nessessário CPF e um Novo nome para mudar o nome de um Paciente."
+
+deletePatient :: [String] -> IO String
+deletePatient [] = return "Nessessário CPF do Paciente para deleta-lo."
+deletePatient args = PC.deletePatient (head args)
+
+viewPatientHistory :: [String] -> IO String
+viewPatientHistory [] = return "Id inválido"
+viewPatientHistory (id:s) = PC.viewPatientHistory id
+
+-- Medication
 addMedication :: [String] -> IO String
 addMedication [a, b, c] = MC.createMedication a b c
-addMedication _ = return "Necessário exatamente 3 informações para cadastro da Medicação"
+addMedication _ = return "Necessário Nome, Bula e Dosagem para cadastro da Medicação."
 
 viewMedication :: [String] -> IO String
-viewMedication [a] = MC.viewMedication a
+viewMedication args = MC.viewMedication (head args)
 
 listMedications :: [String] -> IO String
 listMedications args = MC.readMedications
@@ -69,58 +98,52 @@ updateMedication [a, b, c] = MC.updateMedication a b c
 deleteMedication :: [String] -> IO String
 deleteMedication [a, b] = MC.deleteMedication a b
 
-viewMedicos :: [String] -> IO String
-viewMedicos args = UC.viewMedicos
-
-viewMedicosAtuation :: [String] -> IO String
-viewMedicosAtuation args = UC.viewAtuation
+--Appointment
+viewAvailableAppointment :: [String] -> IO String
+viewAvailableAppointment = AC.checkSchedule
 
 addAppointment :: [String] -> IO String
 addAppointment [a, b, c, d, e] = AC.writeAppointment a b c d e
-addAppointment _ = return "Necessário exatamente 5 informações para cadastro da Consulta"
+addAppointment _ = return "Necessário exatamente 5 informações para cadastro da Consulta."
 
 changeStatusAppointment :: [String] -> IO String
 changeStatusAppointment [a, b] = AC.updateAppointment a b
-changeStatusAppointment _ = return "Necessário exatamente 2 informações para atualização de status da Consulta"
+changeStatusAppointment _ = return "Necessário exatamente 2 informações para atualização de status da Consulta."
 
+-- Symptoms
 enumerateSymptons :: IO String
 enumerateSymptons = PRE.enumerate
 
-generatePrescrip :: [String] -> IO String
-generatePrescrip a = if length a > 10 then
-    return "Necessário respeitar o limite cadastrado no sistema, até 10 sintomas" else PRE.generatePrescription a
+viewSymptoms :: [String] -> IO String
+viewSymptoms args = SC.viewSymptoms
 
+viewSymptomsByArea :: [String] -> IO String
+viewSymptomsByArea [] = return "Necessário um Sistema para listar os Sintomas qe o afetam."
+viewSymptomsByArea args = SC.viewSymptomsByArea (head args)
+-- Disease
 viewDisease :: [String] -> IO String
 viewDisease args = DC.viewDisease (head args)
 
 listDiseases :: [String] -> IO String
 listDiseases args = DC.viewDiseases
 
-viewSymptom :: [String] -> IO String
-viewSymptom args = SC.viewSymptom
+-- Médico
+viewMedicos :: [String] -> IO String
+viewMedicos args = UC.viewMedicos
 
-listSymptoms :: [String] -> String
-listSymptoms args = ""
+viewMedicosAtuation :: [String] -> IO String
+viewMedicosAtuation args = UC.viewAtuation
+
+-- Outros
+generatePrescrip :: [String] -> IO String
+generatePrescrip a = if length a > 10 then
+    return "Necessário respeitar o limite cadastrado no sistema, até 10 sintomas." else PRE.generatePrescription a
 
 viewDashBoard :: [String] -> IO String
 viewDashBoard args = Analytics.dashboard
 
-viewPatients :: [String] -> IO String
-viewPatients args = PC.viewPatients
-
-viewPatient :: [String] -> IO String
-viewPatient args = PC.viewPatient (head args)
-
-addPatient :: [String] -> IO String
-addPatient [cpf, name] = PC.createPatient cpf name
-addPatient _ = return "Nessessário CPF e Nome do Paciente para cadastra-lo"
-
 diagnosticar :: [String] -> IO String
 diagnosticar = D.findDisease
-
-viewPatientHistory :: [String] -> IO String
-viewPatientHistory [] = return "Id inválido"  
-viewPatientHistory (id:s) = PC.viewPatientHistory id
 
 -- Nothing to see here
 duck :: String

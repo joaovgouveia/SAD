@@ -1,13 +1,8 @@
 module Diseases.DiseasesController where
 
-import Data.Aeson (FromJSON, decode, withObject, (.:))
-import Data.Aeson.Key (fromString)
-import Data.ByteString.Lazy (ByteString)
-import qualified Data.ByteString.Lazy as B
 import Data.Maybe (fromMaybe)
-import Data.Aeson.Types (parseJSON)
 import Diseases.Disease(Disease(..))
-import Utils.Utils
+import Utils.Utils (readJsonFile)
 
 viewDisease :: String -> IO String
 viewDisease name = do
@@ -18,10 +13,9 @@ viewDisease name = do
 
 viewDiseases :: IO String
 viewDiseases = do
-    content <- B.readFile "./Diseases/Diseases.JSON"
-    let diseases = fromMaybe [] (decode content :: Maybe [Disease])
-        result = concatMap formatDisease diseases
-    return result
+    let path = "./Diseases/Diseases.JSON"
+    diseases <- fromMaybe [] <$> readJsonFile path
+    return (concatMap formatDisease diseases)
 
 formatDisease::Disease -> String
 formatDisease d = "Doença: " ++ doenca d ++

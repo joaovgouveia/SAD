@@ -1,32 +1,23 @@
 module Symptons.SymptomController where
 
-import Data.Aeson (FromJSON, decode, withObject, (.:))
-import Data.Aeson.Key (fromString)
-import Data.ByteString.Lazy (ByteString)
-import qualified Data.ByteString.Lazy as B
 import Data.Maybe (fromMaybe)
-import Data.Aeson.Types (parseJSON)
+import Symptons.Symptom (Symptom(..))
+import Utils.Utils (readJsonFile, writeJsonFile)
 
-data Symptom = Symptom {
-    doenca                    :: String,
-    especialidadeRelacionada  :: String,
-    sintomasAssociados        :: [String],
-    possivel_causa            :: String
-} deriving (Show)
+pathSymptoms :: String
+pathSymptoms = "./Symptons/Symptoms.JSON"
 
-instance FromJSON Symptom where
-    parseJSON = withObject "Symptom" $ \v -> Symptom
-        <$> v .: fromString "doenca"
-        <*> v .: fromString "especialidade_relacionada"
-        <*> v .: fromString "sintomas_associados"
-        <*> v .: fromString "possivel_causa"
+viewSymptoms :: IO String
+viewSymptoms = do
+    symptoms <- fromMaybe [] <$> readJsonFile pathSymptoms
+    return (unwords (map formatSymptom symptoms))
 
-viewSymptom :: IO String
-viewSymptom = do
-    content <- B.readFile "./Diseases/Diseases.JSON"
-    let symptoms = fromMaybe [] (decode content :: Maybe [Symptom])
-        result = concatMap formatSymptom symptoms
-    return result
-  where
-    formatSymptom s = "Doença: " ++ doenca s ++ "\n" ++
-                      "Sintomas Associados: " ++ unwords (sintomasAssociados s) ++ "\n\n"
+viewSymptomsByArea :: String -> IO String
+viewSymptomsByArea area = do
+    symptoms <- fromMaybe [] <$> readJsonFile pathSymptoms
+    let filteredSymptoms = filter (\x -> area `elem` sistemas x) symptoms
+    if null filteredSymptoms then return "Sistema Inexistente."
+    else return (unwords (map formatSymptom filteredSymptoms))
+
+formatSymptom :: Symptom -> String
+formatSymptom s = sintoma s ++ " - Sistemas afetados: " ++ unwords (sistemas s)  ++ "\n"
