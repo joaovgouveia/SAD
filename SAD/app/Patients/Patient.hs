@@ -8,6 +8,7 @@ import Data.Aeson (FromJSON, ToJSON)
 data Patient = Patient 
     { id_patient       :: String
     , nome_patient     :: String
+    , idade            :: String
     , consultas        :: [String]
     } deriving (Show, Generic)
 

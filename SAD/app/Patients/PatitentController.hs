@@ -1,22 +1,16 @@
 module Patients.PatitentController where
 
-import Data.Aeson (ToJSON, FromJSON, encode, decode, withObject, (.:))
-import Data.Aeson.Key (fromString)
-import Data.Aeson.KeyMap (lookup)
-import Data.ByteString.Lazy (ByteString)
-import qualified Data.ByteString.Lazy as B
 import Data.Maybe (fromMaybe)
-import Data.Aeson.Types (parseJSON)
 import Patients.Patient (Patient(..))
 import Appointments.AppointmentController (viewPatientAppointment)
+import Utils.Utils (readJsonFile, removeChars, removeDuplicates, writeJsonFile)
 
 -- READ Todos os pacientes
 viewPatients::IO String
 viewPatients = do
-    content <- B.readFile "./Patients/Patients.JSON"
-    let patients = fromMaybe [] (decode content :: Maybe [Patient])
-        result = concatMap formatPatient patients
-    return result
+    let path = "./Patients/Patients.JSON"
+    patients <- fromMaybe [] <$> readJsonFile path
+    return (concatMap formatPatient patients)
 
 -- READ PAciente pelo id
 viewPatient :: String -> IO String
@@ -28,10 +22,53 @@ viewPatient cpfBusca = do
 
 
 --Cria passiente e salva no JSON
-createPatient :: String -> String -> IO String
-createPatient cpf nome = do
-    let patient = Patient (removeChars cpf) (removeChars nome) []
+createPatient :: String -> String -> String -> IO String
+createPatient cpf name age = do
+    let patient = Patient (removeChars cpf) (removeChars name) (removeChars age) []
     savePatientToFile patient
+
+--Modifica Nome do Paciente
+changePatientName :: String -> String -> IO String
+changePatientName cpf newName = do
+    let path = "Patients/Patients.JSON"
+    pacientesAntigos <- fromMaybe [] <$> readJsonFile path
+
+    let cleanCpf = removeChars cpf
+        cleanName = removeChars newName
+
+        (atualizadas, remaining) = foldr (\p (acc, rem) ->
+            let cpf = removeChars (id_patient p)
+            in if cpf == cleanCpf
+        
+                then (p { nome_patient = cleanName } : acc, rem)
+                else (acc, p : rem)) ([], []) pacientesAntigos
+
+    if length remaining == length pacientesAntigos
+        then return "Paciente Não Encontrado."
+        else do
+            writeJsonFile path (atualizadas ++ remaining)
+            return $ "Nome Alterado Para Paciente: " ++ formatPatient (head atualizadas)
+
+--Modifica Nome do Paciente
+deletePatient :: String -> IO String
+deletePatient cpf = do
+    let path = "Patients/Patients.JSON"
+    pacientesAntigos <- fromMaybe [] <$> readJsonFile path
+
+    let cleanCpf = removeChars cpf
+
+        (removed, remaining) = foldr (\p (acc, rem) ->
+            let cpf = removeChars (id_patient p)
+            in if cpf == cleanCpf
+                then (p : acc, rem)
+                else (acc, p : rem)) ([], []) pacientesAntigos
+
+    if null removed
+        then return "Paciente Não Encontrado."
+        else do
+            writeJsonFile path remaining
+            return $ "Paciente deletado: " ++ formatPatient (head removed)
+
 
 -- Adiciona consulta ao paciente
 addConsulta :: String -> String -> IO String
@@ -39,19 +76,20 @@ addConsulta cpfBusca consulta = do
     let path = "Patients/Patients.JSON"
     pacientesAntigos <- fromMaybe [] <$> readJsonFile path
 
-    let cpfBuscaLimpo = removeChars cpfBusca
-        consultaLimpo = removeChars consulta
+    let cleanCpf = removeChars cpfBusca
+        cleanConsulta = removeChars consulta
 
-        (atualizadas, restantes) = foldr (\p (acc, rem) ->
+        (atualizadas, remaining) = foldr (\p (acc, rem) ->
             let cpf = removeChars (id_patient p)
-            in if cpf == cpfBuscaLimpo
-                then (p { consultas = consultas p ++ [consultaLimpo] } : acc, rem)
+            in if cpf == cleanCpf
+        
+                then (p { consultas = consultas p ++ [cleanConsulta] } : acc, rem)
                 else (acc, p : rem)) ([], []) pacientesAntigos
 
-    if length restantes == length pacientesAntigos
+    if length remaining == length pacientesAntigos
         then return "Paciente Não Encontrado."
         else do
-            writeJsonFile path (atualizadas ++ restantes)
+            writeJsonFile path (atualizadas ++ remaining)
             return $ "Consulta adicionada para: " ++ formatPatient (head atualizadas)
 
 savePatientToFile :: Patient -> IO String
@@ -71,6 +109,7 @@ savePatientToFile newPatient = do
 formatPatient :: Patient -> String
 formatPatient p = "\nCPF: " ++ id_patient p ++
                   "\nNome: " ++ nome_patient p ++
+                  "\nIdade: " ++ idade p ++
                   "\nConsultas: " ++ unwords (consultas p) ++ "\n"
 
 
@@ -82,15 +121,3 @@ viewPatientHistory cpfBusca = do
     case pacienteFiltrado of
         [] -> return "Paciente não encontrado."
         (p:_) -> viewPatientAppointment (consultas p)
-
--- Utility functions
-writeJsonFile :: (ToJSON a) => FilePath -> a -> IO ()
-writeJsonFile path = B.writeFile path . encode
-
-removeChars :: String -> String
-removeChars = filter (`notElem` "[]\",")
-
-readJsonFile :: (FromJSON a) => FilePath -> IO (Maybe [a])
-readJsonFile path = do
-    content <- B.readFile path
-    return (decode content)

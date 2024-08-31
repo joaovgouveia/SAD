@@ -1,13 +1,9 @@
 module UserIO where
-import Data.Aeson (FromJSON, decode, withObject, (.:))
-import Data.Aeson.Key (fromString)
-import Data.Aeson.KeyMap (lookup)
+import Data.Aeson (decode)
 import Controller ( execute )
 import System.IO ( hFlush, stdout )
 import System.Exit ( exitSuccess )
 import qualified Data.ByteString.Lazy as B
-import Data.Aeson.Types (parseJSON)
-import Data.Maybe (fromMaybe)
 import Users.User(User(..))
 
 showLogin :: IO ()

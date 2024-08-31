@@ -1,12 +1,10 @@
 module Appointments.AppointmentController where
 
-import Data.Aeson (decode, encode, ToJSON, FromJSON)
-import qualified Data.ByteString.Lazy as B
 import Appointments.Appointment
 import Data.Maybe (fromMaybe)
 import Data.List (find, any)
 import Data.Time (parseTimeM, defaultTimeLocale, Day, formatTime)
-import Text.Read (readMaybe)
+import Utils.Utils (removeChars, readJsonFile, writeJsonFile)
 import Users.User (User (..))
 import Patients.Patient (Patient (..))
 
@@ -41,10 +39,6 @@ diaDeAtendimento diaDaSemana = case diaDaSemana of
 geraId :: String -> String -> String -> String
 geraId dataConsulta horarioConsulta medicoConsulta = dataConsulta ++ "/" ++ horarioConsulta ++ "/" ++ medicoConsulta
 
--- Remove caracteres indesejáveis por receber uma lista como parâmetro
-removeChars :: String -> String
-removeChars = filter (`notElem` "[]\",")
-
 -- Verifica se já tem uma consulta para esse horário, se existir não permite o cadastro de outra consulta
 ehIdUnico :: [Consulta] -> String -> Bool
 ehIdUnico consultas idConsulta = not $ any (\c -> id_consulta c == idConsulta) consultas
@@ -54,16 +48,6 @@ ehPacienteValido :: String -> IO Bool
 ehPacienteValido idPaciente = do
     pacientes <- fromMaybe [] <$> readJsonFile "./Patients/Patients.JSON"
     return $ any (\p -> id_patient p == idPaciente) pacientes
-
--- Função para ler JSON de um arquivo
-readJsonFile :: (FromJSON a) => FilePath -> IO (Maybe [a])
-readJsonFile path = do
-    content <- B.readFile path
-    return (decode content)
-
--- Função para escrever JSON em um arquivo
-writeJsonFile :: (ToJSON a) => FilePath -> a -> IO ()
-writeJsonFile path = B.writeFile path . encode
 
 -- Funcão para atualizar a quantidade de consultas do médico
 atualizaAtendimentos :: String -> IO String

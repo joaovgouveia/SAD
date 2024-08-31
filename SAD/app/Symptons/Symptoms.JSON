@@ -1,0 +1,50 @@
+[
+    {
+        "sintoma": "dor_de_cabeca",
+        "sistemas": ["NERVOSO"]
+    },
+    {
+        "sintoma": "convulsoes",
+        "sistemas": ["NERVOSO"]
+    },
+    {
+        "sintoma": "tontura",
+        "sistemas": ["NERVOSO"]
+    },
+    {
+        "sintoma": "dor_nas_costas",
+        "sistemas": ["NERVOSO", "LOCOMOTOR"]
+    },
+    {
+        "sintoma": "desmaio",
+        "sistemas": ["NERVOSO"]
+    },
+    {
+        "sintoma": "colica",
+        "sistemas": ["DIGESTIVO"]
+    },
+    {
+        "sintoma": "vomitos",
+        "sistemas": ["DIGESTIVO"]
+    },
+    {
+        "sintoma": "inchaco",
+        "sistemas": ["LOCOMOTOR"]
+    },
+    {
+        "sintoma": "fadiga",
+        "sistemas": ["NERVOSO", "LOCOMOTOR"]
+    },
+    {
+        "sintoma": "dor_no_peito",
+        "sistemas": ["CARDIOVASCULAR"]
+    },
+    {
+        "sintoma": "tosse",
+        "sistemas": ["RESPIRATORIO"]
+    },
+    {
+        "sintoma": "dor_abdominal",
+        "sistemas": ["DIGESTIVO"]
+    }
+]
