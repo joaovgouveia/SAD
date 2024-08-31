@@ -8,6 +8,7 @@ import qualified Data.ByteString.Lazy as B
 import Data.Maybe (fromMaybe)
 import Data.Aeson.Types (parseJSON)
 import Patients.Patient (Patient(..))
+import Appointments.AppointmentController (viewPatientAppointment)
 
 -- READ Todos os pacientes
 viewPatients::IO String
@@ -71,6 +72,16 @@ formatPatient :: Patient -> String
 formatPatient p = "\nCPF: " ++ id_patient p ++
                   "\nNome: " ++ nome_patient p ++
                   "\nConsultas: " ++ unwords (consultas p) ++ "\n"
+
+
+viewPatientHistory :: String -> IO String
+viewPatientHistory cpfBusca = do
+    let path = "./Patients/Patients.JSON"
+    patients <- fromMaybe [] <$> readJsonFile path
+    let pacienteFiltrado = filter (\p -> id_patient p == cpfBusca) patients
+    case pacienteFiltrado of
+        [] -> return "Paciente não encontrado."
+        (p:_) -> viewPatientAppointment (consultas p)
 
 -- Utility functions
 writeJsonFile :: (ToJSON a) => FilePath -> a -> IO ()

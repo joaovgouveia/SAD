@@ -105,11 +105,23 @@ writeAppointment data_consult horario medico diagnostico idPaciente = do
                     let novaConsulta = Consulta idConsulta dataLimpa horarioLimpo (removeChars medico) (removeChars diagnostico) (removeChars idPaciente) "Em andamento"
                     writeJsonFile pathConsultas (consultasAntigas ++ [novaConsulta])
                     atualizaAtendimentos (removeChars medico)
+                    insertAppointment (removeChars idPaciente) idConsulta
                     return "CONSULTA REGISTRADA"
                 else
                     return "JÁ EXISTE UMA CONSULTA DESSE MÉDICO PARA ESSE DIA E HORÁRIO"
         Nothing -> return "MÉDICO NÃO ENCONTRADO OU NÃO É MÉDICO"
 
+
+-- Adiciona uma consulta ao paciente
+insertAppointment :: String -> String -> IO String
+insertAppointment idPaciente consulta = do
+    patients <- fromMaybe [] <$> readJsonFile "./Patients/Patients.JSON"
+    case find (\p -> id_patient p == idPaciente) patients of
+        Just patient -> do
+            let updatedPatients = map (\p -> if id_patient p == idPaciente then patient {consultas = consultas patient ++ [consulta]} else p) patients
+            writeJsonFile "./Patients/Patients.JSON" updatedPatients
+            return "\n"
+        Nothing -> return "Paciente não cadastrado no sistema"
 
 -- Verifica se o novo Status é válido
 ehStatusValido :: String -> Bool
@@ -131,8 +143,6 @@ updateAppointment idConsulta novoStatus = do
                 writeJsonFile "./Appointments/Appointments.JSON" updatedAppoints
                 return "STATUS DA CONSULTA ATUALIZADO COM SUCESSO"
             Nothing -> return "ID DA CONSULTA INVÁLIDO/CONSULTA NÃO EXISTE OU CONSULTA JÁ FINALIZADA"
-
-
 
 checkSchedule :: [String] -> IO String
 checkSchedule [nomeMed] = do
@@ -202,3 +212,28 @@ strTransformer tuplasList = concatMap (\(a, bs) -> concatenaTupla (a, bs) ++ "\n
 
 concatenaTupla :: (Show a, Show b) => (a, [b]) -> String
 concatenaTupla (a, bs) = show a ++ concatMap show bs ++ "\n"
+
+-- Visualizar Consultas do Paciente
+viewPatientAppointment :: [String] -> IO String
+viewPatientAppointment idsConsultas = do
+
+    consultas <- fromMaybe [] <$> readJsonFile "./Appointments/Appointments.JSON"
+    
+    -- Filtra as consultas correspondentes aos IDs fornecidos
+    let consultasFiltradas = filter (\c -> id_consulta c `elem` idsConsultas) consultas
+    
+    -- Verifica se há consultas filtradas e retorna a mensagem apropriada
+    if null consultasFiltradas
+        then return "O Paciente não possui consultas."
+        else return $ concatMap formatConsulta consultasFiltradas
+
+-- Função para formatar uma consulta
+formatConsulta :: Consulta -> String
+formatConsulta c =
+    "\nID da Consulta: " ++ id_consulta c ++
+    "\nData: " ++ data_consulta c ++
+    "\nHorário: " ++ horario_consulta c ++
+    "\nMédico Responsável: " ++ medico_responsavel c ++
+    "\nDiagnóstico: " ++ diagnostico c ++
+    "\nStatus: " ++ status_consulta c ++ "\n"
+

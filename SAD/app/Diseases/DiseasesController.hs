@@ -6,27 +6,25 @@ import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as B
 import Data.Maybe (fromMaybe)
 import Data.Aeson.Types (parseJSON)
+import Diseases.Disease(Disease(..))
+import Utils.Utils
 
-data Diseases = Diseases {
-    doenca                    :: String,
-    especialidadeRelacionada  :: String,
-    sintomasAssociados        :: [String],
-    possivel_causa            :: String
-} deriving (Show)
+viewDisease :: String -> IO String
+viewDisease name = do
+    let path = "./Diseases/Diseases.JSON"
+    diseases <- fromMaybe [] <$> readJsonFile path
+    let found = head (filter (\p -> doenca p == name) diseases)
+    return $ formatDisease found
 
-instance FromJSON Diseases where
-    parseJSON = withObject "Diseases" $ \v -> Diseases
-        <$> v .: fromString "doenca"
-        <*> v .: fromString "especialidade_relacionada"
-        <*> v .: fromString "sintomas_associados"
-        <*> v .: fromString "possivel_causa"
-
-viewDisease :: IO String
-viewDisease = do
+viewDiseases :: IO String
+viewDiseases = do
     content <- B.readFile "./Diseases/Diseases.JSON"
-    let diseases = fromMaybe [] (decode content :: Maybe [Diseases])
-        result = concatMap formatDiseases diseases
+    let diseases = fromMaybe [] (decode content :: Maybe [Disease])
+        result = concatMap formatDisease diseases
     return result
-  where
-    formatDiseases s = "Doença: " ++ doenca s ++ "\n" ++
-                      "Possíveis Causas: " ++ possivel_causa s ++ "\n\n"
+
+formatDisease::Disease -> String
+formatDisease d = "Doença: " ++ doenca d ++
+                  "\nPossíveis Causas: " ++ possivel_causa d ++
+                  "\nEspecialidade Médica Indicada: " ++ especialidade_relacionada d ++
+                  "\nMedicações Indicadas: " ++ unwords (medicamentos d) ++ "\n\n"

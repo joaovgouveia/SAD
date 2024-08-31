@@ -8,29 +8,7 @@ import System.Exit ( exitSuccess )
 import qualified Data.ByteString.Lazy as B
 import Data.Aeson.Types (parseJSON)
 import Data.Maybe (fromMaybe)
-
-data Usuario = Usuario {
-    usuarioId           :: String,
-    funcao              :: String,
-    especialidade       :: String,
-    dias_atendimento    :: [String],
-    horarios_atendimento :: [String],
-    nome                :: String,
-    pacientes_atendidos :: String,
-    senha               :: String
-} deriving (Show)
-
-instance FromJSON Usuario where
-    parseJSON = withObject "Usuario" $ \v -> Usuario
-        <$> v .: fromString "id"
-        <*> v .: fromString "funcao"
-        <*> v .: fromString "especialidade"
-        <*> v .: fromString "dias_atendimento"
-        <*> v .: fromString "horarios_atendimento"
-        <*> v .: fromString "nome"
-        <*> v .: fromString "pacientes_atendidos"
-        <*> v .: fromString "senha"
-
+import Users.User(User(..))
 
 showLogin :: IO ()
 showLogin = do
@@ -48,20 +26,20 @@ showLogin = do
             content <- B.readFile "./Users/Users.JSON"
     
             -- Decodifica o JSON para uma lista de usuários
-            let mUsuarios = decode content :: Maybe [Usuario]
+            let mUsers = decode content :: Maybe [User]
         
-            case mUsuarios of
-                Just usuarios -> 
+            case mUsers of
+                Just users -> 
                     -- Filtra os usuários que correspondem ao ID e senha fornecidos
-                    let fUsuarios = filter (\u -> usuarioId u == idUser && senha u == senhaUser) usuarios
-                    in if null fUsuarios
+                    let fUsers = filter (\u -> Users.User.id u == idUser && senha u == senhaUser) users
+                    in if null fUsers
                         then do
                             putStrLn "x x x ID ou senha incorretos. x x x \n"
                             showLogin
                         else do
-                            let usuarioLogado = head fUsuarios
+                            let userLogado = head fUsers
                             putStrLn "Login bem-sucedido!\n"
-                            case funcao usuarioLogado of
+                            case funcao userLogado of
                                 "MEDICO" -> showStartMenuMedico
                                 "ADMINISTRADOR" -> showStartMenuAdm
                                 "SECRETARIA" -> showStartMenuSec
@@ -72,20 +50,20 @@ showLogin = do
 showStartMenuMedico::IO()
 showStartMenuMedico = do
     sadMenu <- readFile "./startMenuMedico.txt"
-    putStrLn (sadMenu)
+    putStrLn sadMenu
     showMenuMedico
 
 
 showStartMenuAdm::IO()
 showStartMenuAdm = do
     sadMenu <- readFile "./startMenuAdm.txt"
-    putStrLn (sadMenu)
+    putStrLn sadMenu
     showMenuAdm
 
 showStartMenuSec::IO()
 showStartMenuSec = do
     sadMenu <- readFile "./startMenuSec.txt"
-    putStrLn (sadMenu)
+    putStrLn sadMenu
     showMenuSec
 
 
