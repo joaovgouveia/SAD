@@ -101,7 +101,8 @@ deleteMedication [a, b] = MC.deleteMedication a b
 
 --Appointment
 viewAvailableAppointment :: [String] -> IO String
-viewAvailableAppointment = AC.checkSchedule
+viewAvailableAppointment [a] = AC.checkSchedule [a]
+viewAvailableAppointment _ = return "Necessário exatamente 1 informação para verificar horários"
 
 addAppointment :: [String] -> IO String
 addAppointment [a, b, c, d, e] = do
@@ -124,6 +125,7 @@ viewSymptoms args = SC.viewSymptoms
 viewSymptomsByArea :: [String] -> IO String
 viewSymptomsByArea [] = return "Necessário um Sistema para listar os Sintomas qe o afetam."
 viewSymptomsByArea args = SC.viewSymptomsByArea (head args)
+
 -- Disease
 viewDisease :: [String] -> IO String
 viewDisease args = DC.viewDisease (head args)
