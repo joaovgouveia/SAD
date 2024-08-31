@@ -10,6 +10,7 @@ import qualified Appointments.AppointmentController as AC
 import qualified Prescriptions.PrescriptionsController as PRE
 import qualified Diagnosis.Diagnosis as D
 import Analytics ( dashboard )
+import Appointments.AppointmentController (balanceAppointments)
 
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
@@ -103,7 +104,10 @@ viewAvailableAppointment :: [String] -> IO String
 viewAvailableAppointment = AC.checkSchedule
 
 addAppointment :: [String] -> IO String
-addAppointment [a, b, c, d, e] = AC.writeAppointment a b c d e
+addAppointment [a, b, c, d, e] = do
+  writeResult <- AC.writeAppointment a b c d e
+  balanceResult <- balanceAppointments
+  return $ writeResult ++ "\n" ++ balanceResult
 addAppointment _ = return "Necessário exatamente 5 informações para cadastro da Consulta."
 
 changeStatusAppointment :: [String] -> IO String
