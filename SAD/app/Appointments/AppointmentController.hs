@@ -126,7 +126,9 @@ insertAppointment idPaciente consulta = do
 -- Verifica se o novo Status é válido
 ehStatusValido :: String -> Bool
 ehStatusValido a = a `elem` ["Cancelada", "Concluída"]
-
+-- Função para filtrar um elemento de uma lista dentro de uma tupla
+filtrarElemento :: Eq b => b -> [(a, [b])] -> [(a, [b])]
+filtrarElemento x = map (\(dia, horarios) -> (dia, filter (/= x) horarios))
 -- Altera o status da Consulta
 updateAppointment :: String -> String -> IO String
 updateAppointment idConsulta novoStatus = do
@@ -142,11 +144,79 @@ updateAppointment idConsulta novoStatus = do
                 return "STATUS DA CONSULTA ATUALIZADO COM SUCESSO"
             Nothing -> return "ID DA CONSULTA INVÁLIDO/CONSULTA NÃO EXISTE OU CONSULTA JÁ FINALIZADA"
 
+checkSchedule :: [String] -> IO String
+checkSchedule [nomeMed] = do
+    -- Remove caracteres indesejados da ID do médico
+    let nomeMedLimpo = removeChars nomeMed
+
+    -- Lê o conteúdo do arquivo JSON de usuários
+    content <- fromMaybe [] <$> readJsonFile "./Users/Users.JSON"
+
+    -- Filtra os usuários que correspondem ao ID e função de médico
+    case find (\u -> funcao u == "MEDICO" && Users.User.nome u == nomeMedLimpo) content of
+        Just fMedico -> do 
+            let hAtendimento = horarios_atendimento fMedico
+                dAtendimento = dias_atendimento fMedico
+
+            -- Lê o conteúdo do arquivo JSON de consultas
+            contentApo <- fromMaybe [] <$> readJsonFile "./Appointments/Appointments.JSON"
+
+            -- Filtra as consultas em andamento para o médico
+            let consultasEmAndamento = filter (\f -> status_consulta f == "Em andamento" && medico_responsavel f == nomeMedLimpo) contentApo
+
+            if not (null consultasEmAndamento)
+                then do
+                    let hConsulta = map (\c -> (diaDaSemana (data_consulta c), horario_consulta c)) consultasEmAndamento
+                    return (strTransformer (subtrairListas (criaTuplas dAtendimento hAtendimento) hConsulta))
+                else return (strTransformer (criaTuplas dAtendimento hAtendimento))
+
+        Nothing -> return "x x x Não existe médico com essa ID. x x x \n"
+
+
+-- Função generalizada para criar tuplas
+criaTuplas :: [a] -> [b] -> [(a, [b])]
+criaTuplas lista1 lista2 = [(elemento, lista2) | elemento <- lista1]
+
+-- Função para subtrair os horários das tuplas correspondentes aos dias das consultas
+subtrairListas :: (Eq a, Eq b) => [(a, [b])] -> [(a, b)] -> [(a, [b])]
+subtrairListas original [] = original
+subtrairListas original remover = 
+    foldr (\(diaRemover, horarioRemover) acc ->
+        map (\(dia, horarios) ->
+            if dia == diaRemover
+            then (dia, filter (/= horarioRemover) horarios)
+            else (dia, horarios)
+        ) acc
+    ) original remover
+
+diaDaSemana :: String -> String
+diaDaSemana dataStr = 
+    case parseDate dataStr of
+        Just day -> case formatTime defaultTimeLocale "%A" day of
+            "Monday"    -> "SEGUNDA"
+            "Tuesday"   -> "TERCA"
+            "Wednesday" -> "QUARTA"
+            "Thursday"  -> "QUINTA"
+            "Friday"    -> "SEXTA"
+            "Saturday"  -> "SABADO"
+            "Sunday"    -> "DOMINGO"
+            _           -> "DIA DESCONHECIDO"
+        Nothing -> "DATA INVÁLIDA"
+
+
+strTransformer :: (Show a, Show b) => [(a, [b])] -> String
+strTransformer [] = ""  -- Retorna uma string vazia se a lista estiver vazia
+strTransformer tuplasList = concatMap (\(a, bs) -> concatenaTupla (a, bs) ++ "\n") tuplasList
+
+
+
+concatenaTupla :: (Show a, Show b) => (a, [b]) -> String
+concatenaTupla (a, bs) = show a ++ concatMap show bs ++ "\n"
 
 -- Visualizar Consultas do Paciente
 viewPatientAppointment :: [String] -> IO String
 viewPatientAppointment idsConsultas = do
-    -- Lê o arquivo JSON de consultas
+
     consultas <- fromMaybe [] <$> readJsonFile "./Appointments/Appointments.JSON"
     
     -- Filtra as consultas correspondentes aos IDs fornecidos
@@ -166,3 +236,4 @@ formatConsulta c =
     "\nMédico Responsável: " ++ medico_responsavel c ++
     "\nDiagnóstico: " ++ diagnostico c ++
     "\nStatus: " ++ status_consulta c ++ "\n"
+

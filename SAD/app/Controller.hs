@@ -12,36 +12,42 @@ import qualified Diagnosis.Diagnosis as D
 import Analytics ( dashboard )
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Lazy as B
-
+ 
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
 execute (cmd:args)
-    | cmd == "viewUser"                 = return $ viewUser args
-    | cmd == "listUsers"                = return $ listUsers args
-    | cmd == "addMedication"            = addMedication args
-    | cmd == "viewMedication"           = viewMedication args
-    | cmd == "listMedications"          = listMedications args
-    | cmd == "updateMedication"         = updateMedication args
-    | cmd == "deleteMedication"         = deleteMedication args
-    | cmd == "viewMedicos"              = viewMedicos args
-    | cmd == "viewMedicosAtuation"      = viewMedicosAtuation args
-    | cmd == "addAppointment"           = addAppointment args
-    | cmd == "changeStatusAppointment"  = changeStatusAppointment args
+
+    | cmd == "viewUser"        = return $ viewUser args
+    | cmd == "listUsers"       = return $ listUsers args
+    | cmd == "addMedication"   = addMedication args
+    | cmd == "viewMedication"  = viewMedication args
+    | cmd == "listMedications" = listMedications args
+    | cmd == "updateMedication" = updateMedication args
+    | cmd == "deleteMedication" = deleteMedication args
+    | cmd == "viewMedicos"     = viewMedicos args
+    | cmd == "viewMedicosAtuation" = viewMedicosAtuation args
+    | cmd == "addAppointment"  = addAppointment args
+    | cmd == "changeStatusAppointment" = changeStatusAppointment args
     | cmd == "enumerateSymptons"        = enumerateSymptons
     | cmd == "generatePrescription"     = generatePrescrip args
-    | cmd == "viewDisease"              = viewDisease args
-    | cmd == "listDiseases"             = listDiseases args
-    | cmd == "viewSymptom"              = viewSymptom args
-    | cmd == "listSymptoms"             = return $ listSymptoms args
-    | cmd == "viewDashBoard"            = viewDashBoard args
-    | cmd == "addPatient"               = addPatient args
-    | cmd == "viewPatient"              = viewPatient args
-    | cmd == "viewPatients"             = viewPatients args
-    | cmd == "addPatient"               = addPatient args
+    | cmd == "addDisease"      = return $ addDisease args
+    | cmd == "viewDisease"     = viewDisease args
+    | cmd == "listDiseases"    = return $ listDiseases args
+    | cmd == "addSymptom"      = return $ addSymptom args
+    | cmd == "viewSymptom"     = viewSymptom args
+    | cmd == "listSymptoms"    = return $ listSymptoms args
+    | cmd == "viewDashBoard"   = viewDashBoard args
+    | cmd == "addPatient"      = addPatient args
+    | cmd == "viewPatient"     = viewPatient args
+    | cmd == "viewPatients"    = viewPatients args
+    | cmd == "addPatient"      = addPatient args
     | cmd == "diagnosticar"             = diagnosticar args
     | cmd == "viewPatientHistory"       = viewPatientHistory args
-    | otherwise                         = return "Função não existe"
+    | cmd == "viewAvailableAppointment" = viewAvailableAppointment args
+    | otherwise                = return "Função não existe"
 
+viewAvailableAppointment :: [String] -> IO String
+viewAvailableAppointment args = AP.checkSchedule args
 -- Funções do sistema
 viewUser :: [String] -> String
 viewUser args = ""
