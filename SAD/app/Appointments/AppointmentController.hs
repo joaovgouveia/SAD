@@ -10,6 +10,12 @@ import Users.User (User (..))
 import Patients.Patient (Patient (..))
 import qualified Control.Arrow as Data.Bifunctor
 
+import Control.Monad (when)
+import qualified Data.ByteString.Lazy as B
+import qualified Data.List as L
+import Data.Aeson (decode, encode)
+import qualified Users.User as U (id)
+
 -- Converte a string recebida para o tipo data
 parseDate :: String -> Maybe Day
 parseDate = parseTimeM True defaultTimeLocale "%Y-%m-%d"
@@ -223,3 +229,86 @@ formatConsulta c =
     "\nDiagnóstico: " ++ diagnostico c ++
     "\nStatus: " ++ status_consulta c ++ "\n"
 
+
+-- BALANCEAMENTO DE CONSULTAS
+-- Função para contar consultas em andamento para um médico específico
+contaConsultasEmAndamento :: String -> [Consulta] -> Int
+contaConsultasEmAndamento nomeMedico consultas =
+  length $ filter (\c -> medico_responsavel c == nomeMedico && status_consulta c == "Em andamento") consultas
+
+-- Função para carregar os dados do JSON
+loadData :: IO ([User], [Consulta])
+loadData = do
+  usersJson <- B.readFile "./Users/Users.JSON"
+  consultasJson <- B.readFile "./Appointments/Appointments.JSON"
+  let users = fromMaybe [] (decode usersJson :: Maybe [User])
+      consultas = fromMaybe [] (decode consultasJson :: Maybe [Consulta])
+  return (users, consultas)
+
+-- Função para encontrar a última consulta
+getLastConsulta :: [Consulta] -> Consulta
+getLastConsulta consultas =
+  let sortedConsultas = L.sortOn id_consulta consultas
+  in L.last sortedConsultas
+
+-- Função para encontrar o médico atual da consulta
+findMedicoAtual :: String -> [User] -> Maybe User
+findMedicoAtual nomeMedico = L.find (\u -> nome u == nomeMedico)
+
+-- Função para encontrar os outros médicos da mesma especialidade
+findMedicosEspecialidade :: User -> [User] -> [User]
+findMedicosEspecialidade medicoAtual users =
+  let especialidadeAtual = especialidade medicoAtual
+  in L.filter (\u -> funcao u == "MEDICO" && especialidade u == especialidadeAtual) users
+
+-- Função para encontrar o médico com menos consultas da mesma especialidade
+findMedicoSubstituto :: [Consulta] -> [User] -> User -> User
+findMedicoSubstituto consultas outrosMedicos medicoAtual =
+  L.minimumBy (\u1 u2 -> compare (contaConsultasEmAndamento (nome u1) consultas) (contaConsultasEmAndamento (nome u2) consultas)) outrosMedicos
+
+-- Função para atualizar a lista de consultas
+updateConsultas :: Consulta -> User -> [Consulta] -> [Consulta]
+updateConsultas lastConsulta medicoSubstituto = L.map (\c -> if id_consulta c == id_consulta lastConsulta then novaConsulta else c)
+  where novaConsulta = lastConsulta
+              { medico_responsavel = nome medicoSubstituto
+              , id_consulta = geraId (data_consulta lastConsulta) (horario_consulta lastConsulta) (nome medicoSubstituto)
+              }
+
+-- Função para atualizar a lista de usuários (médicos)
+updateUsuarios :: User -> User -> [User] -> [User]
+updateUsuarios medicoAtual medicoSubstituto = L.map atualizarPacienteAtendido
+  where atualizarPacienteAtendido medico
+          | nome medico == nome medicoAtual = medico { pacientes_atendidos = show (read (pacientes_atendidos medico) - 1 :: Int) }
+          | nome medico == nome medicoSubstituto = medico { pacientes_atendidos = show (read (pacientes_atendidos medico) + 1 :: Int) }
+          | otherwise = medico
+
+-- Função principal de balanceamento
+balanceAppointments :: IO String
+balanceAppointments = do
+  (users, consultas) <- loadData
+  let lastConsulta = getLastConsulta consultas
+      nomeMedicoAtual = medico_responsavel lastConsulta
+
+  case findMedicoAtual nomeMedicoAtual users of
+    Nothing -> return "Erro ao encontrar o médico atual"
+    Just medicoAtual -> do
+      let medicosEspecialidade = findMedicosEspecialidade medicoAtual users
+          outrosMedicos = L.filter (\u -> nome u /= nomeMedicoAtual) medicosEspecialidade
+          medicoSubstituto = findMedicoSubstituto consultas outrosMedicos medicoAtual
+          consultasEmAndamentoAtual = contaConsultasEmAndamento nomeMedicoAtual consultas
+          consultasEmAndamentoSubstituto = contaConsultasEmAndamento (nome medicoSubstituto) consultas
+          diff = consultasEmAndamentoAtual - consultasEmAndamentoSubstituto
+
+      if diff > 5
+      then do
+        let novaConsulta = lastConsulta
+              { medico_responsavel = nome medicoSubstituto
+              , id_consulta = geraId (data_consulta lastConsulta) (horario_consulta lastConsulta) (nome medicoSubstituto)
+              }
+            consultasAtualizadas = updateConsultas lastConsulta medicoSubstituto consultas
+            usuariosAtualizados = updateUsuarios medicoAtual medicoSubstituto users
+        B.writeFile "./Users/Users.JSON" (encode usuariosAtualizados)
+        B.writeFile "./Appointments/Appointments.JSON" (encode consultasAtualizadas)
+        return $ "Balanceamento realizado, consulta atribuída ao novo médico - " ++ nome medicoSubstituto
+      else
+        return "Não é necessário balanceamento"
