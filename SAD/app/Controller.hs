@@ -100,7 +100,8 @@ deleteMedication [a, b] = MC.deleteMedication a b
 
 --Appointment
 viewAvailableAppointment :: [String] -> IO String
-viewAvailableAppointment = AC.checkSchedule
+viewAvailableAppointment [a] = AC.checkSchedule [a]
+viewAvailableAppointment _ = return "Necessário exatamente 1 informação para verificar horários"
 
 addAppointment :: [String] -> IO String
 addAppointment [a, b, c, d, e] = AC.writeAppointment a b c d e

@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 module Appointments.AppointmentController where
 
 import Appointments.Appointment
@@ -7,6 +8,7 @@ import Data.Time (parseTimeM, defaultTimeLocale, Day, formatTime)
 import Utils.Utils (removeChars, readJsonFile, writeJsonFile)
 import Users.User (User (..))
 import Patients.Patient (Patient (..))
+import qualified Control.Arrow as Data.Bifunctor
 
 -- Converte a string recebida para o tipo data
 parseDate :: String -> Maybe Day
@@ -112,7 +114,7 @@ ehStatusValido :: String -> Bool
 ehStatusValido a = a `elem` ["Cancelada", "Concluída"]
 -- Função para filtrar um elemento de uma lista dentro de uma tupla
 filtrarElemento :: Eq b => b -> [(a, [b])] -> [(a, [b])]
-filtrarElemento x = map (\(dia, horarios) -> (dia, filter (/= x) horarios))
+filtrarElemento x = map (Data.Bifunctor.second (filter (/= x)))
 -- Altera o status da Consulta
 updateAppointment :: String -> String -> IO String
 updateAppointment idConsulta novoStatus = do
@@ -138,7 +140,7 @@ checkSchedule [nomeMed] = do
 
     -- Filtra os usuários que correspondem ao ID e função de médico
     case find (\u -> funcao u == "MEDICO" && Users.User.nome u == nomeMedLimpo) content of
-        Just fMedico -> do 
+        Just fMedico -> do
             let hAtendimento = horarios_atendimento fMedico
                 dAtendimento = dias_atendimento fMedico
 
@@ -164,7 +166,7 @@ criaTuplas lista1 lista2 = [(elemento, lista2) | elemento <- lista1]
 -- Função para subtrair os horários das tuplas correspondentes aos dias das consultas
 subtrairListas :: (Eq a, Eq b) => [(a, [b])] -> [(a, b)] -> [(a, [b])]
 subtrairListas original [] = original
-subtrairListas original remover = 
+subtrairListas original remover =
     foldr (\(diaRemover, horarioRemover) acc ->
         map (\(dia, horarios) ->
             if dia == diaRemover
@@ -174,7 +176,7 @@ subtrairListas original remover =
     ) original remover
 
 diaDaSemana :: String -> String
-diaDaSemana dataStr = 
+diaDaSemana dataStr =
     case parseDate dataStr of
         Just day -> case formatTime defaultTimeLocale "%A" day of
             "Monday"    -> "SEGUNDA"
@@ -202,10 +204,10 @@ viewPatientAppointment :: [String] -> IO String
 viewPatientAppointment idsConsultas = do
 
     consultas <- fromMaybe [] <$> readJsonFile "./Appointments/Appointments.JSON"
-    
+
     -- Filtra as consultas correspondentes aos IDs fornecidos
     let consultasFiltradas = filter (\c -> id_consulta c `elem` idsConsultas) consultas
-    
+
     -- Verifica se há consultas filtradas e retorna a mensagem apropriada
     if null consultasFiltradas
         then return "O Paciente não possui consultas."
