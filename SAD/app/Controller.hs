@@ -16,7 +16,6 @@ import qualified Data.ByteString.Lazy as B
 -- Função de execução que age como ponte entre o usuário e as funcionalidades
 execute :: [String] -> IO String
 execute (cmd:args)
-
     | cmd == "viewUser"        = return $ viewUser args
     | cmd == "listUsers"       = return $ listUsers args
     | cmd == "addMedication"   = addMedication args
@@ -33,7 +32,6 @@ execute (cmd:args)
     | cmd == "addDisease"      = return $ addDisease args
     | cmd == "viewDisease"     = viewDisease args
     | cmd == "listDiseases"    = return $ listDiseases args
-    | cmd == "addSymptom"      = return $ addSymptom args
     | cmd == "viewSymptom"     = viewSymptom args
     | cmd == "listSymptoms"    = return $ listSymptoms args
     | cmd == "viewDashBoard"   = viewDashBoard args
