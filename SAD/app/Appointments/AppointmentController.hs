@@ -132,45 +132,18 @@ updateAppointment idConsulta novoStatus = do
                 return "STATUS DA CONSULTA ATUALIZADO COM SUCESSO"
             Nothing -> return "ID DA CONSULTA INVÁLIDO/CONSULTA NÃO EXISTE OU CONSULTA JÁ FINALIZADA"
 
--- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
--- -- ++++++++++++++++++ parte de LULU ++++++++++++++++++++
 
--- viewTeste :: [String] -> IO String
--- viewTeste [idMed] = do
 
---     let idMedLimpo = removeChars idMed
-
---     -- Lê o conteúdo do arquivo JSON
---     content <- fromMaybe [] <$> readJsonFile "./Users/Users.JSON"
-
---     -- Filtra os usuários que correspondem ao ID e senha fornecidos
---     case find (\u -> funcao u == "MEDICO" && Users.User.id u == idMedLimpo) content of
---         Just fMedico -> do 
---             let hAtendimento = horarios_atendimento fMedico
---                 dAtendimento = dias_atendimento fMedico
-
---             -- Lê o conteúdo do arquivo JSON de consultas
---             contentApo <- fromMaybe [] <$> readJsonFile "./Appointments/Appointments.JSON"
-
---             -- Filtra as consultas em andamento
---             case filter (\f -> status_consulta f == "Em andamento") contentApo of
---                 Just consu -> do
---                     let hConsulta = map horario_consulta consu
---                         dataConsulta = diaDaSemana (map data_consulta consu)
---                     return (strTransformer (subtrairListas (criaTuplas dAtendimento hAtendimento) (criaTuplas [dataConsulta] [hConsulta])))
---                 Nothing -> return (strTransformer (criaTuplas dAtendimento hAtendimento))
-
---         Nothing -> return "x x x Não existe médico com essa ID. x x x \n"
 checkSchedule :: [String] -> IO String
-checkSchedule [idMed] = do
+checkSchedule [nomeMed] = do
     -- Remove caracteres indesejados da ID do médico
-    let idMedLimpo = removeChars idMed
+    let nomeMedLimpo = removeChars nomeMed
 
     -- Lê o conteúdo do arquivo JSON de usuários
     content <- fromMaybe [] <$> readJsonFile "./Users/Users.JSON"
 
     -- Filtra os usuários que correspondem ao ID e função de médico
-    case find (\u -> funcao u == "MEDICO" && Users.User.id u == idMedLimpo) content of
+    case find (\u -> funcao u == "MEDICO" && Users.User.nome u == nomeMedLimpo) content of
         Just fMedico -> do 
             let hAtendimento = horarios_atendimento fMedico
                 dAtendimento = dias_atendimento fMedico
@@ -179,39 +152,32 @@ checkSchedule [idMed] = do
             contentApo <- fromMaybe [] <$> readJsonFile "./Appointments/Appointments.JSON"
 
             -- Filtra as consultas em andamento para o médico
-            let consultasEmAndamento = filter (\f -> status_consulta f == "Em andamento") contentApo
+            let consultasEmAndamento = filter (\f -> status_consulta f == "Em andamento" && medico_responsavel f == nomeMedLimpo) contentApo
 
             if not (null consultasEmAndamento)
                 then do
-                    let hConsulta = map horario_consulta consultasEmAndamento
-                        dataConsulta = map (diaDaSemana . data_consulta) consultasEmAndamento
-                    return (strTransformer (subtrairListas (criaTuplas dAtendimento hAtendimento) (criaTuplas dataConsulta hConsulta)))
+                    let hConsulta = map (\c -> (diaDaSemana (data_consulta c), horario_consulta c)) consultasEmAndamento
+                    return (strTransformer (subtrairListas (criaTuplas dAtendimento hAtendimento) hConsulta))
                 else return (strTransformer (criaTuplas dAtendimento hAtendimento))
 
         Nothing -> return "x x x Não existe médico com essa ID. x x x \n"
-
-
-
--- extrairHorarios :: [a] -> [String]
--- extrairHorarios consultas = map horario_consulta consultas
 
 
 -- Função generalizada para criar tuplas
 criaTuplas :: [a] -> [b] -> [(a, [b])]
 criaTuplas lista1 lista2 = [(elemento, lista2) | elemento <- lista1]
 
--- [(seg, [1, 2, 3, 4, 5]), (qua, [1, 2, 3, 4, 5]), (sex, [1, 2, 3, 4, 5])]
-
--- Função para subtrair os elementos de uma lista interna, mantendo o dia da semana
-subtrairListas :: [(String, [String])] -> [(String, [String])] -> [(String, [String])]
-subtrairListas original filtro = map (\(dia, horarios) ->
-    let horariosFiltrar = lookup dia filtro
-    in case horariosFiltrar of
-        Just f -> (dia, filter (`notElem` f) horarios)
-        Nothing -> (dia, horarios)
-    ) original
-
-
+-- Função para subtrair os horários das tuplas correspondentes aos dias das consultas
+subtrairListas :: (Eq a, Eq b) => [(a, [b])] -> [(a, b)] -> [(a, [b])]
+subtrairListas original [] = original
+subtrairListas original remover = 
+    foldr (\(diaRemover, horarioRemover) acc ->
+        map (\(dia, horarios) ->
+            if dia == diaRemover
+            then (dia, filter (/= horarioRemover) horarios)
+            else (dia, horarios)
+        ) acc
+    ) original remover
 
 diaDaSemana :: String -> String
 diaDaSemana dataStr = 
