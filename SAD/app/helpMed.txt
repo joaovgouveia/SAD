@@ -1,0 +1,35 @@
+    __  __________    ____ 
+   / / / / ____/ /   / __ \
+  / /_/ / __/ / /   / /_/ /
+ / __  / /___/ /___/ ____/ 
+/_/ /_/_____/_____/_/ MEDICO
+
+==================================================================================
+             CATEGORIA           |                   PARAMETROS
+==================================================================================
+                                 |
+             [MEDICO]            |
+listaMedicos . . . . . . . . . . | ()
+                                 |
+                                 |
+        [SYMPTOM & DISEASE]      |
+listaSintomasSistema . . . . . . | (areaDaDoenca)
+gerarPrescricao. . . . . . . . . | (["sintoma1", "sintoma2", "...", "sintomaN"])
+listarSintomasPresc  . . . . . . | ()
+verMed . . . . . . . . . . . . . | (nomeDoMedicamento)
+listaMeds    . . . . . . . . . . | ()
+                                 |
+                                 |
+             [PATIENT]           |
+verPaciente  . . . . . . . . . . | (cpf)
+verPacientes . . . . . . . . . . | ()
+verHistóricoPaciente . . . . . . | (cpf)
+                                 |
+                                 |
+           [APPOINTMENT]         |
+diagnosticar . . . . . . . . . . | (["sintoma1", "sintoma2", "...", "sintomaN"])
+mudaStatusConsulta . . . . . . . | (idConsulta novoStatus)
+                                 |
+                                 |
+             [OTHERS]            |
+Dashboard. . . . . . . . . . . . | ()

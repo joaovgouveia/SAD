@@ -69,7 +69,7 @@ showMenuMedico = do
     hFlush stdout
     line <- getLine
     if line == "help" then do
-        help <- readFile "./funcoesHELP.txt"
+        help <- readFile "./helpMed.txt"
         putStrLn ("\n" ++ help)
     else if line == "exit" then exit
     else if null line then putStrLn "Nenhum comando foi digitado."
@@ -87,7 +87,7 @@ showMenuAdm = do
     hFlush stdout
     line <- getLine
     if line == "help" then do
-        help <- readFile "./funcoesHELP.txt"
+        help <- readFile "./helpAdm.txt"
         putStrLn ("\n" ++ help)
     else if line == "exit" then exit
     else if null line then putStrLn "Nenhum comando foi digitado."
@@ -105,7 +105,7 @@ showMenuSec = do
     hFlush stdout
     line <- getLine
     if line == "help" then do
-        help <- readFile "./funcoesHELP.txt"
+        help <- readFile "./helpSec.txt"
         putStrLn ("\n" ++ help)
     else if line == "exit" then exit
     else if null line then putStrLn "Nenhum comando foi digitado."
