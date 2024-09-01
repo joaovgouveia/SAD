@@ -1,0 +1,51 @@
+    __  __________    ____ 
+   / / / / ____/ /   / __ \
+  / /_/ / __/ / /   / /_/ /
+ / __  / /___/ /___/ ____/ 
+/_/ /_/_____/_____/_/ ADMINISTRADOR
+
+==================================================================================
+             CATEGORIA           |                   PARAMETROS
+==================================================================================
+                                 |
+              [USERS]            | 
+verUser. . . . . . . . . . . . . | (idUser)
+listaUser. . . . . . . . . . . . | ()
+listaUsersPorFuncao. . . . . . . | (FUNCAO)
+                                 |
+                                 |
+             [MEDICO]            |
+listaMedicos . . . . . . . . . . | ()
+                                 |
+                                 |
+        [SYMPTOM & DISEASE]      |
+addMed . . . . . . . . . . . . . | (nome bula dosagem)                                  
+mudaMed. . . . . . . . . . . . . | (nomeBusca novaBula dosagemBusca)                                
+deletaMed. . . . . . . . . . . . | (nomeBusca dosagemBusca)     
+listaSintomas. . . . . . . . . . | ()
+listaSintomasSistema . . . . . . | (areaDaDoenca)
+verDoenca  . . . . . . . . . . . | (nomeDaDoenca)
+listaDoencas . . . . . . . . . . | ()
+gerarPrescricao. . . . . . . . . | (["sintoma1", "sintoma2", "...", "sintomaN"])
+listarSintomasPresc  . . . . . . | ()
+verMed . . . . . . . . . . . . . | (nomeDoMedicamento)
+listaMeds    . . . . . . . . . . | ()
+                                 |
+                                 |
+             [PATIENT]           |
+addPaciente  . . . . . . . . . . | (cpf nome idade)
+verPaciente  . . . . . . . . . . | (cpf)
+verPacientes . . . . . . . . . . | ()
+mudaNomePaciente . . . . . . . . | (cpf novoNome)
+deletaPaciente . . . . . . . . . | (cpf)
+verHistóricoPaciente . . . . . . | (cpf)
+                                 |
+                                 |
+           [APPOINTMENT]         |
+addConsulta  . . . . . . . . . . | (dataConsulta horario medico diagnostico cpf)
+verConsultasDisponiveis  . . . . | (nomeMedico)
+verEspecialidadesMedicas . . . . | ()
+                                 |
+                                 |
+             [OTHERS]            |
+Dashboard. . . . . . . . . . . . | ()
