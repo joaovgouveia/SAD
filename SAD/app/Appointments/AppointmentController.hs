@@ -96,8 +96,7 @@ writeAppointment data_consult horario medico diagnostico idPaciente = do
                 if ehIdUnico consultasAntigas idConsulta then do
                     let novaConsulta = Consulta idConsulta dataLimpa horarioLimpo (removeChars medico) (removeChars diagnostico) (removeChars idPaciente) "Em andamento"
                     writeJsonFile pathConsultas (consultasAntigas ++ [novaConsulta])
-                    atualizaAtendimentos (removeChars medico)
-                    insertAppointment (removeChars idPaciente) idConsulta
+                    atualizaAtendimentos (removeChars medico) 
                     return "CONSULTA REGISTRADA"
                 else
                     return "JÁ EXISTE UMA CONSULTA DESSE MÉDICO PARA ESSE DIA E HORÁRIO"
@@ -283,8 +282,8 @@ updateUsuarios medicoAtual medicoSubstituto = L.map atualizarPacienteAtendido
           | otherwise = medico
 
 -- Função principal de balanceamento
-balanceAppointments :: IO String
-balanceAppointments = do
+balanceAppointments :: String -> IO String
+balanceAppointments idPaciente = do
   (users, consultas) <- loadData
   let lastConsulta = getLastConsulta consultas
       nomeMedicoAtual = medico_responsavel lastConsulta
@@ -297,7 +296,7 @@ balanceAppointments = do
           medicoSubstituto = findMedicoSubstituto consultas outrosMedicos medicoAtual
           consultasEmAndamentoAtual = contaConsultasEmAndamento nomeMedicoAtual consultas
           consultasEmAndamentoSubstituto = contaConsultasEmAndamento (nome medicoSubstituto) consultas
-          diff = consultasEmAndamentoAtual - consultasEmAndamentoSubstituto
+          diff = abs(consultasEmAndamentoAtual - consultasEmAndamentoSubstituto)
 
       if diff > 5
       then do
@@ -309,6 +308,8 @@ balanceAppointments = do
             usuariosAtualizados = updateUsuarios medicoAtual medicoSubstituto users
         B.writeFile "./Users/Users.JSON" (encode usuariosAtualizados)
         B.writeFile "./Appointments/Appointments.JSON" (encode consultasAtualizadas)
+        insertAppointment (removeChars idPaciente) (geraId (data_consulta lastConsulta) (horario_consulta lastConsulta) (nome medicoSubstituto))
         return $ "Balanceamento realizado, consulta atribuída ao novo médico - " ++ nome medicoSubstituto
-      else
+      else do
+        insertAppointment (removeChars idPaciente) (geraId (data_consulta lastConsulta) (horario_consulta lastConsulta) (medico_responsavel lastConsulta))
         return "Não é necessário balanceamento"

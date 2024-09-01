@@ -107,7 +107,7 @@ viewAvailableAppointment _ = return "Necessário exatamente 1 informação para 
 addAppointment :: [String] -> IO String
 addAppointment [a, b, c, d, e] = do
   writeResult <- AC.writeAppointment a b c d e
-  balanceResult <- balanceAppointments
+  balanceResult <- balanceAppointments e
   return $ writeResult ++ "\n" ++ balanceResult
 addAppointment _ = return "Necessário exatamente 5 informações para cadastro da Consulta."
 
