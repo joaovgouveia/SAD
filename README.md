@@ -23,3 +23,10 @@ Um sistema para a gestão de uma clínica: doenças, médicos e áreas de atuaç
 > cabal install --lib bytestring
 
 > cabal install --lib time
+
+**Executar o Main**
+<br>Dentro do diretório _app_
+
+> **compile o programa**: ghc Main.hs
+
+> **execute o programa**: ./Main
