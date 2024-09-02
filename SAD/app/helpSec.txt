@@ -21,7 +21,7 @@ listaMedicos . . . . . . . . . . | ()
         [SYMPTOM & DISEASE]      |
 listaSintomas. . . . . . . . . . | ()
 listaSintomasSistema . . . . . . | (AREADADOENCA)
-verDoenca  . . . . . . . . . . . | (nomeDaDoenca)
+verDoenca  . . . . . . . . . . . | (NOMEDADOENCA)
 listaDoencas . . . . . . . . . . | ()
 gerarPrescricao. . . . . . . . . | (["sintoma1", "sintoma2", "...", "sintomaN"])
 listarSintomasPresc  . . . . . . | ()
