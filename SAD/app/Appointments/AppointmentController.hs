@@ -158,11 +158,13 @@ checkSchedule [nomeMed] = do
             if not (null consultasEmAndamento)
                 then do
                     let hConsulta = map (\c -> (diaDaSemana (data_consulta c), horario_consulta c)) consultasEmAndamento
-                    return (strTransformer (subtrairListas (criaTuplas dAtendimento hAtendimento) hConsulta))
-                else return (strTransformer (criaTuplas dAtendimento hAtendimento))
+                    return (trocaAspasPorEspaco (strTransformer (subtrairListas (criaTuplas dAtendimento hAtendimento) hConsulta)))
+                else return (trocaAspasPorEspaco (strTransformer (criaTuplas dAtendimento hAtendimento)))
 
         Nothing -> return "x x x Não existe médico com esse nome. x x x \n"
 
+trocaAspasPorEspaco :: String -> String
+trocaAspasPorEspaco = map (\c -> if c == '"' then ' ' else c)
 
 -- Função generalizada para criar tuplas
 criaTuplas :: [a] -> [b] -> [(a, [b])]
