@@ -1,5 +1,5 @@
 # SAD - Sistema Automático de Diagnosticos
-### Um sistema para a gestão de uma clínica: doenças, médicos e áreas de atuação. Este sistema será utilizado como base para que os usuários possam saber como tratar os seus sintomas. O objetivo é facilitar o diagnóstico inicial e a gestão dos recursos médicos de forma equilibrada. 
+Um sistema para a gestão de uma clínica: doenças, médicos e áreas de atuação. Este sistema será utilizado como base para que os usuários possam saber como tratar os seus sintomas. O objetivo é facilitar o diagnóstico inicial e a gestão dos recursos médicos de forma equilibrada. 
 
 ## Como rodar:
 
