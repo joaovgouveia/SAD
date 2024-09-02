@@ -39,7 +39,7 @@ verPaciente  . . . . . . . . . . | (cpf)
 verPacientes . . . . . . . . . . | ()
 mudaNomePaciente . . . . . . . . | (cpf novoNome)
 deletaPaciente . . . . . . . . . | (cpf)
-verHistóricoPaciente . . . . . . | (cpf)
+verHistoricoPaciente . . . . . . | (cpf)
                                  |
                                  |
            [APPOINTMENT]         |

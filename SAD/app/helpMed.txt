@@ -24,7 +24,7 @@ listaMeds    . . . . . . . . . . | ()
              [PATIENT]           |
 verPaciente  . . . . . . . . . . | (cpf)
 verPacientes . . . . . . . . . . | ()
-verHistóricoPaciente . . . . . . | (cpf)
+verHistoricoPaciente . . . . . . | (cpf)
                                  |
                                  |
            [APPOINTMENT]         |

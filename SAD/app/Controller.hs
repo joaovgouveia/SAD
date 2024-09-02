@@ -35,7 +35,7 @@ execute (cmd:args)
     | cmd == "verPacientes"                 = viewPatients args
     | cmd == "mudaNomePaciente"             = changePatientName args
     | cmd == "deletaPaciente"               = deletePatient args
-    | cmd == "verHistóricoPaciente"         = viewPatientHistory args
+    | cmd == "verHistoricoPaciente"         = viewPatientHistory args
     | cmd == "addConsulta"                  = addAppointment args
     | cmd == "mudaStatusConsulta"           = changeStatusAppointment args
     | cmd == "verConsultasDisponiveis"      = viewAvailableAppointment args
