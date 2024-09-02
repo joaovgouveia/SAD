@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 module Utils.Utils where
 
 import Data.Aeson (ToJSON, FromJSON, decode, encode)
@@ -52,3 +53,7 @@ maxValue (h:t)
 mostCommonElem :: Eq a => [a] -> a
 mostCommonElem list = fst $ maximumBy (compare `on` snd) elemCounts 
     where elemCounts = nub [(element, count) | element <- list, let count = length (filter (==element) list)]
+
+-- Nothing to see here
+duck :: String
+duck = "quack"
