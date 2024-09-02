@@ -1,6 +1,6 @@
 [
   {
-    "sintoma": "Dor_de_Cabeça",
+    "sintoma": "dor_de_cabeca",
     "medicamento_nome": "Ibuprofeno",
     "medicamento_dosagem": "400 mg",
     "medicamento_frequencia": "a cada 6-8 horas",
@@ -8,7 +8,7 @@
     "medicamento_observacoes": "Não exceder 1200 mg por dia. Consultar um médico se a dor persistir."
   },
   {
-    "sintoma": "Febre",
+    "sintoma": "febre",
     "medicamento_nome": "Paracetamol",
     "medicamento_dosagem": "500 mg",
     "medicamento_frequencia": "a cada 4-6 horas",
@@ -16,7 +16,7 @@
     "medicamento_observacoes": "Não exceder 4000 mg por dia. Evitar em caso de problemas no fígado."
   },
   {
-    "sintoma": "Enjoo",
+    "sintoma": "enjoo",
     "medicamento_nome": "Dimenidrinato",
     "medicamento_dosagem": "50 mg",
     "medicamento_frequencia": "a cada 4-6 horas",
@@ -24,7 +24,7 @@
     "medicamento_observacoes": "Pode causar sonolência. Evitar dirigir ou operar máquinas."
   },
   {
-    "sintoma": "Dor_Abdominal",
+    "sintoma": "dor_abdominal",
     "medicamento_nome": "Simeticona",
     "medicamento_dosagem": "80 mg",
     "medicamento_frequencia": "a cada 4-6 horas",
@@ -32,7 +32,7 @@
     "medicamento_observacoes": "Normalmente bem tolerado. Se os sintomas persistirem, consulte um médico."
   },
   {
-    "sintoma": "Congestão_Nasal",
+    "sintoma": "congestao_nasal",
     "medicamento_nome": "Pseudoefedrina",
     "medicamento_dosagem": "60 mg",
     "medicamento_frequencia": "a cada 4-6 horas",
@@ -40,7 +40,7 @@
     "medicamento_observacoes": "Pode causar aumento da pressão arterial. Evitar em caso de hipertensão."
   },
   {
-    "sintoma": "Indigestão",
+    "sintoma": "indigestao",
     "medicamento_nome": "Antiácido (Hidróxido de Alumínio e Magnésio)",
     "medicamento_dosagem": "1-2 colheres de chá",
     "medicamento_frequencia": "após as refeições",
@@ -48,7 +48,7 @@
     "medicamento_observacoes": "Pode interagir com outros medicamentos. Consultar um médico se os sintomas persistirem."
   },
   {
-    "sintoma": "Tosse",
+    "sintoma": "tosse",
     "medicamento_nome": "Guaifenesina",
     "medicamento_dosagem": "200-400 mg",
     "medicamento_frequencia": "a cada 4-6 horas",
@@ -56,7 +56,7 @@
     "medicamento_observacoes": "Beber muitos líquidos pode ajudar a soltar o muco."
   },
   {
-    "sintoma": "Diarreia",
+    "sintoma": "diarreia",
     "medicamento_nome": "Loperamida",
     "medicamento_dosagem": "2 mg",
     "medicamento_frequencia": "após a primeira evacuação, seguido de 1 mg após cada evacuação solta",
@@ -64,7 +64,7 @@
     "medicamento_observacoes": "Não exceder 8 mg por dia. Consultar um médico se a diarreia persistir por mais de 48 horas."
   },
   {
-    "sintoma": "Insônia",
+    "sintoma": "insonia",
     "medicamento_nome": "Diphenhydramine",
     "medicamento_dosagem": "25-50 mg",
     "medicamento_frequencia": "antes de dormir",
@@ -72,7 +72,7 @@
     "medicamento_observacoes": "Pode causar sonolência no dia seguinte. Evitar uso prolongado sem orientação médica."
   },
   {
-    "sintoma": "Coceira",
+    "sintoma": "coceira",
     "medicamento_nome": "Loratadina",
     "medicamento_dosagem": "10 mg",
     "medicamento_frequencia": "uma vez ao dia",

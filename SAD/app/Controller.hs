@@ -150,7 +150,3 @@ viewDashBoard args = Analytics.dashboard
 
 diagnosticar :: [String] -> IO String
 diagnosticar = D.findDisease
-
--- Nothing to see here
-duck :: String
-duck = "quack"
