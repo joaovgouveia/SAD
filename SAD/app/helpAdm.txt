@@ -10,20 +10,21 @@
                                  |
               [USERS]            | 
 verUser. . . . . . . . . . . . . | (idUser)
-listaUser. . . . . . . . . . . . | ()
+listaUsers . . . . . . . . . . . | ()
 listaUsersPorFuncao. . . . . . . | (FUNCAO)
                                  |
                                  |
              [MEDICO]            |
 listaMedicos . . . . . . . . . . | ()
+diagnosticar . . . . . . . . . . | (simtomas)
                                  |
                                  |
         [SYMPTOM & DISEASE]      |
-addMed . . . . . . . . . . . . . | (nome bula dosagem)                                  
-mudaMed. . . . . . . . . . . . . | (nomeBusca novaBula dosagemBusca)                                
-deletaMed. . . . . . . . . . . . | (nomeBusca dosagemBusca)     
+addMed . . . . . . . . . . . . . | (nomeRemedio bula dosagem)                                  
+mudaMed. . . . . . . . . . . . . | (nomeRemedio novaBula dosagemBusca)                                
+deletaMed. . . . . . . . . . . . | (nomeRemedio dosagemBusca)     
 listaSintomas. . . . . . . . . . | ()
-listaSintomasSistema . . . . . . | (areaDaDoenca)
+listaSintomasSistema . . . . . . | (AREADADOENCA)
 verDoenca  . . . . . . . . . . . | (nomeDaDoenca)
 listaDoencas . . . . . . . . . . | ()
 gerarPrescricao. . . . . . . . . | (["sintoma1", "sintoma2", "...", "sintomaN"])
@@ -45,7 +46,8 @@ verHistóricoPaciente . . . . . . | (cpf)
 addConsulta  . . . . . . . . . . | (dataConsulta horario medico diagnostico cpf)
 verConsultasDisponiveis  . . . . | (nomeMedico)
 verEspecialidadesMedicas . . . . | ()
+mudaStatusConsulta . . . . . . . | (idConsulta novoStatus)
                                  |
                                  |
              [OTHERS]            |
-Dashboard. . . . . . . . . . . . | ()
+dashboard . . . . . . . . . . .  | ()

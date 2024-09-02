@@ -161,7 +161,7 @@ checkSchedule [nomeMed] = do
                     return (strTransformer (subtrairListas (criaTuplas dAtendimento hAtendimento) hConsulta))
                 else return (strTransformer (criaTuplas dAtendimento hAtendimento))
 
-        Nothing -> return "x x x Não existe médico com essa ID. x x x \n"
+        Nothing -> return "x x x Não existe médico com esse nome. x x x \n"
 
 
 -- Função generalizada para criar tuplas

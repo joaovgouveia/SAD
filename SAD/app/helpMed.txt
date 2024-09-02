@@ -10,10 +10,11 @@
                                  |
              [MEDICO]            |
 listaMedicos . . . . . . . . . . | ()
+diagnosticar . . . . . . . . . . | (simtomas)
                                  |
                                  |
         [SYMPTOM & DISEASE]      |
-listaSintomasSistema . . . . . . | (areaDaDoenca)
+listaSintomasSistema . . . . . . | (AREADADOENCA)
 gerarPrescricao. . . . . . . . . | (["sintoma1", "sintoma2", "...", "sintomaN"])
 listarSintomasPresc  . . . . . . | ()
 verMed . . . . . . . . . . . . . | (nomeDoMedicamento)
@@ -32,4 +33,4 @@ mudaStatusConsulta . . . . . . . | (idConsulta novoStatus)
                                  |
                                  |
              [OTHERS]            |
-Dashboard. . . . . . . . . . . . | ()
+dashboard. . . . . . . . . . . . | ()

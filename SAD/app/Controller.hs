@@ -29,7 +29,7 @@ execute (cmd:args)
     | cmd == "listaDoencas"                 = listDiseases args
     | cmd == "gerarPrescricao"              = generatePrescrip args
     | cmd == "listarSintomasPresc"          = enumerateSymptons
-    | cmd == "Dashboard"                    = viewDashBoard args
+    | cmd == "dashboard"                    = viewDashBoard args
     | cmd == "addPaciente"                  = addPatient args
     | cmd == "verPaciente"                  = viewPatient args
     | cmd == "verPacientes"                 = viewPatients args
