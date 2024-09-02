@@ -5,7 +5,8 @@
     "sintomas_associados": [
       "sede",
       "vontade_de_urinar",
-      "fadiga"
+      "fadiga",
+      "perda_de_peso"
     ],
     "possivel_causa": "Fatores genéticos, obesidade, sedentarismo",
     "medicamentos": ["Insulina"]
@@ -17,7 +18,8 @@
       "dor_de_cabeca",
       "tontura",
       "dor_no_peito",
-      "falta_de_ar"
+      "falta_de_ar",
+      "pressao_alta"
     ],
     "possivel_causa": "Fatores genéticos, dieta rica em sal, obesidade",
     "medicamentos": ["Atenolol", "Hidroclorotiazida", "Captopril", "Losartana", "Enalapril"]
@@ -38,7 +40,7 @@
   {
     "doenca": "GASTRITE",
     "especialidade_relacionada": "CLINICO_GERAL",
-    "sintomas_associados": ["dor estomacal", "nausea", "vomito", "indigestao"],
+    "sintomas_associados": ["dor_estomacal", "nausea", "vomito", "indigestao"],
     "possivel_causa": "Infecção por H. pylori, uso excessivo de anti-inflamatórios, estresse",
     "medicamentos": ["Pantoprazol", "Omeprazol"]
   },
@@ -99,8 +101,7 @@
     "sintomas_associados": [
       "desatencao",
       "hiperatividade",
-      "impulsividade",
-      "dificuldade_organizacional"
+      "impulsividade"
     ],
     "possivel_causa": "Fatores genéticos, desequilíbrios químicos no cérebro",
     "medicamentos": ["Ritalina"]
@@ -122,8 +123,7 @@
     "especialidade_relacionada": "NEUROLOGISTA",
     "sintomas_associados": [
       "tremores",
-      "rigidez_muscular",
-      "dificuldade_para_falar"
+      "rigidez_muscular"
     ],
     "possivel_causa": "Degeneração de células nervosas, fatores genéticos",
     "medicamentos": ["Levodopa"]
@@ -180,7 +180,7 @@
     "especialidade_relacionada": "ORTOPEDISTA",
     "sintomas_associados": [
       "dor_nas_costas",
-      "desconforto_muscular",
+      "dor_muscular",
       "postura_encurvada"
     ],
     "possivel_causa": "Fatores genéticos, distúrbios neuromusculares",
@@ -215,7 +215,7 @@
     "especialidade_relacionada": "PNEUMOLOGISTA",
     "sintomas_associados": [
       "falta_de_ar",
-      "tosse_seca",
+      "tosse",
       "fadiga",
       "dificuldade_respiratoria"
     ],
@@ -223,16 +223,30 @@
     "medicamentos": ["Predinisona", "Nintedanibe", "Pirfenidona", "Ciclofasfamida", "Azatioprina"]
   },
   {
-    "doenca": "BRONQUITE",
+    "doenca": "AVC",
+    "especialidade_relacionada": "NEUROLOGISTA",
+    "sintomas_associados": [
+      "confusao",
+      "desequilibrio",
+      "tontura",
+      "formigamento",
+      "dor_de_cabeca"
+    ],
+    "possivel_causa": "Dano cerebral",
+    "medicamentos": ["Alteplaze", "Losartana", "Sinvastantina"]
+  },
+  {
+    "doenca": "TUBERCULOSE",
     "especialidade_relacionada": "PNEUMOLOGISTA",
     "sintomas_associados": [
       "tosse",
-      "producao_de_muco",
-      "falta_de_ar",
-      "chiado_ao_respirar",
-      "dor_no_peito"
+      "perda_de_peso",
+      "cansaco",
+      "fadiga",
+      "dor_no_peito",
+      "febre"
     ],
-    "possivel_causa": "Infecções virais, tabagismo, poluição",
-    "medicamentos": ["Levodopropizina", "Acebrofilina", "Ambroxol", "Predinisona", "Fluticasona", "Budesonida"]
+    "possivel_causa": "Contato com pessoas infectadas",
+    "medicamentos": ["Estreptomicina", "Rifampicina", "isoniazida"]
   }
 ]
