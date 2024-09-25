@@ -42,4 +42,5 @@ exit_system:-
     print_warning("Fechando Sistema..."),
     halt.
 
+% Nothing to see here.
 duck:- write('quack').
