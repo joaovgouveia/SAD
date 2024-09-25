@@ -1,8 +1,8 @@
 % Trabalhe Luciano
-:- module(user_io, [menu/0, exit_system/0]).
+:- module(userio, [menu/0, exit_system/0]).
 
-:- use_module("../utils/Utils").
-:- use_module("./Controller").
+:- use_module("../utils/utils").
+:- use_module("./controller").
 
 menu:-
     write("Opção:\n> "), 
