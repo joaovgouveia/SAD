@@ -1,24 +1,26 @@
 :- module(utils, [
     read_json/2,
     write_json/2,
-    limpa_tela/0
+    clear_screen/0,
+    print_warning/1,
+    exit_system/0
 ]).
 
 :- use_module(library(http/json)).
+:- use_module(library(ansi_term)).
 
-# Ler do JSON
+% JSON Stuff
 read_json(Path, D):-
     open(Path, read, Stream),
     json_read_dict(Stream, D),
     close(Stream).
 
-#Escrever no JSON
 write_json(Path, D):-
     open(Path, write, Stream),
     json_write_dict(Stream, D),
     close(Stream).
 
-#Limpa a tela
+% IO releated
 clear_screen:-
     (   current_prolog_flag(unix, true) % Verifica se é linux e limpa, se não limpa para outros OS.
     ->  shell(clear)
@@ -26,5 +28,18 @@ clear_screen:-
         process_wait(PID, _Status)
     ).
 
-#Nothing to see here    
+print_warning(Text):-
+    ansi_format([bold, fg(yellow)], '~w', [Text]).
+
+print_succes(Text):-
+    ansi_format([bold, fg(green)], '~w', [Text]).
+
+print_error(Text):-
+    ansi_format([bold, fg(red)], '~w', [Text]).
+
+% exit_system
+exit_system:-
+    print_warning("Fechando Sistema..."),
+    halt.
+
 duck:- write('quack').

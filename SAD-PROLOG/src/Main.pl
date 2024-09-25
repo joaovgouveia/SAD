@@ -1,3 +1,5 @@
-:- module(main, [main_menu/0])
+:- initialization(main).
+:- set_prolog_flag(encoding, utf8).
+:- use_module(["./UserIO"]).
 
-main_menu:- write("Hello World!").
+main:- menu, main.
