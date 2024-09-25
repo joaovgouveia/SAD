@@ -1,4 +1,4 @@
-#Trabalhe Luciano
+% Trabalhe Luciano
 :- module(user_io, [menu/0, exit_system/0]).
 
 :- use_module("../utils/Utils").
