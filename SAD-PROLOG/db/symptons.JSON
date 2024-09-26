@@ -1,0 +1,211 @@
+[
+  {
+    "sintoma": "dor_de_cabeca",
+    "sistemas": ["NERVOSO", "NEUROLOGICO"]
+  },
+  {
+    "sintoma": "convulsoes",
+    "sistemas": ["NERVOSO", "NEUROLOGICO"]
+  },
+  {
+    "sintoma": "tontura",
+    "sistemas": ["NERVOSO", "NEUROLOGICO"]
+  },
+  {
+    "sintoma": "dor_nas_costas",
+    "sistemas": ["NERVOSO", "LOCOMOTOR"]
+  },
+  {
+    "sintoma": "desmaio",
+    "sistemas": ["NERVOSO", "NEUROLOGICO"]
+  },
+  {
+    "sintoma": "colica",
+    "sistemas": ["DIGESTIVO"]
+  },
+  {
+    "sintoma": "vomitos",
+    "sistemas": ["DIGESTIVO"]
+  },
+  {
+    "sintoma": "inchaco",
+    "sistemas": ["LOCOMOTOR"]
+  },
+  {
+    "sintoma": "fadiga",
+    "sistemas": ["NERVOSO", "LOCOMOTOR"]
+  },
+  {
+    "sintoma": "dor_no_peito",
+    "sistemas": ["CARDIOVASCULAR"]
+  },
+  {
+    "sintoma": "tosse",
+    "sistemas": ["RESPIRATORIO"]
+  },
+  {
+    "sintoma": "vontade_de_urinar",
+    "sistemas": ["DIGESTIVO"]
+  },
+  {
+    "sintoma": "falta_de_ar",
+    "sistemasdor": "dor_ao_urinar",
+    "sistemas": ["DIGESTIVO", "RENAL"]
+  },
+  {
+    "sintoma": "urina_com_sangue",
+    "sistemas": ["RENAL", "DIGESTIVO"]
+  },
+  {
+    "sintoma": "febre",
+    "sistemas": ["IMUNOLÓGICO"]
+  },
+  {
+    "sintoma": "dor_estomacal",
+    "sistemas": ["DIGESTIVO"]
+  },
+  {
+    "sintoma": "nausea",
+    "sistemas": ["DIGESTIVO"]
+  },
+  {
+    "sintoma": "indigestao",
+    "sistemas": ["DIGESTIVO"]
+  },
+  {
+    "sintoma": "ganho_de_peso",
+    "sistemas": ["DIGESTIVO", "CARDIOVASCULAR"]
+  },
+  {
+    "sintoma": "palpitacao",
+    "sistemas": ["CARDIOVASCULAR"]
+  },
+  {
+    "sintoma": "cansaco",
+    "sistemas": ["CARDIOVASCULAR", "NERVOSO"]
+  },
+  {
+    "sintoma": "batimentos_irregulares",
+    "sistemas": ["CARDIOVASCULAR"]
+  },
+  {
+    "sintoma": "inchaco_nas_pernas",
+    "sistemas": ["CARDIOVASCULAR"]
+  },
+  {
+    "sintoma": "desatencao",
+    "sistemas": ["NERVOSO", "NEUROLOGICO"]
+  },
+  {
+    "sintoma": "hiperatividade",
+    "sistemas": ["NEUROLOGICO"]
+  },
+  {
+    "sintoma": "impulsividade",
+    "sistemas": ["NEUROLOGICO", "NERVOSO"]
+  },
+  {
+    "sintoma": "sensibilidade_a_luz",
+    "sistemas": ["NEUROLOGICO", "NERVOSO"]
+  },
+  {
+    "sintoma": "tremores",
+    "sistemas": ["NERVOSO", "NEUROLOGICO"]
+  },
+  {
+    "sintoma": "rigidez_muscular",
+    "sistemas": ["NERVOSO", "LOCOMOTOR"]
+  },
+  {
+    "sintoma": "confusao",
+    "sistemas": ["NEUROLOGICO"]
+  },
+  {
+    "sintoma": "movimentos_involuntario",
+    "sistemas": ["NEUROLOGICO"]
+  },
+  {
+    "sintoma": "dificuldade_de_movimento",
+    "sistemas": ["NEUROLOGICO", "LOCOMOTOR"]
+  },
+  {
+    "sintoma": "sensibilidade_ao_toque",
+    "sistemas": ["NERVOSO"]
+  },
+  {
+    "sintoma": "perda_de_altura",
+    "sistemas": ["ORTOPEDICO", "LOCOMOTOR"]
+  },
+  {
+    "sintoma": "postura_encurvada",
+    "sistemas": ["ORTOPEDICO"]
+  },
+  {
+    "sintoma": "fraturas_faceis",
+    "sistemas": ["ORTOPEDICO"]
+  },
+  {
+    "sintoma": "fraqueza",
+    "sistemas": ["CARDIOVASCULAR", "LOCOMOTOR"]
+  },
+  {
+    "sintoma": "dor_muscular",
+    "sistemas": ["ORTOPEDICO", "NERVOSO"]
+  },
+  {
+    "sintoma": "dificuldade_respiratoria",
+    "sistemas": ["RESPIRATORIO"]
+  },
+  {
+    "sintoma": "chida_ao_respiratorio",
+    "sistemas": ["RESPIRATORIO"]
+  },
+  {
+    "sintoma": "pressao_no_peito",
+    "sistemas": ["RESPIRATORIO", "CARDIOVASCULAR"]
+  },
+  {
+    "sintoma": "producao_de_muco",
+    "sistemas": ["RESPIRATORIO", "IMUNOLÓGICO"]
+  },
+  {
+    "sintoma": "perda_de_peso",
+    "sistemas": ["DIGESTIVO", "CARDIOVASCULAR"]
+  },
+  {
+    "sintoma": "pressao_alta",
+    "sistemas": ["CARDIOVASCULAR"]
+  },
+  {
+    "sintoma": "desesquilibrio",
+    "sistemas": ["NERVOSO", "NEUROLOGICO"]
+  },
+  {
+    "sintoma": "formigamentos",
+    "sistemas": ["NERVOSO"]
+  },
+  {
+    "sintoma": "coceira",
+    "sistemas": ["IMUNOLÓGICO"]
+  },
+  {
+    "sintoma": "insonia",
+    "sistemas": ["NEUROLOGICO", "NERVOSO"]
+  },
+  {
+    "sintoma": "diarreia",
+    "sistemas": ["DIGESTIVO"]
+  },
+  {
+    "sintoma": "congestao_nasal",
+    "sistemas": ["IMUNOLÓGICO"]
+  },
+  {
+    "sintoma": "dor_abdominal",
+    "sistemas": ["DIGESTIVO"]
+  },
+  {
+    "sintoma": "enjoo",
+    "sistemas": ["DIGESTIVO"]
+  }
+]

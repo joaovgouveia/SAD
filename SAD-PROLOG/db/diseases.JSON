@@ -1,0 +1,274 @@
+[
+  {
+    "doenca": "DIABETES",
+    "especialidade_relacionada": "CLINICO_GERAL",
+    "sintomas_associados": [
+      "sede",
+      "vontade_de_urinar",
+      "fadiga",
+      "perda_de_peso"
+    ],
+    "possivel_causa": "Fatores genéticos, obesidade, sedentarismo",
+    "medicamentos": ["Insulina"]
+  },
+  {
+    "doenca": "HIPERTENSAO ARTERIAL",
+    "especialidade_relacionada": "CLINICO_GERAL",
+    "sintomas_associados": [
+      "dor_de_cabeca",
+      "tontura",
+      "dor_no_peito",
+      "falta_de_ar",
+      "pressao_alta"
+    ],
+    "possivel_causa": "Fatores genéticos, dieta rica em sal, obesidade",
+    "medicamentos": [
+      "Atenolol",
+      "Hidroclorotiazida",
+      "Captopril",
+      "Losartana",
+      "Enalapril"
+    ]
+  },
+  {
+    "doenca": "INFECCAO_URINARIA",
+    "especialidade_relacionada": "CLINICO_GERAL",
+    "sintomas_associados": [
+      "dor_ao_urinar",
+      "vontade_de_urinar",
+      "dor_abdominal",
+      "urina_com_sangue",
+      "febre"
+    ],
+    "possivel_causa": "Bactérias, má higiene, imunidade baixa",
+    "medicamentos": [
+      "Nimesulida",
+      "Ibuprofeno",
+      "Levoflaxacino",
+      "Ciproflaxacino"
+    ]
+  },
+  {
+    "doenca": "GASTRITE",
+    "especialidade_relacionada": "CLINICO_GERAL",
+    "sintomas_associados": ["dor_estomacal", "nausea", "vomito", "indigestao"],
+    "possivel_causa": "Infecção por H. pylori, uso excessivo de anti-inflamatórios, estresse",
+    "medicamentos": ["Pantoprazol", "Omeprazol"]
+  },
+  {
+    "doenca": "INSUFICIENCIA_CARDIACA",
+    "especialidade_relacionada": "CARDIOLOGISTA",
+    "sintomas_associados": [
+      "falta_de_ar",
+      "inchaco_nas_pernas",
+      "fadiga",
+      "tosse",
+      "ganho_de_peso"
+    ],
+    "possivel_causa": "Doença arterial coronariana, hipertensão, diabetes",
+    "medicamentos": ["Sucubitril", "Valsartana"]
+  },
+  {
+    "doenca": "ARRITMIA",
+    "especialidade_relacionada": "CARDIOLOGISTA",
+    "sintomas_associados": [
+      "palpitacao",
+      "falta_de_ar",
+      "cansaco",
+      "dor_no_peito",
+      "batimento_irregular"
+    ],
+    "possivel_causa": "Doença cardíaca, estresse, consumo de cafeína",
+    "medicamentos": ["Atenolol", "Propafenona", "Amiodarona"]
+  },
+  {
+    "doenca": "HIPERTENSAO PULMONAR",
+    "especialidade_relacionada": "CARDIOLOGISTA",
+    "sintomas_associados": [
+      "falta_de_ar",
+      "fadiga",
+      "dor_no_peito",
+      "inchaco_nas_pernas",
+      "tosse"
+    ],
+    "possivel_causa": "Doenças cardíacas ou pulmonares, genética",
+    "medicamentos": ["Anlodipino", "Nifedipino"]
+  },
+  {
+    "doenca": "DOENCA_VALVULAR_CARDIACA",
+    "especialidade_relacionada": "CARDIOLOGISTA",
+    "sintomas_associados": [
+      "falta_de_ar",
+      "dor_no_peito",
+      "tontura",
+      "palpitacao"
+    ],
+    "possivel_causa": "Degeneração valvular, febre reumática, infecções",
+    "medicamentos": ["Digoxina", "Propanolol"]
+  },
+  {
+    "doenca": "TDAH",
+    "especialidade_relacionada": "NEUROLOGISTA",
+    "sintomas_associados": ["desatencao", "hiperatividade", "impulsividade"],
+    "possivel_causa": "Fatores genéticos, desequilíbrios químicos no cérebro",
+    "medicamentos": ["Ritalina"]
+  },
+  {
+    "doenca": "ENXAQUECA",
+    "especialidade_relacionada": "NEUROLOGISTA",
+    "sintomas_associados": [
+      "dor_de_cabeca",
+      "nausea",
+      "vomito",
+      "sensibilidade_a_luz"
+    ],
+    "possivel_causa": "Fatores genéticos, estresse, alterações hormonais",
+    "medicamentos": ["Dipirona"]
+  },
+  {
+    "doenca": "PARKINSON",
+    "especialidade_relacionada": "NEUROLOGISTA",
+    "sintomas_associados": ["tremores", "rigidez_muscular"],
+    "possivel_causa": "Degeneração de células nervosas, fatores genéticos",
+    "medicamentos": ["Levodopa"]
+  },
+  {
+    "doenca": "EPILEPSIA",
+    "especialidade_relacionada": "NEUROLOGISTA",
+    "sintomas_associados": [
+      "convulsao",
+      "perda_de_conciencia",
+      "movimentos_involuntarios",
+      "confusao"
+    ],
+    "possivel_causa": "Lesões cerebrais, genética, distúrbios do desenvolvimento",
+    "medicamentos": ["Carbamazepina", "Fenitoína", "Ácido Valpróico"]
+  },
+  {
+    "doenca": "TENDINITE",
+    "especialidade_relacionada": "ORTOPEDISTA",
+    "sintomas_associados": [
+      "dor_intensa",
+      "inchaco",
+      "dificuldade_de_movimento",
+      "senbilidade_ao_toque"
+    ],
+    "possivel_causa": "Esforço repetitivo, envelhecimento, lesões",
+    "medicamentos": ["Paracetamol", "Ibuprofeno", "Piroxican", "Dipirona"]
+  },
+  {
+    "doenca": "OSTEOPOROSE",
+    "especialidade_relacionada": "ORTOPEDISTA",
+    "sintomas_associados": [
+      "dor_nas_costas",
+      "perda_de_altura",
+      "postura_encurvada",
+      "fraturas_faceis"
+    ],
+    "possivel_causa": "Deficiência de cálcio, alterações hormonais, idade avançada",
+    "medicamentos": ["Aleandronato", "Risedronato", "Ibandronato"]
+  },
+  {
+    "doenca": "HERNIA_DE_DISCO",
+    "especialidade_relacionada": "ORTOPEDISTA",
+    "sintomas_associados": [
+      "dor_nas_costas",
+      "fraqueza",
+      "dificuldade_de_movimento"
+    ],
+    "possivel_causa": "Degeneração dos discos, esforço excessivo, lesões",
+    "medicamentos": ["Ibuprofeno", "Cetoprofeno", "Dipirona"]
+  },
+  {
+    "doenca": "ESCOLIOSE",
+    "especialidade_relacionada": "ORTOPEDISTA",
+    "sintomas_associados": [
+      "dor_nas_costas",
+      "dor_muscular",
+      "postura_encurvada"
+    ],
+    "possivel_causa": "Fatores genéticos, distúrbios neuromusculares",
+    "medicamentos": ["Diclofenaco", "Ibuprofeno"]
+  },
+  {
+    "doenca": "ASMA",
+    "especialidade_relacionada": "PNEUMOLOGISTA",
+    "sintomas_associados": [
+      "dificuldade_respiratoria",
+      "tosse",
+      "chiado_ao_respirar",
+      "pressao_no_peito"
+    ],
+    "possivel_causa": "Alergias, fatores genéticos, poluição",
+    "medicamentos": [
+      "Sabultamol",
+      "Budesonida",
+      "Formoterol",
+      "Prednisona",
+      "Brometo de Ipratrópio"
+    ]
+  },
+  {
+    "doenca": "PNEUMONIA",
+    "especialidade_relacionada": "PNEUMOLOGISTA",
+    "sintomas_associados": [
+      "febre",
+      "tosse",
+      "producao_de_muco",
+      "falta_de_ar"
+    ],
+    "possivel_causa": "Infecções bacterianas ou virais",
+    "medicamentos": [
+      "Amoxilina",
+      "Azitromicina",
+      "Levoflaxacino",
+      "Vancomicina",
+      "Meropenem"
+    ]
+  },
+  {
+    "doenca": "FIBROSE_PULMONAR",
+    "especialidade_relacionada": "PNEUMOLOGISTA",
+    "sintomas_associados": [
+      "falta_de_ar",
+      "tosse",
+      "fadiga",
+      "dificuldade_respiratoria"
+    ],
+    "possivel_causa": "Doenças autoimunes, exposição a poluentes, genética",
+    "medicamentos": [
+      "Predinisona",
+      "Nintedanibe",
+      "Pirfenidona",
+      "Ciclofasfamida",
+      "Azatioprina"
+    ]
+  },
+  {
+    "doenca": "AVC",
+    "especialidade_relacionada": "NEUROLOGISTA",
+    "sintomas_associados": [
+      "confusao",
+      "desequilibrio",
+      "tontura",
+      "formigamento",
+      "dor_de_cabeca"
+    ],
+    "possivel_causa": "Dano cerebral",
+    "medicamentos": ["Alteplaze", "Losartana", "Sinvastantina"]
+  },
+  {
+    "doenca": "TUBERCULOSE",
+    "especialidade_relacionada": "PNEUMOLOGISTA",
+    "sintomas_associados": [
+      "tosse",
+      "perda_de_peso",
+      "cansaco",
+      "fadiga",
+      "dor_no_peito",
+      "febre"
+    ],
+    "possivel_causa": "Contato com pessoas infectadas",
+    "medicamentos": ["Estreptomicina", "Rifampicina", "isoniazida"]
+  }
+]

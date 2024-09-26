@@ -10,8 +10,6 @@
 :- use_module("./symptons").
 :- use_module("./users").
 
-run("teste") :- 
-    write("Hell yeah\n").
 run("appointments") :- appointments_menu.
 run("diagnosis") :- diagnosis_menu.
 run("diseases") :- diseases_menu.
@@ -20,7 +18,5 @@ run("patients") :- patients_menu.
 run("prescriptions") :- prescriptions_menu.
 run("symptons") :- symptons_menu.
 run("users") :- users_menu.
-run("logout") :- 
-    exit_system.
-run(_):- 
-    write("Função não existe").
+run("logout") :- exit_system.
+run(_):- write("Função não existe").
