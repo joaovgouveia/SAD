@@ -15,8 +15,22 @@ filter([H|T], DadosDoencas, [Doenca|Doencas]) :-
     member(H, SintomasLista),
     filter(T, DadosDoencas, Doencas).
 filter([_|T], DadosDoencas, Doencas) :-
-    filter(T, DadosDoencas, Doencas). 
+    filter(T, DadosDoencas, Doencas).
 
-diagnosis(Symptons) :- 
+intersection([], _, []).
+intersection(L, L, L).
+intersection([H|T], L, [H|R]) :-
+    member(H, L),
+    intersection(T, L, R).
+intersection([_|T], L, R) :-
+    intersection(T, L, R).
+
+diagnosis(Symptons, Doencas) :- 
     read_json("../db/diseases.JSON", DadosDoencas),
     filter(Symptons, DadosDoencas, Doencas).
+
+teste :-
+    read_line_to_string(user_input, A),
+    read_line_to_string(user_input, B),
+    read_line_to_string(user_input, C),
+    diagnosis([A, B, C], Doenca).
