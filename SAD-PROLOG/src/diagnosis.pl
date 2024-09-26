@@ -27,7 +27,8 @@ intersection([_|T], L, R) :-
 
 diagnosis(Symptons, Doencas) :- 
     read_json("../db/diseases.JSON", DadosDoencas),
-    filter(Symptons, DadosDoencas, Doencas).
+    filter(Symptons, DadosDoencas, Doencas),
+    write(Doencas).
 
 teste :-
     read_line_to_string(user_input, A),
