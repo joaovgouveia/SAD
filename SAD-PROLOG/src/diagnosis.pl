@@ -27,11 +27,18 @@ intersection([_|T], L, R) :-
 
 diagnosis(Symptons, Doencas) :- 
     read_json("../db/diseases.JSON", DadosDoencas),
-    filter(Symptons, DadosDoencas, Doencas),
-    write(Doencas).
+    findall(Doenca, 
+            (member(Doc, DadosDoencas),
+            get_dict(doenca, Doc, Doenca),
+            get_dict(sintomas_associados, Doc, SintomasLista),
+            intersection(Symptons, SintomasLista, R),
+            length(R, N),
+            N > 0), 
+        Doencas).
 
 teste :-
     read_line_to_string(user_input, A),
     read_line_to_string(user_input, B),
     read_line_to_string(user_input, C),
-    diagnosis([A, B, C], Doenca).
+    diagnosis([A, B, C], Doencas),
+    write(Doencas).
