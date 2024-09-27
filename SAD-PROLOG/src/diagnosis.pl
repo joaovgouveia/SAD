@@ -30,7 +30,8 @@ calculate_probability(Disease, Symptons, Prob) :-
     length(Intersection, IntersectionSize),
     length(DiseaseSymptons, SymptonsSize),
     X is (IntersectionSize / SymptonsSize) * 100,
-    round(X, Prob).
+    round(X, Prob),
+    write(Prob).
 
 most_probable([D|[]], _, D).
 most_probable([D1,D2|T], Symptons, MostProbable) :-
@@ -38,7 +39,8 @@ most_probable([D1,D2|T], Symptons, MostProbable) :-
     calculate_probability(D2, Symptons, Prob2),
     (Prob1 >= Prob2 -> 
         most_probable([D1|T], Symptons, MostProbable),
-        most_probable([D2|T], Symptons, MostProbable)).
+        most_probable([D2|T], Symptons, MostProbable)),
+    write(MostProbable).
 
 diagnosis(Symptons) :- 
     read_json("../db/diseases.JSON", Diseases),
