@@ -37,8 +37,8 @@ most_probable([H1,H2|T], Symptons, MostProbable) :-
     calculate_probability(H1, Symptons, Prob1),
     calculate_probability(H2, Symptons, Prob2),
     (Prob1 >= Prob2 -> 
-        most_probable([H1|T], MostProbable),
-        most_probable([H2|T], MostProbable)).
+        most_probable([H1|T], Symptons, MostProbable),
+        most_probable([H2|T], Symptons, MostProbable)).
 
 diagnosis(Symptons) :- 
     read_json("../db/diseases.JSON", Diseases),
