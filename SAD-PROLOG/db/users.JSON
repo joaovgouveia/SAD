@@ -20,33 +20,6 @@
     "senha": "SECIFRSAD"
   },
   {
-    "dias_atendimento": ["SEGUNDA", "TERCA", "QUARTA"],
-    "especialidade": "CARDIOLOGISTA",
-    "funcao": "MEDICO",
-    "horarios_atendimento": [
-      "08:00",
-      "08:30",
-      "09:00",
-      "09:30",
-      "10:00",
-      "10:30",
-      "11:00",
-      "11:30",
-      "13:30",
-      "14:00",
-      "14:30",
-      "15:00",
-      "15:30",
-      "16:00",
-      "16:30",
-      "17:00"
-    ],
-    "id": "MCARDGCS",
-    "nome": "Gabriel_Costa_Santos",
-    "pacientes_atendidos": "0",
-    "senha": "MCARDGCSSAD"
-  },
-  {
     "dias_atendimento": ["QUARTA", "QUINTA", "SEXTA"],
     "especialidade": "CLINICO_GERAL",
     "funcao": "MEDICO",
@@ -276,5 +249,32 @@
     "nome": "Gabriel_Henrique_Lima",
     "pacientes_atendidos": "0",
     "senha": "MPNEUGHLSAD"
+  },
+  {
+    "dias_atendimento": ["SEGUNDA", "TERCA", "QUARTA"],
+    "especialidade": "CARDIOLOGISTA",
+    "funcao": "MEDICO",
+    "horarios_atendimento": [
+      "08:00",
+      "08:30",
+      "09:00",
+      "09:30",
+      "10:00",
+      "10:30",
+      "11:00",
+      "11:30",
+      "13:30",
+      "14:00",
+      "14:30",
+      "15:00",
+      "15:30",
+      "16:00",
+      "16:30",
+      "17:00"
+    ],
+    "id": "MCARDGCS",
+    "nome": "Gabriel_Costa_Santos",
+    "pacientes_atendidos": "0",
+    "senha": "MCARDGCSSAD"
   }
 ]
