@@ -8,6 +8,7 @@
     print_error/1,
     print_bold/1,
     remove_duplicates/2,
+    intersection/3,
     exit_system/0
 ]).
 
@@ -57,11 +58,18 @@ remove_duplicates([H|T], R):-
     member(H, T),
     remove_duplicates(T, R).
 
+intersection([], _, []).
+intersection(L, L, L).
+intersection([H|T], L, [H|R]) :-
+    member(H, L),
+    intersection(T, L, R).
+intersection([_|T], L, R) :-
+    intersection(T, L, R).
+
 % exit_system
 exit_system:-
     print_warning("Fechando Sistema..."),
     halt.
-
 
 % Nothing to see here.
 duck:- write('quack').
