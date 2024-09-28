@@ -3,6 +3,10 @@
     write_json/2,
     clear_screen/0,
     print_warning/1,
+    print_highlighted/1,
+    print_succes/1,
+    print_error/1,
+    print_bold/1,
     exit_system/0
 ]).
 
@@ -30,6 +34,12 @@ clear_screen:-
 
 print_warning(Text):-
     ansi_format([bold, fg(yellow)], '~w', [Text]).
+
+print_highlighted(Text) :-
+    ansi_format([bold, fg(blue)], '~w', [Text]).
+
+print_bold(Text) :-
+    ansi_format([bold, fg(white)], '~w', [Text]).
 
 print_succes(Text):-
     ansi_format([bold, fg(green)], '~w', [Text]).
