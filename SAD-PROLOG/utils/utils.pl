@@ -4,9 +4,10 @@
     clear_screen/0,
     print_warning/1,
     print_highlighted/1,
-    print_succes/1,
+    print_success/1,
     print_error/1,
     print_bold/1,
+    remove_duplicates/2,
     exit_system/0
 ]).
 
@@ -41,16 +42,26 @@ print_highlighted(Text) :-
 print_bold(Text) :-
     ansi_format([bold, fg(white)], '~w', [Text]).
 
-print_succes(Text):-
+print_success(Text):-
     ansi_format([bold, fg(green)], '~w', [Text]).
 
 print_error(Text):-
     ansi_format([bold, fg(red)], '~w', [Text]).
 
+% Lists
+remove_duplicates([], []).
+remove_duplicates([H|T], [H|R]):-
+    \+ member(H, T),
+    remove_duplicates(T, R).
+remove_duplicates([H|T], R):-
+    member(H, T),
+    remove_duplicates(T, R).
+
 % exit_system
 exit_system:-
     print_warning("Fechando Sistema..."),
     halt.
+
 
 % Nothing to see here.
 duck:- write('quack').
