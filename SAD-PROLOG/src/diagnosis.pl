@@ -36,6 +36,7 @@ most_probable([D1,D2|T], Symptons, MostProbable) :-
         most_probable([D1|T], Symptons, MostProbable);
         most_probable([D2|T], Symptons, MostProbable)).
 
+% Função de diagnóstico
 diagnosis(Symptons) :- 
     read_json("../db/diseases.JSON", Diseases),
     filter_diseases(Symptons, Diseases, FilteredDiseases),
@@ -59,9 +60,3 @@ diagnosis(Symptons) :-
     write("\n"),
     print_bold(DataMeds),
     write("\n"),!.
-    
-teste :-
-    read_line_to_string(user_input, A),
-    read_line_to_string(user_input, B),
-    read_line_to_string(user_input, C),
-    diagnosis([A, B, C]).

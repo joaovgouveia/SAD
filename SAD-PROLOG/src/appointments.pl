@@ -60,12 +60,6 @@ horario_valido(Horario, Medico) :-
     get_dict(horarios_atendimento, Doc, Horarios),
     member(Horario, Horarios).
 
-% Função auxiliar de checagem de paciente
-eh_paciente(IdPaciente) :-
-    read_json("../db/patients.JSON", DadosPacientes),
-    member(Doc, DadosPacientes),
-    get_dict(id_patient, Doc, IdPaciente).
-
 % Função auxiliar de geração de id
 gera_id(Medico, Data, Horario, IdConsulta) :-
     atomics_to_string([Medico, Data, Horario], '_', IdConsulta).
@@ -106,7 +100,7 @@ update_json(IdConsulta, Medico, Data, Horario, Diagnostico, IdPaciente, Status) 
     append(Appointments, [NovaConsulta], AppointmentsAtualizados),
     update_doctor_appointments(MedicoAtt),
     insert_patient_appointment(IdConsultaAtt, IdPaciente),
-    print_succes("\nCONSULTA REGISTRADA COM SUCESSO\n"),
+    print_success("\nCONSULTA REGISTRADA COM SUCESSO\n"),
     write_json("../db/appointments.JSON", AppointmentsAtualizados),
     !.
 
@@ -164,7 +158,7 @@ update_status(IdConsulta, NovoStatus, DadosConsultas) :-
     get_dict(id_consulta, Doc, IdConsulta),
     put_dict(status_consulta, Doc, NovoStatus, NovoDoc),
     append(DemaisDados, [NovoDoc], DadosAtualizados),
-    print_succes("CONSULTA ATUALIZADA COM SUCESSO\n"),
+    print_success("CONSULTA ATUALIZADA COM SUCESSO\n"),
     write_json("../db/appointments.JSON", DadosAtualizados),
     !.
 

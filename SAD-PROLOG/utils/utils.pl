@@ -9,6 +9,7 @@
     print_bold/1,
     remove_duplicates/2,
     intersection/3,
+    eh_paciente/1,
     exit_system/0
 ]).
 
@@ -65,6 +66,12 @@ intersection([H|T], L, [H|R]) :-
     intersection(T, L, R).
 intersection([_|T], L, R) :-
     intersection(T, L, R).
+
+% Checks
+eh_paciente(IdPaciente) :-
+    read_json("../db/patients.JSON", DadosPacientes),
+    member(Doc, DadosPacientes),
+    get_dict(id_patient, Doc, IdPaciente).
 
 % exit_system
 exit_system:-
