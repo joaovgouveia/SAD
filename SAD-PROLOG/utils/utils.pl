@@ -10,6 +10,7 @@
     remove_duplicates/2,
     intersection/3,
     eh_paciente/1,
+    is_user/1,
     exit_system/0
 ]).
 
@@ -50,6 +51,9 @@ print_success(Text):-
 print_error(Text):-
     ansi_format([bold, fg(red)], '~w', [Text]).
 
+print_spacer :-
+    print_bold("==================================================\n").
+
 % Lists
 remove_duplicates([], []).
 remove_duplicates([H|T], [H|R]):-
@@ -72,6 +76,11 @@ eh_paciente(IdPaciente) :-
     read_json("../db/patients.JSON", DadosPacientes),
     member(Doc, DadosPacientes),
     get_dict(id_patient, Doc, IdPaciente).
+
+is_user(Id) :-
+    read_json("../db/users.JSON", Users),
+    member(User, Users),
+    get_dict(id, User, Id).
 
 % exit_system
 exit_system:-
