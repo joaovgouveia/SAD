@@ -7,6 +7,7 @@
     print_success/1,
     print_error/1,
     print_bold/1,
+    print_spacer/0,
     remove_duplicates/2,
     intersection/3,
     eh_paciente/1,
