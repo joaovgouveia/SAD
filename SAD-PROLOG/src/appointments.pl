@@ -68,6 +68,7 @@ gera_id(Medico, Data, Horario, IdConsulta) :-
 existe_id(IdConsulta) :-
     read_json("../db/appointments.JSON", DadosConsultas),
     member(Doc, DadosConsultas),
+    get_dict(status_consulta, Doc, "Em andamento"),
     get_dict(id_consulta, Doc, IdConsulta).
 
 % Função auxiliar de checagem de consulta
@@ -313,6 +314,7 @@ get_days_with_appointments(Medico, DaysWithAppointments) :-
     findall(Consulta, (member(Consulta, DadosConsultas),
     get_dict(data_consulta, Consulta, DataConsulta),
     get_dict(medico_responsavel, Consulta, Medico),
+    get_dict(status_consulta, Consulta, "Em andamento"),
     date_in_interval(DataConsulta)),
     Consultas),
     generate_days_with_appointments(Consultas, DaysWithAppointments).
