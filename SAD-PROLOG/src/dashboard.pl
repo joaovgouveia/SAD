@@ -37,7 +37,6 @@ trending_diseases_field :-
 show_trending_diseases :-
     print_error("[implementar]").
 
-
 most_appointments_field :-
     most_appointments_header,
     read_json("../db/users.JSON", Users),
@@ -49,14 +48,11 @@ most_appointments_field :-
 count_doctors(Count) :-
     read_json("../db/users.JSON", Users),
     select_doctors(Users, Doctors),
-    length(Doctors, Count),
-    print_bold(Count).
+    length(Doctors, Count).
 
 count_patients(Count) :-
     read_json("../db/patients.JSON", Patients),
-    length(Patients, Count),
-    print_bold(Count).
-
+    length(Patients, Count).
 
 most_appointments([], _, []).
 most_appointments([H|T], Value, Doctors) :-
@@ -90,5 +86,25 @@ print_all_doctors([H|T]) :-
     write("\n"),
     print_all_doctors(T).
 
+count_diseases([], []).
+count_diseases([H|T], Diseases) :-
+    get_dict(diagnostico, H, Disease),
+    (get_dict(Disease, Diseases, X)).
+
+get_diseases([], _{}).
+get_diseases([H|T], Diseases) :-
+    get_diseases(T, Rest),
+    get_dict(diagnostico, H, DiseaseName),
+    (get_dict(disease, Rest, DiseaseName) ->
+        get_dict(amount, Rest, Amount)
+        NewAmount is Amount + 1,
+        % is breaking near this comment
+        get_dict(amount, Rest, _, Diseases, NewAmount);
+        Diseases = Rest.put(_{disease: DiseaseName, amount: 1})
+    ).
+
+
 test :- 
-    show_dashbaord.
+    read_json("../db/appointments.JSON", Appointments),
+    get_diseases(Appointments, Diseases),
+    print_highlighted(Diseases).
