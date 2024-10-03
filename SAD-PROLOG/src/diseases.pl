@@ -6,12 +6,9 @@ diseases_menu :-
     write("menu de doencas\n").
 
 
-    doenca                    :: String,
-    especialidade_relacionada  :: String,
-    sintomas_associados        :: [String],
-    possivel_causa             :: String,
-    medicamentos              :: [String]
-
+:- use_module("../utils/utils").
+:- use_module(library(readutil)).
+:- set_prolog_flag(encoding, utf8).
 
 % Cria uma doenca
 create_disease(Doenca, Especialidade, Sintomas, Causa, Medicamentos):-
