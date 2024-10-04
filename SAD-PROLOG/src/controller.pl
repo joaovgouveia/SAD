@@ -10,13 +10,12 @@
 :- use_module("./symptons").
 :- use_module("./users").
 
-run("appointments") :- appointments_menu.
-run("diagnosis") :- diagnosis_menu.
-run("diseases") :- diseases_menu.
-run("medications") :- medications_menu.
-run("patients") :- patients_menu.
-run("prescriptions") :- prescriptions_menu.
-run("symptons") :- symptons_menu.
-run("users") :- users_menu.
+run("1") :- appointments_menu.
+run("2") :- medications_menu.
+run("3") :- diseases_menu.
+run("4") :- symptons_menu.
+run("5") :- patients_menu.
+run("6") :- prescriptions_menu.
+run("7") :- diagnosis_menu.
 run("logout") :- exit_system.
 run(_):- write("Função não existe").
