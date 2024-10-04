@@ -9,7 +9,7 @@
 medications_menu :-
     write("menu de medicamentos\n").
 
-% Cria um medicamento
+% Funcao principal de criacao de medicamento
 create_medication(Nome, Bula, Dosagem):-
     read_json("../db/medications.JSON", Medications),
     NewMedication = _{
@@ -19,51 +19,66 @@ create_medication(Nome, Bula, Dosagem):-
     },
     append(Medications, [NewMedication], MedicationsNew),
     write_json("../db/medications.JSON", MedicationsNew),
-    print_success("MEDICACAO CADASTRADA COM SUCESSO!\n"),!.
+    print_success("MEDICAÇÃO CADASTRADA COM SUCESSO!\n"),!.
 
-% Atualiza a bula de uma medicação pelo nome e dosagem
-update_medication(Nome, Dosagem, NovaBula) :-
-    read_json("../db/medications.JSON", Medications),
-    (   select(Medication, Medications, Rest),  % Seleciona a medicação que bate com o nome e dosagem
-        get_dict(nome, Medication, Nome),
-        get_dict(dosagem, Medication, Dosagem)
-    ->  % Atualiza a bula
-        put_dict(bula, Medication, NovaBula, UpdatedMedication),
-        append(Rest, [UpdatedMedication], UpdatedMedications),  % Atualiza a lista
-        write_json("../db/medications.JSON", UpdatedMedications),
-        print_success("BULA DA MEDICACAO ATUALIZADA COM SUCESSO!\n")
-    ;   % Caso não encontre a medicação
-        print_error("MEDICACAO NAO ENCONTRADA!\n")
-    ),
-    !.
-
-% Encontra um medicamento
-read_medication(Nome, Dosagem) :-
-    read_json("../db/medications.JSON", Medications),
-    % Encontra a medicação pelo nome e dosagem
-    select(Medication, Medications, _),
+eh_medicamento(Nome, Dosagem, Medications) :-
+    member(Medication, Medications),
     get_dict(nome, Medication, Nome),
-    get_dict(dosagem, Medication, Dosagem),
-    get_dict(bula, Medication, Bula),
-    % Formata a saída
-    string_concat("Nome: ", Nome, Header),
-    string_concat("\nDosagem: ", Dosagem, Temp),
-    string_concat(Temp, "\nBula: ", Text),
-    % Exibe as informações
-    print_success(Header),
-    print_bold(Text),
-    print_bold(Bula),
-    write("\n"),
-    !.
+    get_dict(dosagem, Medication, Dosagem).
 
-% Deleta um medicamento
-delete_medication(Nome, Dosagem) :-
+% Funcao principal de atualizacao da bula de um medicamento
+update_medication(Nome, Dosagem, NewBula) :-
     read_json("../db/medications.JSON", Medications),
-    % Encontra e remove o medicamento pelo nome e dosagem
+    (eh_medicamento(Nome, Dosagem, Medications) -> true ; print_error("MEDICAÇÃO NÃO CADASTRADA NO SISTEMA\n")),
     select(Medication, Medications, Rest),
     get_dict(nome, Medication, Nome),
     get_dict(dosagem, Medication, Dosagem),
-    % Exibe mensagem de sucesso e salva a lista atualizada
-    print_success("MEDICACAO DELETADA COM SUCESSO!\n"),
+    put_dict(bula, Medication, NewBula, MedicationAtt),
+    append(Rest, [MedicationAtt], MedicationsAtt),
+    write_json("../db/medications.JSON", MedicationsAtt),
+    print_success("BULA DA MEDICAÇÃO ATUALIZADA COM SUCESSO!\n"),
+    !.
+
+
+format_medications([], Formatted, Formatted).
+format_medications([Medication|Rest], FormattedTemp, FormattedResult) :-
+    format_medication(Medication, FormattedMedication),
+    string_concat(FormattedTemp, FormattedMedication, NewFormattedMedication),
+    format_medications(Rest, NewFormattedMedication, FormattedResult).
+
+format_medication(Medication, FormattedMedication) :-
+    get_dict(nome, Medication, Nome),
+    get_dict(dosagem, Medication, Dosagem),
+    get_dict(bula, Medication, Bula),
+    format(string(FormattedMedication), "\nMedicamento: ~w\nDosagem: ~w\nBula: ~w\n",
+           [Nome, Dosagem, Bula]).
+
+% Funcao principal de visualizacao da bula do medicamento
+view_medication_bula(Nome, Dosagem) :-
+    read_json("../db/medications.JSON", Medications),
+    (eh_medicamento(Nome, Dosagem) -> true ; print_error("MEDICAÇÃO NÃO CADASTRADA NO SISTEMA\n")),
+    member(Medication, Medications),
+    get_dict(nome, Medication, Nome),
+    get_dict(dosagem, Medication, Dosagem),
+    format_medication(Medication, FormattedMedication),
+    print_bold(FormattedMedication),
+    write("\n"),
+    !.
+
+% Funcao principal de listagem de medicamentos
+list_medications :-
+    read_json("../db/medications.JSON", Medications),
+    format_medications(Medications, "", Result),
+    print_bold(Result), 
+    !.
+
+% Funcao principal de remocao de medicamentos
+delete_medication(Nome, Dosagem) :-
+    read_json("../db/medications.JSON", Medications),
+    (eh_medicamento(Nome, Dosagem, Medications) -> true ; print_error("MEDICAÇÃO NÃO CADASTRADA NO SISTEMA\n")),
+    select(Medication, Medications, Rest),
+    get_dict(nome, Medication, Nome),
+    get_dict(dosagem, Medication, Dosagem),
+    print_success("MEDICAÇÃO DELETADA COM SUCESSO!\n"),
     write_json("../db/medications.JSON", Rest),
     !.

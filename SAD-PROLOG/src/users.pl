@@ -1,10 +1,5 @@
 :- module(users, [
-    users_menu/0,
-    view_doctor/1,
-    view_user/1,
-    view_users_by_function/1,
-    view_medicos/0,
-    view_atuation/0
+    users_menu/0
 ]).
 
 :- use_module("../utils/utils").
@@ -25,14 +20,15 @@ get_user(Id, User) :-
 % Visualiza um medico pelo ID
 view_doctor(Id) :-
     get_user(Id, User),
-    (get_dict(funcao, User, "MEDICO") -> true; print_error("ID NÃO PERTENCE A UM MÉDICO!")),
+    (get_dict(funcao, User, "MEDICO") -> true ; print_error("ID NÃO PERTENCE A UM MÉDICO!")),
+    get_dict(funcao, User, "MEDICO"),
     get_dict(nome, User, Name),
     get_dict(especialidade, User, Area),
     get_dict(dias_atendimento, User, WorkDays),
     get_dict(horarios_atendimento, User, Schedule),
     get_dict(pacientes_atendidos, User, PatientCount),
     string_concat("Nome: ", Name, Header),
-    print_success(Header),
+    print_bold(Header),
     print_bold("\nEspecialidade: "),
     write(Area),
     print_bold("\nDias de Atendimento: "),
@@ -50,7 +46,7 @@ view_user(Id) :-
     get_dict(funcao, User, Function),
     string_concat("Nome: ", Name, Header),
     string_concat("\nFunção: ", Function, Text),
-    print_success(Header),
+    print_bold(Header),
     print_bold(Text),
     write("\n"),!.
 
@@ -62,8 +58,7 @@ view_users_by_function(Function) :-
     format_users(FilteredUsers)).
 
 is_function(Function, User) :-
-    get_dict(funcao, User, UserFunction),
-    UserFunction = Function.
+    get_dict(funcao, User, Function).
 
 % Formata a exibição de multiplos usuários
 format_users([]) :- !.
@@ -76,7 +71,7 @@ format_user(User) :-
     get_dict(funcao, User, Function),
     string_concat("Nome: ", Name, Header),
     string_concat("\nFunção: ", Function, Text),
-    print_success(Header),
+    print_bold(Header),
     print_bold(Text),
     write("\n").
 
@@ -88,8 +83,7 @@ view_medicos :-
     format_medicos(Medicos)).
 
 is_doctor(User) :-
-    get_dict(funcao, User, Funcao),
-    Funcao = "MEDICO".
+    get_dict(funcao, User, "MEDICO").
 
 format_medicos([]) :- !.
 format_medicos([Medico | Rest]) :-
@@ -102,7 +96,7 @@ format_medico(Medico) :-
     get_dict(dias_atendimento, Medico, WorkDays),
     get_dict(horarios_atendimento, Medico, Schedule),
     string_concat("Nome: ", Name, Header),
-    print_success(Header),
+    print_bold(Header),
     print_bold("\nEspecialidade: "),
     write(Especialidade),
     print_bold("\nDias de Atendimento: "),
