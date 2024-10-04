@@ -124,8 +124,7 @@ group_by(Key, [First | Rest], [[First | Same] | Groups]) :-
     group_by(Key, Different, Groups).
 
 same_value(Key, Value, Item) :-
-    get_dict(Key, Item, ItemValue),
-    Value = ItemValue.
+    get_dict(Key, Item, Value).
 
 format_specialties([]) :- !.
 format_specialties([[First | Rest] | Groups]) :-
