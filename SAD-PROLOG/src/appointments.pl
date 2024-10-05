@@ -218,6 +218,7 @@ existe_consulta_atualizavel(IdConsulta, DadosConsultas) :-
 % menu_update_appointment
 menu_update_appointment:-
     print_bold_highlighted_blue("ID CONSULTA: "),
+    print_highlighted_black("Nome_do_Medico_DD/MM/AAAA_HH:MM\n "),
     read_line_to_string(user_input, IdConsulta),
     print_bold_highlighted_blue("NOVO STATUS: "),
     read_line_to_string(user_input, NovoStatus),
