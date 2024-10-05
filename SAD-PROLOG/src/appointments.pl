@@ -1,15 +1,40 @@
 :- module(appointments, [
     appointments_menu/0
-]).
+    ]).
 
 :- use_module("../utils/utils").
+:- use_module("./userio").
 :- use_module(library(readutil)).
 :- set_prolog_flag(encoding, utf8).
 :- use_module(library(strings)).
 :- use_module(library(date)).
+:- use_module(library(system)).
 
-appointments_menu :-
-    write("menu de consultas\n").
+
+% APPOINTMENT RUN
+run_appointment("1") :- menu_write_appointment.
+run_appointment("2") :- menu_check_schedule.
+run_appointment("3") :- menu_update_appointment.
+run_appointment("logout") :- exit_system.
+run_appointment("back") :- start_menu.
+run_appointment(_):- print_warning("Função não existe\n"), sleep(2), appointments_menu.
+
+
+appointments_menu:-
+    clear_screen(),
+    write(" ← VOLTAR"),
+    print_bold_highlighted_black(" (back)\n"),
+  
+    print_bold_highlighted_blue("                                     ╔═╗╔═╗╔═╗╔═╗ ╦ ╔╗╔╔╦╗╔╦╗╔═╗╔╗╔╔╦╗\n"),
+    print_bold_highlighted_blue("                                     ╠═╣╠═╝╠═╝║ ║ ║ ║║║ ║ ║║║║╣ ║║║ ║ \n"),
+    print_bold_highlighted_blue("                                     ╩ ╩╩  ╩  ╚═╝ ╩ ╝╚╝ ╩ ╩ ╩╚═╝╝╚╝ ╩ \n\n"), 
+    print_bold("                     (1)                           (2)                            (3)\n"),
+    print_highlighted_yellow("              ADICIONAR CONSULTA        VER CONSULTAS DISPONÍVEIS       MUDAR STATUS DA CONSULTA\n\n"),
+                                                              
+
+    write("Opção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_appointment(Option).
 
 % Função auxiliar de checagem de data
 quebrar_data(DataString, Dia, Mes, Ano) :-
@@ -120,6 +145,25 @@ update_doctor_appointments(Medico) :-
     append(DemaisDados, [NovoDoc], DadosAtualizados),
     write_json("../db/users.JSON", DadosAtualizados).
 
+
+% MENU write_appointment
+menu_write_appointment:-
+    print_bold_highlighted_blue("MEDICO: \n "),
+    read_line_to_string(user_input, Medico),
+    print_bold_highlighted_blue("DATA: "),
+    print_highlighted_black("DD/MM/AAAA\n "),
+    read_line_to_string(user_input, Data),
+    print_bold_highlighted_blue("HORÁRIO: "),
+    print_highlighted_black("HH:MM\n "),
+    read_line_to_string(user_input, Horario),
+    print_bold_highlighted_blue("DIAGNOSTICO:\n "),
+    read_line_to_string(user_input, Diagnostico),
+    print_bold_highlighted_blue("CPF:\n "),
+    read_line_to_string(user_input, IdPaciente),    
+    write_appointment(Medico, Data, Horario, Diagnostico, IdPaciente), sleep(2),    
+    appointments_menu.
+
+
 % Função principal de criação de consulta
 write_appointment(Medico, Data, Horario, Diagnostico, IdPaciente) :-
     (eh_medico(Medico) ->
@@ -169,6 +213,19 @@ existe_consulta_atualizavel(IdConsulta, DadosConsultas) :-
     get_dict(id_consulta, Doc, IdConsulta),
     get_dict(status_consulta, Doc, StatusConsulta),
     StatusConsulta == "Em andamento".
+
+
+% menu_update_appointment
+menu_update_appointment:-
+    print_bold_highlighted_blue("ID CONSULTA: "),
+    print_highlighted_black("Nome_do_Medico_DD/MM/AAAA_HH:MM\n "),
+    read_line_to_string(user_input, IdConsulta),
+    print_bold_highlighted_blue("NOVO STATUS: "),
+    read_line_to_string(user_input, NovoStatus),
+    update_appointment(IdConsulta, NovoStatus), sleep(2),
+    appointments_menu.
+
+
 
 % Função principal de atualização de consulta
 update_appointment(IdConsulta, NovoStatus) :-
@@ -370,6 +427,21 @@ format_groups(GroupedDays, FormattedDays) :-
     ), Formatted),
     atomic_list_concat(Formatted, '\n', FormattedDays).
 
+
+% menu_check_schedule
+menu_check_schedule:-
+    print_bold_highlighted_blue("MÉDICO: "),
+    read_line_to_string(user_input, Medico),
+    check_schedule(Medico),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_appointment(Option).
+
+
+
+
 % Função principal de criação de tabela de horários disponíveis para atendimento
 check_schedule(Medico) :-
     (eh_medico(Medico) -> true ; print_error("MÉDICO NÃO ENCONTRADO OU NÃO É MÉDICO\n")),
@@ -381,6 +453,10 @@ check_schedule(Medico) :-
     format_schedule(FreeDays, FormattedDays),
     string_concat("\nHORÁRIOS DISPONÍVEIS DA SEMANA SEGUINTE (PRÓXIMOS 7 DIAS) PARA O(A) MÉDICO(A) ", Medico, Temp),
     string_concat(Temp, "\n", Tittle),
-    print_highlighted(Tittle),
-    print_bold(FormattedDays),
+    print_highlighted_blue(Tittle),
+    print_bold_highlighted_blue(FormattedDays),
     !.
+
+
+
+

@@ -1,4 +1,4 @@
-:- module(dashboard, [show_dashbaord/0]).
+:- module(dashboard, [show_dashboard/0]).
 
 :- use_module("../utils/utils").
 :- use_module("./users.pl").
@@ -6,7 +6,7 @@
 :- set_prolog_flag(encoding, utf8).
 
 
-show_dashbaord :-
+show_dashboard :-
     dashboard_header,
     system_counts_field,
     most_appointments_field,
@@ -35,7 +35,13 @@ trending_diseases_field :-
     show_trending_diseases.
 
 show_trending_diseases :-
-    print_error("[implementar]").
+    read_json("../db/appointments.JSON", Appointments),
+    get_diseases(Appointments, Diseases),
+    trending_disease_amount(Diseases, Value),
+    get_trending_diseases(Diseases, Value, TrendingDiseases),
+    print_bold("Quantidade de Casos (de cada Doença): "),
+    print_highlighted(Value),
+    print_diseases(TrendingDiseases).
 
 most_appointments_field :-
     most_appointments_header,
@@ -86,25 +92,38 @@ print_all_doctors([H|T]) :-
     write("\n"),
     print_all_doctors(T).
 
-count_diseases([], []).
-count_diseases([H|T], Diseases) :-
-    get_dict(diagnostico, H, Disease),
-    (get_dict(Disease, Diseases, X)).
-
-get_diseases([], _{}).
+get_diseases([], []).
 get_diseases([H|T], Diseases) :-
     get_diseases(T, Rest),
     get_dict(diagnostico, H, DiseaseName),
-    (get_dict(disease, Rest, DiseaseName) ->
-        get_dict(amount, Rest, Amount)
+    (find_disease_in_list(Rest, DiseaseName, Disease) ->
+        get_dict(amount, Disease, Amount),
         NewAmount is Amount + 1,
-        % is breaking near this comment
-        get_dict(amount, Rest, _, Diseases, NewAmount);
-        Diseases = Rest.put(_{disease: DiseaseName, amount: 1})
-    ).
+        get_dict(amount, Disease, _, NewDisease, NewAmount),
+        delete(Rest, Disease, NewList),
+        Diseases = [NewDisease|NewList];
+        NewDisease = _{disease: DiseaseName, amount: 1},
+        append(Rest, [NewDisease], Diseases)
+   ).
 
+find_disease_in_list([H|T], Name, Disease):-
+    get_dict(disease, H, DiseaseName),
+    (DiseaseName == Name -> Disease = H; find_disease_in_list(T, Name, Disease)),!.
 
-test :- 
-    read_json("../db/appointments.JSON", Appointments),
-    get_diseases(Appointments, Diseases),
-    print_highlighted(Diseases).
+trending_disease_amount([], 0).
+trending_disease_amount([H|T], A) :-
+    trending_disease_amount(T, OtherAmount),
+    get_dict(amount, H, Amount),
+    (Amount > OtherAmount -> A is Amount; A is OtherAmount).
+
+get_trending_diseases([], _,[]).
+get_trending_diseases([H|T], Value, Diseases) :-
+    get_trending_diseases(T, Value, Jose),
+    (get_dict(amount, H, Value) -> Diseases = [H|Jose]; Diseases = Jose).
+
+print_diseases([]) :- write("\n").
+print_diseases([H|T]) :-
+    get_dict(disease, H, Name),
+    print_bold("\n-> "),
+    print_success(Name), 
+    print_diseases(T).
