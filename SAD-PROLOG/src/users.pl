@@ -152,4 +152,5 @@ view_atuation :-
     read_json("../db/users.JSON", Users),
     include(is_doctor, Users, Medicos),
     group_by_specialty(Medicos, GroupedBySpecialty),
-    format_specialties(GroupedBySpecialty).
+    format_specialties(GroupedBySpecialty),
+    !.
