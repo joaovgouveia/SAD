@@ -47,6 +47,6 @@ start_menu:-
 
     print_bold("         (1)                       (2)                      (3)                     (4)                    (5)                      (6)                       (7)                  (8)\n"),
     print_highlighted_yellow("     APPOINTMENT                MEDICATION                DISEASES                SYMPTOM                PATIENT                PRESCRIPTON                DIAGNOSIS              USERS\n\n"),
-    write("Opção:\n>"),
+    write("Opção:\n> "),
     read_line_to_string(user_input, Option),
     run(Option).

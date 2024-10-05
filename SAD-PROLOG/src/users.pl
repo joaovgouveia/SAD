@@ -40,7 +40,7 @@ users_menu :-
 
 % Busca um usuário pelo ID
 get_user(Id, User) :-
-    (is_user(Id) -> true; print_error("USUÁRIO NÃO EXISTE!")),
+    (is_user(Id) -> true; print_error("USUÁRIO NÃO EXISTE!\n ")),
     read_json("../db/users.JSON", Users),
     select(User, Users, _),
     get_dict(id, User, Id),!.
@@ -58,7 +58,7 @@ menu_view_doctor:-
 % Visualiza um medico pelo ID
 view_doctor(Id) :-
     get_user(Id, User),
-    (get_dict(funcao, User, "MEDICO") -> true ; print_error("ID NÃO PERTENCE A UM MÉDICO!")),
+    (get_dict(funcao, User, "MEDICO") -> true ; print_error("ID NÃO PERTENCE A UM MÉDICO!\n ")),
     get_dict(funcao, User, "MEDICO"),
     get_dict(nome, User, Name),
     get_dict(especialidade, User, Area),
@@ -112,7 +112,7 @@ menu_view_users_by_function:-
 view_users_by_function(Function) :-
     read_json("../db/users.JSON", Users),
     include(is_function(Function), Users, FilteredUsers),
-    (FilteredUsers == [] -> print_error("NENHUM USUÁRIO ENCONTRADO COM ESTA FUNÇÃO."); 
+    (FilteredUsers == [] -> print_error("NENHUM USUÁRIO ENCONTRADO COM ESTA FUNÇÃO.\n "); 
     format_users(FilteredUsers)).
 
 is_function(Function, User) :-
@@ -145,7 +145,7 @@ menu_view_medicos:-
 view_medicos :-
     read_json("../db/users.JSON", Users),
     include(is_doctor, Users, Medicos),
-    (Medicos == [] -> print_error("NENHUM MÉDICO ENCONTRADO."); 
+    (Medicos == [] -> print_error("NENHUM MÉDICO ENCONTRADO.\n "); 
     format_medicos(Medicos)).
 
 % Verifica se o usuário é um medico

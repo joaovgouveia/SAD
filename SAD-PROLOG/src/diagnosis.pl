@@ -58,14 +58,31 @@ most_probable([D1,D2|T], Symptoms, MostProbable) :-
         most_probable([D2|T], Symptoms, MostProbable)).
 
 menu_diagnosis:-
-    print_bold_highlighted_blue("SINTOMA(S): \n"),
-    read_line_to_string(user_input, Sintoma),
-    diagnosis(Sintoma),
-    write("\nPressione [enter] para voltar para o menu "),
-    read_line_to_string(user_input, _),
-    write("\nOpção:\n> "), 
-    read_line_to_string(user_input, Option),
-    run_diagnosis(Option).
+    print_bold_highlighted_blue("NÚMERO DE SINTOMAS:\n "),
+    read_line_to_string(user_input, N),
+    atom_string(A, N),
+    atom_number(A, Numero),
+    size_symptoms(Size),
+    ((Numero =< Size, Numero >= 1) -> generate_symptoms_list(Numero, Sintomas),
+                                      diagnosis(Sintomas),
+                                      write("\nPressione [enter] para voltar para o menu "),
+                                      read_line_to_string(user_input, _),
+                                      write("\nOpção:\n> "),
+                                      read_line_to_string(user_input, Option),   
+                                      run_diagnosis(Option)
+    ;
+    print_error("NÚMERO INDEVIDO DE SINTOMAS INFORMADOS\n"), sleep(2), diagnosis_menu).
+
+generate_symptoms_list(0, []).
+generate_symptoms_list(N, [S|Rest]) :-
+    print_bold_highlighted_blue("SINTOMA: "),
+    read_line_to_string(user_input, S),
+    NewN is N - 1,
+    generate_symptoms_list(NewN, Rest).
+
+size_symptoms(Size) :-
+    read_json("../db/symptoms.JSON", DadosSintomas),
+    length(DadosSintomas, Size).
 
 % Função de diagnóstico
 diagnosis(Symptoms) :- 
@@ -85,8 +102,8 @@ diagnosis(Symptoms) :-
     string_concat("Medicamentos indicados: ", FormattedMeds, DataMeds),
     print_success(Message),
     write("\n"),
-    print_highlighted(DataProb),
-    print_highlighted("%\n"),
+    print_bold_highlighted_blue(DataProb),
+    print_bold_highlighted_blue("%\n"),
     print_bold(DataCause),
     write("\n"),
     print_bold(DataMeds),
