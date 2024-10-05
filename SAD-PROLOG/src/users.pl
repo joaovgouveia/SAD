@@ -39,7 +39,6 @@ users_menu :-
     read_line_to_string(user_input, Option),
     run_users(Option).
 
-
 % Busca um usuário pelo ID
 get_user(Id, User) :-
     (is_user(Id) -> true; print_error("USUÁRIO NÃO EXISTE!")),
@@ -56,8 +55,6 @@ menu_view_doctor:-
     write("\nOpção:\n> "), 
     read_line_to_string(user_input, Option),
     run_users(Option).
-
-
 
 % Visualiza um medico pelo ID
 view_doctor(Id) :-
@@ -137,8 +134,6 @@ format_user(User) :-
     print_bold(Text),
     write("\n").
 
-
-
 menu_view_medicos:-
     view_medicos,
     write("\nPressione [enter] para voltar para o menu "),
@@ -158,7 +153,6 @@ view_medicos :-
 is_doctor(User) :-
     User.funcao == "MEDICO".
 
-% Agrupa os medicos por especialidade
 group_by_specialty(Medicos, GroupedBySpecialty) :-
     findall(Specialty-MedicosPerSpecialty,
         (   member(Medico, Medicos),
@@ -175,7 +169,6 @@ menu_view_atuation:-
     read_line_to_string(user_input, Option),
     run_users(Option).
 
-% Agrupa os medicos com base na chave especificada (por exemplo, especialidade)
 group_by(_, [], []).
 group_by(Key, [First | Rest], [[First | Same] | Groups]) :-
     get_dict(Key, First, Value),
@@ -186,14 +179,12 @@ group_by(Key, [First | Rest], [[First | Same] | Groups]) :-
 same_value(Key, Value, Item) :-
     get_dict(Key, Item, Value).
 
-% Formata a lista de especialidades e mdicos para exibição
 format_specialties([]) :- !.
 format_specialties([Specialty-MedicosPerSpecialty | Rest]) :-
     format('Especialidade: ~w~n', [Specialty]),
     format_medicos(MedicosPerSpecialty),
     format_specialties(Rest).
 
-% Formata os nomes dos medicos para exibição
 format_names([]) :- !.
 format_names([User | Rest]) :-
     get_dict(nome, User, Name),
@@ -201,7 +192,6 @@ format_names([User | Rest]) :-
     write("\n"),
     format_names(Rest).
 
-% Formata a lista de medicos para exibição
 format_medicos([]).
 format_medicos([Medico | Rest]) :-
     format('  Médico: ~w, Atendimentos: ~w~n', [Medico.nome, Medico.pacientes_atendidos]),
