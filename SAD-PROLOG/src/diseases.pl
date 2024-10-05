@@ -10,7 +10,7 @@
 % DISEASES RUN
 run_diseases("1") :- menu_update_disease_sympton_medication.
 run_diseases("2") :- menu_view_disease.
-run_diseases("3") :- list_diseases.
+run_diseases("3") :- menu_list_diseases.
 run_diseases("logout") :- exit_system.
 run_diseases("back") :- start_menu.
 run_diseases(_):- print_warning("Função não existe\n"), sleep(2), diseases_menu.
