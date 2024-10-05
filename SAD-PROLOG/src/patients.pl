@@ -41,9 +41,8 @@ menu_create_patient:-
     read_line_to_string(user_input, Name),
     print_bold_highlighted_blue("IDADE:\n "),
     read_line_to_string(user_input, Age),
-    create_patient(Id, Name, Age),
-    read_line_to_string(user_input, Option),
-    run_appointment(Option).
+    create_patient(Id, Name, Age), sleep(2),
+    patients_menu.
 
 
 
