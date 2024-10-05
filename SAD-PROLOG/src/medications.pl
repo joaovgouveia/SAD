@@ -5,9 +5,47 @@
 :- use_module("../utils/utils").
 :- use_module(library(readutil)).
 :- set_prolog_flag(encoding, utf8).
+:- use_module(library(system)).
+
+% MEDICATION RUN
+run_medication("1") :- menu_create_medication.
+run_medication("2") :- menu_update_medication.
+run_medication("3") :- menu_view_medication_bula.
+run_medication("4") :- menu_list_medications.
+run_medication("5") :- menu_delete_medication.
+run_medication("logout") :- exit_system.
+run_medication("back") :- start_menu.
+run_medication(_):- print_warning("Função não existe\n"), sleep(2), medications_menu.
+
 
 medications_menu :-
-    write("menu de medicamentos\n").
+    clear_screen(),
+    write(" ← VOLTAR"),
+    print_bold_highlighted_black(" (back)\n"),
+  
+
+    print_bold_highlighted_blue("                                     ╔╦╗╔═╗╔╦╗╦╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗\n"),
+    print_bold_highlighted_blue("                                     ║║║║╣  ║║║║  ╠═╣ ║ ║║ ║║║║╚═╗\n"),
+    print_bold_highlighted_blue("                                     ╩ ╩╚═╝═╩╝╩╚═╝╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝\n"), 
+    print_bold(                 "        (1)                    (2)                   (3)                   (4)                          (5)\n"),
+    print_highlighted_yellow(   "ADICIONAR MEDICAÇÃO       ATUALIZAR BULA           VER BULA         LISTA MEDICAMENTO           REMOVE MEDICAMENTO\n\n"),
+                                                              
+
+    write("Opção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_medication(Option).
+
+
+menu_create_medication:-
+    print_bold_highlighted_blue("NOME MEDICAMENTO:\n "),
+    read_line_to_string(user_input, NomeMed),
+    print_bold_highlighted_blue("BULA:\n "),
+    read_line_to_string(user_input, Bula),
+    print_bold_highlighted_blue("DOSAGEM:\n "),
+    read_line_to_string(user_input, Dosagem),
+    create_medication(NomeMed, Bula, Dosagem), sleep(2),
+    medications_menu.
+
 
 % Funcao principal de criacao de medicamento
 create_medication(Nome, Bula, Dosagem):-
@@ -25,6 +63,18 @@ eh_medicamento(Nome, Dosagem, Medications) :-
     member(Medication, Medications),
     get_dict(nome, Medication, Nome),
     get_dict(dosagem, Medication, Dosagem).
+
+
+menu_update_medication:-
+    print_bold_highlighted_blue("NOME MEDICAMENTO:\n "),
+    read_line_to_string(user_input, NomeMed),
+    print_bold_highlighted_blue("DOSAGEM:\n "),
+    read_line_to_string(user_input, Dosagem),
+    print_bold_highlighted_blue("NOVA BULA:\n "),
+    read_line_to_string(user_input, NewBula),
+    update_medication(NomeMed, Dosagem, NewBula), sleep(2),
+    medications_menu.
+
 
 % Funcao principal de atualizacao da bula de um medicamento
 update_medication(Nome, Dosagem, NewBula) :-
@@ -53,10 +103,24 @@ format_medication(Medication, FormattedMedication) :-
     format(string(FormattedMedication), "\nMedicamento: ~w\nDosagem: ~w\nBula: ~w\n",
            [Nome, Dosagem, Bula]).
 
+
+
+menu_view_medication_bula:-
+    print_bold_highlighted_blue("NOME MEDICAMENTO:\n "),
+    read_line_to_string(user_input, NomeMed),
+    print_bold_highlighted_blue("DOSAGEM:\n "),
+    read_line_to_string(user_input, Dosagem),
+    view_medication_bula(NomeMed, Dosagem),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_medication(Option).
+
 % Funcao principal de visualizacao da bula do medicamento
 view_medication_bula(Nome, Dosagem) :-
     read_json("../db/medications.JSON", Medications),
-    (eh_medicamento(Nome, Dosagem) -> true ; print_error("MEDICAÇÃO NÃO CADASTRADA NO SISTEMA\n")),
+    (eh_medicamento(Nome, Dosagem, Medications) -> true ; print_error("MEDICAÇÃO NÃO CADASTRADA NO SISTEMA\n")),
     member(Medication, Medications),
     get_dict(nome, Medication, Nome),
     get_dict(dosagem, Medication, Dosagem),
@@ -65,12 +129,29 @@ view_medication_bula(Nome, Dosagem) :-
     write("\n"),
     !.
 
+menu_list_medications:-
+    list_medications,
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_medication(Option).
+
 % Funcao principal de listagem de medicamentos
 list_medications :-
     read_json("../db/medications.JSON", Medications),
     format_medications(Medications, "", Result),
-    print_bold(Result), 
+    print_bold(Result),
     !.
+
+menu_delete_medication:-
+    print_bold_highlighted_blue("NOME MEDICAMENTO:\n "),
+    read_line_to_string(user_input, NomeMed),
+    print_bold_highlighted_blue("DOSAGEM:\n "),
+    read_line_to_string(user_input, Dosagem),
+    view_medication_bula(NomeMed, Dosagem), sleep(2),
+    medications_menu.
+
 
 % Funcao principal de remocao de medicamentos
 delete_medication(Nome, Dosagem) :-

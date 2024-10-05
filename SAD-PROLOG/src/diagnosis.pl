@@ -5,9 +5,30 @@
 :- use_module("../utils/utils").
 :- use_module(library(readutil)).
 :- set_prolog_flag(encoding, utf8).
+:- use_module(library(system)).
+
+% DIAGNOSIS RUN
+run_diagnosis("1") :- menu_diagnosis.
+run_diagnosis("logout") :- exit_system.
+run_diagnosis("back") :- start_menu.
+run_diagnosis(_):- print_warning("Função não existe\n"), sleep(2), diagnosis_menu.
 
 diagnosis_menu :-
-    write("menu de diagnosticos\n").
+    clear_screen(),
+    write(" ← VOLTAR"),
+    print_bold_highlighted_black(" (back)\n"),
+  
+    print_bold_highlighted_blue("                                       ╔╦╗╦╔═╗╔═╗╔╗╔╔═╗╔═╗╦╔═╗\n"),
+    print_bold_highlighted_blue("                                        ║║║╠═╣║ ╦║║║║ ║╚═╗║╚═╗\n"),
+    print_bold_highlighted_blue("                                       ═╩╝╩╩ ╩╚═╝╝╚╝╚═╝╚═╝╩╚═╝\n"), 
+    print_bold(                 "                                                  (1)\n"),
+    print_highlighted_yellow(   "                                           GERA DIAGNÓSTICO\n\n"),
+                                                              
+
+    write("Opção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_diagnosis(Option).
+
 
 filter_diseases(Symptoms, Diseases, R) :-
     findall(Disease,
@@ -35,6 +56,16 @@ most_probable([D1,D2|T], Symptoms, MostProbable) :-
     (Prob1 >= Prob2 -> 
         most_probable([D1|T], Symptoms, MostProbable);
         most_probable([D2|T], Symptoms, MostProbable)).
+
+menu_diagnosis:-
+    print_bold_highlighted_blue("SINTOMA(S): \n"),
+    read_line_to_string(user_input, Sintoma),
+    diagnosis(Sintoma),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_diagnosis(Option).
 
 % Função de diagnóstico
 diagnosis(Symptoms) :- 

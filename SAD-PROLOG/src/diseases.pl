@@ -5,13 +5,48 @@
 :- use_module("../utils/utils").
 :- use_module(library(readutil)).
 :- set_prolog_flag(encoding, utf8).
+:- use_module(library(system)).
+
+% DISEASES RUN
+run_diseases("1") :- menu_update_disease_sympton_medication.
+run_diseases("2") :- menu_view_disease.
+run_diseases("3") :- menu_update_appointment.
+run_diseases("logout") :- exit_system.
+run_diseases("back") :- start_menu.
+run_diseases(_):- print_warning("Função não existe\n"), sleep(2), diseases_menu.
+
 
 diseases_menu :-
-    write("menu de doencas\n").
+    clear_screen(),
+    write(" ← VOLTAR"),
+    print_bold_highlighted_black(" (back)\n"),
+  
+    print_bold_highlighted_blue("                                        ╔╦╗╦╔═╗╔═╗╔═╗╔═╗╔═╗╔═╗\n"),
+    print_bold_highlighted_blue("                                         ║║║╚═╗║╣ ╠═╣╚═╗║╣ ╚═╗\n"),
+    print_bold_highlighted_blue("                                        ═╩╝╩╚═╝╚═╝╩ ╩╚═╝╚═╝╚═╝\n"), 
+    print_bold(                 "                            (1)                    (2)                   (3)\n"),
+    print_highlighted_yellow(   "                      ATUALIZAR DOENÇA          VER DOENÇA           LISTA DOENÇA\n\n"),
+                                                              
+
+    write("Opção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_diseases(Option).
+
 
 eh_doenca(NomeDoenca, Diseases) :-
     member(Disease, Diseases),
     get_dict(doenca, Disease, NomeDoenca).
+
+menu_update_disease_sympton_medication:-
+    print_bold_highlighted_blue("NOME DOENÇA:\n "),
+    read_line_to_string(user_input, NomeDoenca),
+    print_bold_highlighted_blue("NOVO SINTOMA:\n "),
+    read_line_to_string(user_input, NewSintoma),
+    print_bold_highlighted_blue("NOVO MEDICAMENTO:\n "),
+    read_line_to_string(user_input, NewMedicamento),
+    update_disease_sympton_medication(NomeDoenca, NewSintoma, NewMedicamento), sleep(2),
+    diseases_menu.
+
 
 % Funcao principal de atualizacao de dados de uma doenca
 update_disease_sympton_medication(NomeDoenca, NewSintoma, NewMedicamento):-
@@ -44,6 +79,18 @@ format_disease(Disease, FormattedDisease) :-
     format(string(FormattedDisease), "\nDoença: ~w\nEspecialidade: ~w\nSintomas: ~w\nCausa: ~w\nMedicamentos Recomendados: ~w\n",
            [NomeDoenca, Especialidade, Sintomas, Causa, Medicamentos]).
 
+
+menu_view_disease:-
+    print_bold_highlighted_blue("NOME DOENÇA:\n "),
+    read_line_to_string(user_input, NomeDoenca),
+    view_disease(NomeDoenca),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_diseases(Option).
+
+
 % Funcao principal de visualizacao de doenca
 view_disease(NomeDoenca):-
     read_json("../db/diseases.JSON", Diseases),
@@ -54,6 +101,15 @@ view_disease(NomeDoenca):-
     print_bold(FormattedDisease),
     write("\n"),
     !.
+
+menu_list_diseases:-
+    list_diseases, 
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_diseases(Option).
+
 
 % Funcao principal de listagem de doencas
 list_diseases :-
