@@ -112,9 +112,8 @@ read_patient(Id):-
 menu_delete_patient:-
     print_bold_highlighted_blue("CPF:\n "),
     read_line_to_string(user_input, Id),
-    delete_patient(Id),
-    read_line_to_string(user_input, Option),
-    run_appointment(Option).
+    delete_patient(Id), sleep(2),
+    patients_menu.
 
 % Deleta um paciente
 delete_patient(Id):-
