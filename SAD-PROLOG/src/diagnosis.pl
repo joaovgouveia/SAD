@@ -42,7 +42,7 @@ diagnosis(Symptons) :-
     filter_diseases(Symptons, Diseases, FilteredDiseases),
     length(FilteredDiseases, L),
     (L > 0 -> true; print_warning("Não foi possível diagnosticar.\n")),
-    most_probable(FilteredDiseases, Symptons, Disease),
+    most_probable(FilteredDiseases, Symptoms, Disease),
     get_dict(doenca, Disease, Name),
     get_dict(possivel_causa, Disease, Cause),
     get_dict(medicamentos, Disease, Meds),
