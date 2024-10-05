@@ -17,6 +17,11 @@ run_users("logout") :- exit_system.
 run_users("back") :- start_menu.
 run_users(_):- print_warning("Função não existe\n"), sleep(2), users_menu.
 
+% Permite que as cláusulas de group_by_specialty/2 e format_specialties/1
+% sejam definidas em diferentes locais do arquivo
+:- discontiguous group_by_specialty/2.
+:- discontiguous format_specialties/1.
+
 % Menu de usuários
 users_menu :-
     clear_screen(),
@@ -76,7 +81,6 @@ view_doctor(Id) :-
     write(PatientCount),
     write("\n"),!.
 
-
 menu_view_user:-
     print_bold_highlighted_blue("ID USUÁRIO: "),
     read_line_to_string(user_input, IdUser),
@@ -118,7 +122,7 @@ view_users_by_function(Function) :-
 is_function(Function, User) :-
     get_dict(funcao, User, Function).
 
-% Formata a exibição de multiplos usuários
+% Formata a exibicao de multiplos usuários
 format_users([]) :- !.
 format_users([User | Rest]) :-
     format_user(User),
@@ -150,30 +154,18 @@ view_medicos :-
     (Medicos == [] -> print_error("NENHUM MÉDICO ENCONTRADO."); 
     format_medicos(Medicos)).
 
+% Verifica se o usuário é um medico
 is_doctor(User) :-
-    get_dict(funcao, User, "MEDICO").
+    User.funcao == "MEDICO".
 
-format_medicos([]) :- !.
-format_medicos([Medico | Rest]) :-
-    format_medico(Medico),
-    format_medicos(Rest).
-
-format_medico(Medico) :-
-    get_dict(nome, Medico, Name),
-    get_dict(especialidade, Medico, Especialidade),
-    get_dict(dias_atendimento, Medico, WorkDays),
-    get_dict(horarios_atendimento, Medico, Schedule),
-    string_concat("Nome: ", Name, Header),
-    print_bold(Header),
-    print_bold("\nEspecialidade: "),
-    write(Especialidade),
-    print_bold("\nDias de Atendimento: "),
-    write(WorkDays),
-    print_bold("\nHorários de Atendimento: "),
-    write(Schedule),
-    write("\n").
-
-
+% Agrupa os medicos por especialidade
+group_by_specialty(Medicos, GroupedBySpecialty) :-
+    findall(Specialty-MedicosPerSpecialty,
+        (   member(Medico, Medicos),
+            Specialty = Medico.especialidade,
+            findall(M, (member(M, Medicos), M.especialidade == Specialty), MedicosPerSpecialty)
+        ),
+        GroupedBySpecialty).
 
 menu_view_atuation:-
     view_atuation,
@@ -183,18 +175,7 @@ menu_view_atuation:-
     read_line_to_string(user_input, Option),
     run_users(Option).
 
-
-% Visualiza a atuação de medicos por especialidade
-view_atuation :-
-    read_json("../db/users.JSON", Users),
-    include(is_doctor, Users, Medicos),
-    group_by_specialty(Medicos, GroupedBySpecialty),
-    format_specialties(GroupedBySpecialty).
-
-group_by_specialty(Medicos, Grouped) :-
-    sort(2, @=<, Medicos, SortedMedicos),
-    group_by(especialidade, SortedMedicos, Grouped).
-
+% Agrupa os medicos com base na chave especificada (por exemplo, especialidade)
 group_by(_, [], []).
 group_by(Key, [First | Rest], [[First | Same] | Groups]) :-
     get_dict(Key, First, Value),
@@ -205,18 +186,31 @@ group_by(Key, [First | Rest], [[First | Same] | Groups]) :-
 same_value(Key, Value, Item) :-
     get_dict(Key, Item, Value).
 
+% Formata a lista de especialidades e mdicos para exibição
 format_specialties([]) :- !.
-format_specialties([[First | Rest] | Groups]) :-
-    get_dict(especialidade, First, Especialidade),
-    print_bold(Especialidade),
-    write(":\n"),
-    format_names([First | Rest]),
-    write("\n"),
-    format_specialties(Groups).
+format_specialties([Specialty-MedicosPerSpecialty | Rest]) :-
+    format('Especialidade: ~w~n', [Specialty]),
+    format_medicos(MedicosPerSpecialty),
+    format_specialties(Rest).
 
+% Formata os nomes dos medicos para exibição
 format_names([]) :- !.
 format_names([User | Rest]) :-
     get_dict(nome, User, Name),
     print_success(Name),
     write("\n"),
     format_names(Rest).
+
+% Formata a lista de medicos para exibição
+format_medicos([]).
+format_medicos([Medico | Rest]) :-
+    format('  Médico: ~w, Atendimentos: ~w~n', [Medico.nome, Medico.pacientes_atendidos]),
+    format_medicos(Rest).
+
+% Visualiza a atuação dos medicos agrupados por especialidade
+view_atuation :-
+    read_json("../db/users.JSON", Users),
+    include(is_doctor, Users, Medicos),
+    group_by_specialty(Medicos, GroupedBySpecialty),
+    format_specialties(GroupedBySpecialty),
+    !.
