@@ -168,6 +168,18 @@ menu_view_atuation:-
     read_line_to_string(user_input, Option),
     run_users(Option).
 
+% Visualiza a atuação dos medicos agrupados por especialidade
+view_atuation :-
+    read_json("../db/users.JSON", Users),
+    include(is_doctor, Users, Medicos),
+    group_by_specialty(Medicos, GroupedBySpecialty),
+    length(GroupedBySpecialty, Total),
+    Half is Total // 2,  % Calcula a metade
+    length(FirstHalf, Half),  % Cria uma lista com o tamanho da metade
+    append(FirstHalf, _, GroupedBySpecialty),  % Divide a lista
+    format_specialties(FirstHalf),  % Formata e exibe apenas a metade
+    !.
+
 group_by(_, [], []).
 group_by(Key, [First | Rest], [[First | Same] | Groups]) :-
     get_dict(Key, First, Value),
@@ -195,11 +207,3 @@ format_medicos([]).
 format_medicos([Medico | Rest]) :-
     format('  Médico: ~w, Atendimentos: ~w~n', [Medico.nome, Medico.pacientes_atendidos]),
     format_medicos(Rest).
-
-% Visualiza a atuação dos medicos agrupados por especialidade
-view_atuation :-
-    read_json("../db/users.JSON", Users),
-    include(is_doctor, Users, Medicos),
-    group_by_specialty(Medicos, GroupedBySpecialty),
-    format_specialties(GroupedBySpecialty),
-    !.
