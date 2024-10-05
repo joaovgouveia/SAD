@@ -6,6 +6,11 @@
 :- use_module(library(readutil)).
 :- set_prolog_flag(encoding, utf8).
 
+% Permite que as cláusulas de group_by_specialty/2 e format_specialties/1
+% sejam definidas em diferentes locais do arquivo
+:- discontiguous group_by_specialty/2.
+:- discontiguous format_specialties/1.
+
 % Menu de usuários
 users_menu :-
     write("menu de usuarios\n").
@@ -39,7 +44,7 @@ view_doctor(Id) :-
     write(PatientCount),
     write("\n"),!.
 
-% Visualiza um usuário pelo ID
+% Visualiza um usuario pelo ID
 view_user(Id) :-
     get_user(Id, User),
     get_dict(nome, User, Name),
@@ -50,7 +55,7 @@ view_user(Id) :-
     print_bold(Text),
     write("\n"),!.
 
-% Visualiza usuários por função
+% Visualiza usuarios por funcao
 view_users_by_function(Function) :-
     read_json("../db/users.JSON", Users),
     include(is_function(Function), Users, FilteredUsers),
@@ -60,7 +65,7 @@ view_users_by_function(Function) :-
 is_function(Function, User) :-
     get_dict(funcao, User, Function).
 
-% Formata a exibição de multiplos usuários
+% Formata a exibicao de multiplos usuários
 format_users([]) :- !.
 format_users([User | Rest]) :-
     format_user(User),
@@ -95,12 +100,46 @@ group_by_specialty(Medicos, GroupedBySpecialty) :-
         ),
         GroupedBySpecialty).
 
-% Formata a lista de especialidades e medicos para exibição
-format_specialties([]).
+% Outra definição de group_by_specialty, usando sort
+group_by_specialty(Medicos, Grouped) :-
+    sort(2, @=<, Medicos, SortedMedicos),
+    group_by(especialidade, SortedMedicos, Grouped).
+
+% Agrupa os medicos com base na chave especificada (por exemplo, especialidade)
+group_by(_, [], []).
+group_by(Key, [First | Rest], [[First | Same] | Groups]) :-
+    get_dict(Key, First, Value),
+    include(same_value(Key, Value), Rest, Same),
+    exclude(same_value(Key, Value), Rest, Different),
+    group_by(Key, Different, Groups).
+
+same_value(Key, Value, Item) :-
+    get_dict(Key, Item, Value).
+
+% Formata a lista de especialidades e mdicos para exibição
+format_specialties([]) :- !.
 format_specialties([Specialty-MedicosPerSpecialty | Rest]) :-
     format('Especialidade: ~w~n', [Specialty]),
     format_medicos(MedicosPerSpecialty),
     format_specialties(Rest).
+
+% Outra definição de format_specialties
+format_specialties([]) :- !.
+format_specialties([[First | Rest] | Groups]) :-
+    get_dict(especialidade, First, Especialidade),
+    print_bold(Especialidade),
+    write(":\n"),
+    format_names([First | Rest]),
+    write("\n"),
+    format_specialties(Groups).
+
+% Formata os nomes dos medicos para exibição
+format_names([]) :- !.
+format_names([User | Rest]) :-
+    get_dict(nome, User, Name),
+    print_success(Name),
+    write("\n"),
+    format_names(Rest).
 
 % Formata a lista de medicos para exibição
 format_medicos([]).
@@ -114,33 +153,3 @@ view_atuation :-
     include(is_doctor, Users, Medicos),
     group_by_specialty(Medicos, GroupedBySpecialty),
     format_specialties(GroupedBySpecialty).
-
-group_by_specialty(Medicos, Grouped) :-
-    sort(2, @=<, Medicos, SortedMedicos),
-    group_by(especialidade, SortedMedicos, Grouped).
-
-group_by(_, [], []).
-group_by(Key, [First | Rest], [[First | Same] | Groups]) :-
-    get_dict(Key, First, Value),
-    include(same_value(Key, Value), Rest, Same),
-    exclude(same_value(Key, Value), Rest, Different),
-    group_by(Key, Different, Groups).
-
-same_value(Key, Value, Item) :-
-    get_dict(Key, Item, Value).
-
-format_specialties([]) :- !.
-format_specialties([[First | Rest] | Groups]) :-
-    get_dict(especialidade, First, Especialidade),
-    print_bold(Especialidade),
-    write(":\n"),
-    format_names([First | Rest]),
-    write("\n"),
-    format_specialties(Groups).
-
-format_names([]) :- !.
-format_names([User | Rest]) :-
-    get_dict(nome, User, Name),
-    print_success(Name),
-    write("\n"),
-    format_names(Rest).
