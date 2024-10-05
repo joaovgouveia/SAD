@@ -66,9 +66,8 @@ menu_update_patient:-
     read_line_to_string(user_input, Id),
     print_bold_highlighted_blue("NOME:\n "),
     read_line_to_string(user_input, Nome),
-    update_patient(Id, Nome),
-    read_line_to_string(user_input, Option),
-    run_appointment(Option).
+    update_patient(Id, Nome), sleep(2),
+    patients_menu.
 
 % Atualiza um paciente
 update_patient(Id, Name):-
