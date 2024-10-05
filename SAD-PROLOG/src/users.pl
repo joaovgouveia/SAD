@@ -82,30 +82,33 @@ view_medicos :-
     (Medicos == [] -> print_error("NENHUM MÉDICO ENCONTRADO."); 
     format_medicos(Medicos)).
 
+% Verifica se o usuário é um medico
 is_doctor(User) :-
-    get_dict(funcao, User, "MEDICO").
+    User.funcao == "MEDICO".
 
-format_medicos([]) :- !.
+% Agrupa os medicos por especialidade
+group_by_specialty(Medicos, GroupedBySpecialty) :-
+    findall(Specialty-MedicosPerSpecialty,
+        (   member(Medico, Medicos),
+            Specialty = Medico.especialidade,
+            findall(M, (member(M, Medicos), M.especialidade == Specialty), MedicosPerSpecialty)
+        ),
+        GroupedBySpecialty).
+
+% Formata a lista de especialidades e medicos para exibição
+format_specialties([]).
+format_specialties([Specialty-MedicosPerSpecialty | Rest]) :-
+    format('Especialidade: ~w~n', [Specialty]),
+    format_medicos(MedicosPerSpecialty),
+    format_specialties(Rest).
+
+% Formata a lista de medicos para exibição
+format_medicos([]).
 format_medicos([Medico | Rest]) :-
-    format_medico(Medico),
+    format('  Médico: ~w, Atendimentos: ~w~n', [Medico.nome, Medico.pacientes_atendidos]),
     format_medicos(Rest).
 
-format_medico(Medico) :-
-    get_dict(nome, Medico, Name),
-    get_dict(especialidade, Medico, Especialidade),
-    get_dict(dias_atendimento, Medico, WorkDays),
-    get_dict(horarios_atendimento, Medico, Schedule),
-    string_concat("Nome: ", Name, Header),
-    print_bold(Header),
-    print_bold("\nEspecialidade: "),
-    write(Especialidade),
-    print_bold("\nDias de Atendimento: "),
-    write(WorkDays),
-    print_bold("\nHorários de Atendimento: "),
-    write(Schedule),
-    write("\n").
-
-% Visualiza a atuação de medicos por especialidade
+% Visualiza a atuação dos medicos agrupados por especialidade
 view_atuation :-
     read_json("../db/users.JSON", Users),
     include(is_doctor, Users, Medicos),
