@@ -46,7 +46,8 @@ start_menu:-
     print_bold_highlighted_black("AAAA\n\n\n"),
 
 
-
+print_bold_highlighted_black("                                                                                                                                                                      (logout) "),
+write("→ SAIR\n"),
 print_bold_highlighted_blue("                                                                             ███████╗ █████╗ ██████╗ \n"),
 print_bold_highlighted_blue("                                                                             ██╔════╝██╔══██╗██╔══██╗\n"),
 print_bold_highlighted_blue("                                                                             ███████╗███████║██║  ██║\n"),
@@ -60,10 +61,8 @@ print_bold_highlighted_blue("                                             └─
 print_bold_highlighted_blue("                                             └─┘┴└─┘ ┴ └─┘┴ ┴┴ ┴  ┴ ┴└─┘ ┴ └─┘┴ ┴┴ ┴ ┴ ┴└─┘└─┘  ─┴┘└─┘  ─┴┘┴┴ ┴└─┘┘└┘└─┘└─┘ ┴ ┴└─┘└─┘\n\n"),
 
 
-    print_bold("                      (1)                       (2)                      (3)                     (4)                    (5)                      (6)                       (7)\n"),
-    print_highlighted_yellow("                  APPOINTMENT                MEDICATION                DISEASES                SYMPTOM                PATIENT                PRESCRIPTON                DIAGNOSIS\n"),
-    write("Opção:"),
-    print_bold_highlighted_black("(logout) "),
-    write("→ SAIR\n>"),
+    print_bold("         (1)                       (2)                      (3)                     (4)                    (5)                      (6)                       (7)                  (8)\n"),
+    print_highlighted_yellow("     APPOINTMENT                MEDICATION                DISEASES                SYMPTOM                PATIENT                PRESCRIPTON                DIAGNOSIS              USERS\n"),
+    write("Opção:\n>"),
     read_line_to_string(user_input, Option),
     run(Option).

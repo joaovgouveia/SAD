@@ -14,8 +14,7 @@
 % APPOINTMENT RUN
 run_appointment("1") :- menu_write_appointment.
 run_appointment("2") :- menu_check_schedule.
-% run_appointment("3") :- diseases_menu.
-run_appointment("4") :- menu_update_appointment.
+run_appointment("3") :- menu_update_appointment.
 run_appointment("logout") :- exit_system.
 run_appointment("back") :- start_menu.
 run_appointment(_):- print_warning("Função não existe\n"), sleep(2), appointments_menu.
@@ -23,14 +22,14 @@ run_appointment(_):- print_warning("Função não existe\n"), sleep(2), appointm
 
 appointments_menu:-
     clear_screen(),
-    print_bold(" ← VOLTAR"),
+    write(" ← VOLTAR"),
     print_bold_highlighted_black(" (back)\n"),
   
     print_bold_highlighted_blue("                                     ╔═╗╔═╗╔═╗╔═╗ ╦ ╔╗╔╔╦╗╔╦╗╔═╗╔╗╔╔╦╗\n"),
     print_bold_highlighted_blue("                                     ╠═╣╠═╝╠═╝║ ║ ║ ║║║ ║ ║║║║╣ ║║║ ║ \n"),
     print_bold_highlighted_blue("                                     ╩ ╩╩  ╩  ╚═╝ ╩ ╝╚╝ ╩ ╩ ╩╚═╝╝╚╝ ╩ \n\n"), 
-    print_bold("       (1)                           (2)                              (3)                                (4)\n"),
-    print_highlighted_yellow("ADICIONAR CONSULTA        VER CONSULTAS DISPONÍVEIS        VER ESPECIALIDADES MÉDICAS         MUDAR STATUS DA CONSULTA\n\n"),
+    print_bold("                     (1)                           (2)                            (3)\n"),
+    print_highlighted_yellow("              ADICIONAR CONSULTA        VER CONSULTAS DISPONÍVEIS       MUDAR STATUS DA CONSULTA\n\n"),
                                                               
 
     write("Opção:\n> "), 
