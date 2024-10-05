@@ -25,7 +25,7 @@ symptoms_menu :-
     print_bold_highlighted_blue("                         ╚═╗╚╦╝║║║╠═╝ ║ ║ ║║║║╚═╗\n"),
     print_bold_highlighted_blue("                         ╚═╝ ╩ ╩ ╩╩   ╩ ╚═╝╩ ╩╚═╝\n"), 
     print_bold(                 "             (1)                  (2)                      (3)\n"),
-    print_highlighted_yellow(   "         VER SINTOMAS        LISTAR SINTOMAS     LISTA SINTOMAS POR SISTEMA\n\n"),
+    print_highlighted_yellow(   "         VER SINTOMA        LISTAR SINTOMAS     LISTA SINTOMAS POR SISTEMA\n\n"),
                                                               
 
     write("Opção:\n> "), 
@@ -75,8 +75,8 @@ view_symptom(Sintoma):-
     !.
 
 
-menu_list_symptom:-
-    list_symptom,
+menu_list_symptoms:-
+    list_symptoms,
     write("\nPressione [enter] para voltar para o menu "),
     read_line_to_string(user_input, _),
     write("\nOpção:\n> "), 
