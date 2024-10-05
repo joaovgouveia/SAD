@@ -40,15 +40,15 @@ eh_doenca(NomeDoenca, Diseases) :-
 menu_update_disease_sympton_medication:-
     print_bold_highlighted_blue("NOME DOENÇA:\n "),
     read_line_to_string(user_input, NomeDoenca),
-    print_bold_highlighted_blue("ADICIONAR SINTOMA? ( y / n(default))"),
+    print_bold_highlighted_blue("ADICIONAR SINTOMA? ( y / n(default))\n "),
     read_line_to_string(user_input, Resposta),
     (Resposta == "y" ->
     print_bold_highlighted_blue("NOVO SINTOMA:\n "),
     read_line_to_string(user_input, NewSintoma);
     NewSintoma = ""),
-    print_bold_highlighted_blue("ADICIONAR MEDICAMENTO? ( y / n(default))"),
-    read_line_to_string(user_input, Resposta),
-    (Resposta == "y" ->
+    print_bold_highlighted_blue("ADICIONAR MEDICAMENTO? ( y / n(default))\n "),
+    read_line_to_string(user_input, RespostaMed),
+    (RespostaMed == "y" ->
     print_bold_highlighted_blue("NOVO MEDICAMENTO:\n "),
     read_line_to_string(user_input, NewMedicamento);
     NewMedicamento = ""),
