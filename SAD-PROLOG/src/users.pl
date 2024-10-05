@@ -5,10 +5,35 @@
 :- use_module("../utils/utils").
 :- use_module(library(readutil)).
 :- set_prolog_flag(encoding, utf8).
+:- use_module(library(system)).
+
+% USERS RUN
+run_users("1") :- menu_view_user.
+run_users("2") :- menu_view_doctor.
+run_users("3") :- menu_view_users_by_function.
+run_users("4") :- menu_view_medicos.
+run_users("5") :- menu_view_atuation.
+run_users("logout") :- exit_system.
+run_users("back") :- start_menu.
+run_users(_):- print_warning("Função não existe\n"), sleep(2), users_menu.
 
 % Menu de usuários
 users_menu :-
-    write("menu de usuarios\n").
+    clear_screen(),
+    write(" ← VOLTAR"),
+    print_bold_highlighted_black(" (back)\n"),
+  
+    print_bold_highlighted_blue("                                            ╦ ╦╔═╗╔═╗╦═╗╔═╗\n"),
+    print_bold_highlighted_blue("                                            ║ ║╚═╗║╣ ╠╦╝╚═╗\n"),
+    print_bold_highlighted_blue("                                            ╚═╝╚═╝╚═╝╩╚═╚═╝\n"), 
+    print_bold(                 "       (1)                 (2)                    (3)                       (4)                      (5)\n"),
+    print_highlighted_yellow(   "    VER USUÁRIO         VER MÉDICO        VER USUÁRIO POR FUNÇÃO        LISTA MÉDICOS      VER MEDICOS ESPECIALIDADE\n\n"),
+                                                              
+
+    write("Opção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_users(Option).
+
 
 % Busca um usuário pelo ID
 get_user(Id, User) :-
@@ -16,6 +41,18 @@ get_user(Id, User) :-
     read_json("../db/users.JSON", Users),
     select(User, Users, _),
     get_dict(id, User, Id),!.
+
+menu_view_doctor:-
+    print_bold_highlighted_blue("ID MÉDICO: "),
+    read_line_to_string(user_input, IdUser),
+    view_doctor(IdUser),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_users(Option).
+
+
 
 % Visualiza um medico pelo ID
 view_doctor(Id) :-
@@ -39,6 +76,17 @@ view_doctor(Id) :-
     write(PatientCount),
     write("\n"),!.
 
+
+menu_view_user:-
+    print_bold_highlighted_blue("ID USUÁRIO: "),
+    read_line_to_string(user_input, IdUser),
+    view_user(IdUser),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_users(Option).
+
 % Visualiza um usuário pelo ID
 view_user(Id) :-
     get_user(Id, User),
@@ -49,6 +97,16 @@ view_user(Id) :-
     print_bold(Header),
     print_bold(Text),
     write("\n"),!.
+
+menu_view_users_by_function:-
+    print_bold_highlighted_blue("FUNÇÃO USUÁRIO: "),
+    read_line_to_string(user_input, Funcao),
+    view_users_by_function(Funcao),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_users(Option).
 
 % Visualiza usuários por função
 view_users_by_function(Function) :-
@@ -74,6 +132,16 @@ format_user(User) :-
     print_bold(Header),
     print_bold(Text),
     write("\n").
+
+
+
+menu_view_medicos:-
+    view_medicos,
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_users(Option).
 
 % Visualiza todos os medicos
 view_medicos :-
@@ -104,6 +172,17 @@ format_medico(Medico) :-
     print_bold("\nHorários de Atendimento: "),
     write(Schedule),
     write("\n").
+
+
+
+menu_view_atuation:-
+    view_atuation,
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_users(Option).
+
 
 % Visualiza a atuação de medicos por especialidade
 view_atuation :-

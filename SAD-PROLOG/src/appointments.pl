@@ -35,7 +35,6 @@ appointments_menu:-
     write("Opção:\n> "), 
     read_line_to_string(user_input, Option),
     run_appointment(Option).
-    % write("menu de consultas\n").
 
 % Função auxiliar de checagem de data
 quebrar_data(DataString, Dia, Mes, Ano) :-

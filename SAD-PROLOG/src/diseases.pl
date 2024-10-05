@@ -30,7 +30,7 @@ diseases_menu :-
 
     write("Opção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_medication(Option).
+    run_diseases(Option).
 
 
 eh_doenca(NomeDoenca, Diseases) :-
