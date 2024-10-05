@@ -25,7 +25,6 @@
     print_bold_highlighted_green/1,
     print_bold_highlighted_magenta/1,
     print_bold_highlighted_black/1,
-
     exit_system/0
 ]).
 
@@ -96,7 +95,7 @@ is_user(Id) :-
 
 % exit_system
 exit_system:-
-    print_warning("Fechando Sistema..."),
+    print_warning("Fechando Sistema...\n\n"),
     halt.
 
 %===== HIGHLIGHT ==============================================
