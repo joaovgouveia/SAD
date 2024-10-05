@@ -10,7 +10,7 @@
 % DISEASES RUN
 run_diseases("1") :- menu_update_disease_sympton_medication.
 run_diseases("2") :- menu_view_disease.
-run_diseases("3") :- menu_update_appointment.
+run_diseases("3") :- list_diseases.
 run_diseases("logout") :- exit_system.
 run_diseases("back") :- start_menu.
 run_diseases(_):- print_warning("Função não existe\n"), sleep(2), diseases_menu.
@@ -25,7 +25,7 @@ diseases_menu :-
     print_bold_highlighted_blue("                                         ║║║╚═╗║╣ ╠═╣╚═╗║╣ ╚═╗\n"),
     print_bold_highlighted_blue("                                        ═╩╝╩╚═╝╚═╝╩ ╩╚═╝╚═╝╚═╝\n"), 
     print_bold(                 "                            (1)                    (2)                   (3)\n"),
-    print_highlighted_yellow(   "                      ATUALIZAR DOENÇA          VER DOENÇA           LISTA DOENÇA\n\n"),
+    print_highlighted_yellow(   "                      ATUALIZAR DOENÇA          VER DOENÇA           LISTA DOENÇAS\n\n"),
                                                               
 
     write("Opção:\n> "), 
