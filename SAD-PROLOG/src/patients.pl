@@ -94,7 +94,7 @@ menu_read_patient:-
 % Encontra um paciente
 read_patient(Id):-
     read_json("../db/patients.JSON", Patients),
-    (eh_paciente(Id) -> true; print_error("PACIENTE NAO CADASTRADO NO SISTEMA.\n")),
+    (eh_paciente(Id) -> true; print_error("PACIENTE NAO CADASTRADO NO SISTEMA.\n"),!),
     select(Patient, Patients, _),
     get_dict(id_patient, Patient, Id),
     get_dict(nome_patient, Patient, Name),
@@ -118,7 +118,7 @@ menu_delete_patient:-
 % Deleta um paciente
 delete_patient(Id):-
     read_json("../db/patients.JSON", Patients),
-    (eh_paciente(Id) -> true; print_error("PACIENTE NAO CADASTRADO NO SISTEMA.\n")),
+    (eh_paciente(Id) -> true; print_error("PACIENTE NAO CADASTRADO NO SISTEMA.\n"),!),
     select(Patient, Patients, Rest),
     get_dict(id_patient, Patient, Id),
     print_success("PACIENTE DELETADO COM SUCESSO!\n"),
