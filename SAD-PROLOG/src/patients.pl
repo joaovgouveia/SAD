@@ -64,7 +64,7 @@ create_patient(Id, Name, Age):-
 menu_update_patient:-
     print_bold_highlighted_blue("CPF:\n "),
     read_line_to_string(user_input, Id),
-    print_bold_highlighted_blue("NOME:\n "),
+    print_bold_highlighted_blue("NOVO NOME:\n "),
     read_line_to_string(user_input, Nome),
     update_patient(Id, Nome), sleep(2),
     patients_menu.
