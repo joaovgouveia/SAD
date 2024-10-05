@@ -149,7 +149,7 @@ menu_delete_medication:-
     read_line_to_string(user_input, NomeMed),
     print_bold_highlighted_blue("DOSAGEM:\n "),
     read_line_to_string(user_input, Dosagem),
-    view_medication_bula(NomeMed, Dosagem), sleep(2),
+    delete_medication(NomeMed, Dosagem), sleep(2),
     medications_menu.
 
 

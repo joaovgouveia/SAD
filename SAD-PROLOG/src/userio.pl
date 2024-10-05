@@ -30,19 +30,19 @@ start_menu:-
     
 
 
-print_bold_highlighted_black("                                                                                                                                                                          (logout) "),
-write("→ SAIR\n"),
-print_bold_highlighted_blue("                                                                             ███████╗ █████╗ ██████╗ \n"),
-print_bold_highlighted_blue("                                                                             ██╔════╝██╔══██╗██╔══██╗\n"),
-print_bold_highlighted_blue("                                                                             ███████╗███████║██║  ██║\n"),
-print_bold_highlighted_blue("                                                                             ╚════██║██╔══██║██║  ██║\n"),
-print_bold_highlighted_blue("                                                                             ███████║██║  ██║██████╔╝\n"),
-print_bold_highlighted_blue("                                                                             ╚══════╝╚═╝  ╚═╝╚═════╝ \n"),
-                        
-
-print_bold_highlighted_blue("                                             ┌─┐┬┌─┐┌┬┐┌─┐┌┬┐┌─┐  ┌─┐┬ ┬┌┬┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌─┐  ┌┬┐┌─┐  ┌┬┐┬┌─┐┌─┐┌┐┌┌─┐┌─┐┌┬┐┬┌─┐┌─┐\n"),
-print_bold_highlighted_blue("                                             └─┐│└─┐ │ ├┤ │││├─┤  ├─┤│ │ │ │ ││││├─┤ │ ││  │ │   ││├┤    │││├─┤│ ┬││││ │└─┐ │ ││  │ │\n"),
-print_bold_highlighted_blue("                                             └─┘┴└─┘ ┴ └─┘┴ ┴┴ ┴  ┴ ┴└─┘ ┴ └─┘┴ ┴┴ ┴ ┴ ┴└─┘└─┘  ─┴┘└─┘  ─┴┘┴┴ ┴└─┘┘└┘└─┘└─┘ ┴ ┴└─┘└─┘\n\n"),
+    print_bold_highlighted_black("                                                                                                                                                                          (logout) "),
+    write("→ SAIR\n"),
+    print_bold_highlighted_blue("                                                                             ███████╗ █████╗ ██████╗ \n"),
+    print_bold_highlighted_blue("                                                                             ██╔════╝██╔══██╗██╔══██╗\n"),
+    print_bold_highlighted_blue("                                                                             ███████╗███████║██║  ██║\n"),
+    print_bold_highlighted_blue("                                                                             ╚════██║██╔══██║██║  ██║\n"),
+    print_bold_highlighted_blue("                                                                             ███████║██║  ██║██████╔╝\n"),
+    print_bold_highlighted_blue("                                                                             ╚══════╝╚═╝  ╚═╝╚═════╝ \n"),
+                            
+    
+    print_bold_highlighted_blue("                                             ┌─┐┬┌─┐┌┬┐┌─┐┌┬┐┌─┐  ┌─┐┬ ┬┌┬┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌─┐  ┌┬┐┌─┐  ┌┬┐┬┌─┐┌─┐┌┐┌┌─┐┌─┐┌┬┐┬┌─┐┌─┐\n"),
+    print_bold_highlighted_blue("                                             └─┐│└─┐ │ ├┤ │││├─┤  ├─┤│ │ │ │ ││││├─┤ │ ││  │ │   ││├┤    │││├─┤│ ┬││││ │└─┐ │ ││  │ │\n"),
+    print_bold_highlighted_blue("                                             └─┘┴└─┘ ┴ └─┘┴ ┴┴ ┴  ┴ ┴└─┘ ┴ └─┘┴ ┴┴ ┴ ┴ ┴└─┘└─┘  ─┴┘└─┘  ─┴┘┴┴ ┴└─┘┘└┘└─┘└─┘ ┴ ┴└─┘└─┘\n\n"),
 
 
     print_bold("         (1)                       (2)                      (3)                     (4)                    (5)                      (6)                       (7)                  (8)\n"),
