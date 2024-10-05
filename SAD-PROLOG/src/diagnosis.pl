@@ -41,7 +41,7 @@ diagnosis(Symptoms) :-
     read_json("../db/diseases.JSON", Diseases),
     filter_diseases(Symptoms, Diseases, FilteredDiseases),
     length(FilteredDiseases, L),
-    (L > 0 -> true; print_warning("Nao foi possivel diagnosticar.\n")),
+    (L > 0 -> true; print_warning("Não foi possivel diagnosticar.\n")),
     most_probable(FilteredDiseases, Symptoms, Disease),
     get_dict(doenca, Disease, Name),
     get_dict(possivel_causa, Disease, Cause),
