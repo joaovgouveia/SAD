@@ -1,5 +1,6 @@
 :- module(diseases, [
-    diseases_menu/0
+    diseases_menu/0,
+    diseases_menu_sec/0
 ]).
 
 :- use_module("../utils/utils").

@@ -1,5 +1,7 @@
 :- module(symptoms, [
-    symptoms_menu/0
+    symptoms_menu_adm/0,
+    symptoms_menu_med/0,
+    symptoms_menu_sec/0
 ]).
 
 

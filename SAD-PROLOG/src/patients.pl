@@ -1,5 +1,7 @@
 :- module(patients, [
-    patients_menu/0
+    patients_menu_adm/0,
+    patients_menu_med/0,
+    patients_menu_sec/0
 ]).
 
 :- use_module("../utils/utils").

@@ -50,8 +50,8 @@ appointments_menu_adm:-
     print_bold_highlighted_blue("                                     ╔═╗╔═╗╔═╗╔═╗ ╦ ╔╗╔╔╦╗╔╦╗╔═╗╔╗╔╔╦╗\n"),
     print_bold_highlighted_blue("                                     ╠═╣╠═╝╠═╝║ ║ ║ ║║║ ║ ║║║║╣ ║║║ ║ \n"),
     print_bold_highlighted_blue("                                     ╩ ╩╩  ╩  ╚═╝ ╩ ╝╚╝ ╩ ╩ ╩╚═╝╝╚╝ ╩ \n\n"), 
-    print_bold                 ("                     (1)                           (2)                            (3)\n"),
-    print_highlighted_yellow   ("              ADICIONAR CONSULTA        VER CONSULTAS DISPONÍVEIS       MUDAR STATUS DA CONSULTA\n\n"),
+    print_bold("                     (1)                           (2)                            (3)\n"),
+    print_highlighted_yellow("              ADICIONAR CONSULTA        VER CONSULTAS DISPONÍVEIS       MUDAR STATUS DA CONSULTA\n\n"),
                                                               
 
     write("Opção:\n> "), 
@@ -68,8 +68,8 @@ appointments_menu_med:-
     print_bold_highlighted_blue("                                     ╔═╗╔═╗╔═╗╔═╗ ╦ ╔╗╔╔╦╗╔╦╗╔═╗╔╗╔╔╦╗\n"),
     print_bold_highlighted_blue("                                     ╠═╣╠═╝╠═╝║ ║ ║ ║║║ ║ ║║║║╣ ║║║ ║ \n"),
     print_bold_highlighted_blue("                                     ╩ ╩╩  ╩  ╚═╝ ╩ ╝╚╝ ╩ ╩ ╩╚═╝╝╚╝ ╩ \n\n"), 
-    print_bold                 ("                                                    (1)\n"),
-    print_highlighted_yellow   ("                                         MUDAR STATUS DA CONSULTA\n\n"),
+    print_bold("                                                    (1)\n"),
+    print_highlighted_yellow("                                         MUDAR STATUS DA CONSULTA\n\n"),
                                                               
 
     write("Opção:\n> "), 
@@ -87,8 +87,8 @@ appointments_menu_sec:-
     print_bold_highlighted_blue("                                     ╔═╗╔═╗╔═╗╔═╗ ╦ ╔╗╔╔╦╗╔╦╗╔═╗╔╗╔╔╦╗\n"),
     print_bold_highlighted_blue("                                     ╠═╣╠═╝╠═╝║ ║ ║ ║║║ ║ ║║║║╣ ║║║ ║ \n"),
     print_bold_highlighted_blue("                                     ╩ ╩╩  ╩  ╚═╝ ╩ ╝╚╝ ╩ ╩ ╩╚═╝╝╚╝ ╩ \n\n"), 
-    print_bold                 ("                     (1)                           (2)                            (3)\n"),
-    print_highlighted_yellow   ("              ADICIONAR CONSULTA        VER CONSULTAS DISPONÍVEIS       MUDAR STATUS DA CONSULTA\n\n"),
+    print_bold("                     (1)                           (2)                            (3)\n"),
+    print_highlighted_yellow("              ADICIONAR CONSULTA        VER CONSULTAS DISPONÍVEIS       MUDAR STATUS DA CONSULTA\n\n"),
                                     
     write("Opção:\n> "), 
     read_line_to_string(user_input, Option),
