@@ -136,7 +136,7 @@ valid_symptoms(Symptoms) :-
 % Função auxiliar que gera a receita MÉDICA
 generate_string(Symptoms) :-
     format_symptoms(Symptoms, "", Result),
-    print_highlighted("\nRECEITA MÉDICA:\n"),
+    print_bold_highlighted_blue("\nRECEITA MÉDICA:\n"),
     print_bold(Result),
     !.
 
@@ -157,29 +157,74 @@ format_one_symptom(Symptom, Formatted) :-
     format(string(Formatted), "\nMedicamento: ~w\nDosagem: ~w\nFrequência: ~w\nTipo: ~w\nObservações: ~w\n",
            [MedNome, MedDosagem, MedFreq, MedTipo, MedObs]).
 
-
 menu_generate_prescription_adm:-
-    print_bold_highlighted_blue("SINTOMA(S): "),
-    read_line_to_string(user_input, Sintoma),
-    generate_prescription(Sintoma), sleep(2),
-    prescriptions_menu_adm.
+    print_bold_highlighted_blue("NÚMERO DE SINTOMAS:\n "),
+    read_line_to_string(user_input, N),
+    atom_string(A, N),
+    atom_number(A, Numero),
+    size_symptoms_prescription(Size),
+    ((Numero =< Size, Numero >= 1) -> generate_symptoms_list(Numero, Sintomas),
+                                      generate_prescription(Sintomas),
+                                      write("\nPressione [enter] para voltar para o menu "),
+                                      read_line_to_string(user_input, _),
+                                      write("\nOpção:\n> "),
+                                      read_line_to_string(user_input, Option),   
+                                      run_prescription_adm(Option)
+    ;
+    print_error("NÚMERO INDEVIDO DE SINTOMAS INFORMADOS\n"), sleep(2), prescriptions_menu_adm).
 
 menu_generate_prescription_med:-
-    print_bold_highlighted_blue("SINTOMA(S): "),
-    read_line_to_string(user_input, Sintoma),
-    generate_prescription(Sintoma), sleep(2),
-    prescriptions_menu_med.
+    print_bold_highlighted_blue("NÚMERO DE SINTOMAS:\n "),
+    read_line_to_string(user_input, N),
+    atom_string(A, N),
+    atom_number(A, Numero),
+    size_symptoms_prescription(Size),
+    ((Numero =< Size, Numero >= 1) -> generate_symptoms_list(Numero, Sintomas),
+                                      generate_prescription(Sintomas),
+                                      write("\nPressione [enter] para voltar para o menu "),
+                                      read_line_to_string(user_input, _),
+                                      write("\nOpção:\n> "),
+                                      read_line_to_string(user_input, Option),   
+                                      run_prescription_med(Option)
+    ;
+    print_error("NÚMERO INDEVIDO DE SINTOMAS INFORMADOS\n"), sleep(2), prescriptions_menu_med).
 
 menu_generate_prescription_sec:-
-    print_bold_highlighted_blue("SINTOMA(S): "),
-    read_line_to_string(user_input, Sintoma),
-    generate_prescription(Sintoma), sleep(2),
-    prescriptions_menu_sec.
+    print_bold_highlighted_blue("NÚMERO DE SINTOMAS:\n "),
+    read_line_to_string(user_input, N),
+    atom_string(A, N),
+    atom_number(A, Numero),
+    size_symptoms_prescription(Size),
+    ((Numero =< Size, Numero >= 1) -> generate_symptoms_list(Numero, Sintomas),
+                                      generate_prescription(Sintomas),
+                                      write("\nPressione [enter] para voltar para o menu "),
+                                      read_line_to_string(user_input, _),
+                                      write("\nOpção:\n> "),
+                                      read_line_to_string(user_input, Option),   
+                                      run_prescription_sec(Option)
+    ;
+    print_error("NÚMERO INDEVIDO DE SINTOMAS INFORMADOS\n"), sleep(2), prescriptions_menu_sec).
+
+generate_symptoms_list(0, []).
+generate_symptoms_list(N, [S|Rest]) :-
+    print_bold_highlighted_blue("SINTOMA: "),
+    read_line_to_string(user_input, S),
+    NewN is N - 1,
+    generate_symptoms_list(NewN, Rest).
+
+size_symptoms_prescription(Size) :-
+    read_json("../db/prescriptions.JSON", DadosReceitas),
+    length(DadosReceitas, Size).
 
 % Função principal que gera a receita MÉDICA
 generate_prescription(Symptoms) :-
-    (valid_symptoms(Symptoms) -> true ; print_error("SINTOMA(S) INFORMADO(S) NÃO CADASTRADO(S)")),
-    read_json("../db/prescriptions.JSON", DadosReceitas),
-    findall(Symptom, (member(Symptom, DadosReceitas), get_dict(sintoma, Symptom, SymptomN), member(SymptomN, Symptoms)), SymptomsDoc),
-    generate_string(SymptomsDoc),
-    !.
+    (valid_symptoms(Symptoms) -> read_json("../db/prescriptions.JSON", DadosReceitas),
+                                 findall(Symptom, 
+                                        (member(Symptom, DadosReceitas), 
+                                        get_dict(sintoma, Symptom, SymptomN), 
+                                        member(SymptomN, Symptoms)), 
+                                        SymptomsDoc),
+                                 generate_string(SymptomsDoc),
+                                 !
+    ;
+    print_error("SINTOMA(S) INFORMADO(S) NÃO CADASTRADO(S)")).

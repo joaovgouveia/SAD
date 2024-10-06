@@ -83,7 +83,6 @@ start_menu_adm:-
     print_bold_highlighted_blue("                                             └─┘┴└─┘ ┴ └─┘┴ ┴┴ ┴  ┴ ┴└─┘ ┴ └─┘┴ ┴┴ ┴ ┴ ┴└─┘└─┘  ─┴┘└─┘  ─┴┘┴┴ ┴└─┘┘└┘└─┘└─┘ ┴ ┴└─┘└─┘\n"),
     print_bold_highlighted_blue("                                                                                     MÉDICO\n\n"),                        
 
-
     print_bold("                           (1)                     (2)                    (3)                   (4)                  (5)                    (6)                (7)\n"),
     print_highlighted_yellow("                       APPOINTMENT              MEDICATION              SYMPTOM               PATIENT            PRESCRIPTION            DIAGNOSIS          DASHBOARD\n\n"),
     write("Opção:\n> "),

@@ -94,7 +94,6 @@ menu_create_patient_adm:-
     read_line_to_string(user_input, Option),
     run_appointment_adm(Option).
 
-
 menu_create_patient_sec:-
     print_bold_highlighted_blue("CPF:\n "),
     read_line_to_string(user_input, Id),
@@ -105,8 +104,6 @@ menu_create_patient_sec:-
     create_patient(Id, Name, Age),
     read_line_to_string(user_input, Option),
     run_appointment_sec(Option).
-
-
 
 % Cria um paciente
 create_patient(Id, Name, Age):-
@@ -136,7 +133,7 @@ menu_update_patient_adm:-
 menu_update_patient_sec:-
     print_bold_highlighted_blue("CPF:\n "),
     read_line_to_string(user_input, Id),
-    print_bold_highlighted_blue("NOME:\n "),
+    print_bold_highlighted_blue("NOVO NOME:\n "),
     read_line_to_string(user_input, Nome),
     update_patient(Id, Nome),
     read_line_to_string(user_input, Option),
@@ -187,7 +184,7 @@ menu_read_patient_sec:-
 % Encontra um paciente
 read_patient(Id):-
     read_json("../db/patients.JSON", Patients),
-    (eh_paciente(Id) -> true; print_error("PACIENTE NAO CADASTRADO NO SISTEMA.\n")),
+    (eh_paciente(Id) -> true; print_error("PACIENTE NAO CADASTRADO NO SISTEMA.\n"),!),
     select(Patient, Patients, _),
     get_dict(id_patient, Patient, Id),
     get_dict(nome_patient, Patient, Name),
@@ -219,7 +216,7 @@ menu_delete_patient_sec:-
 % Deleta um paciente
 delete_patient(Id):-
     read_json("../db/patients.JSON", Patients),
-    (eh_paciente(Id) -> true; print_error("PACIENTE NAO CADASTRADO NO SISTEMA.\n")),
+    (eh_paciente(Id) -> true; print_error("PACIENTE NAO CADASTRADO NO SISTEMA.\n"),!),
     select(Patient, Patients, Rest),
     get_dict(id_patient, Patient, Id),
     print_success("PACIENTE DELETADO COM SUCESSO!\n"),

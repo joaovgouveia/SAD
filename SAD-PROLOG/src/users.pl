@@ -29,6 +29,11 @@ run_users_sec("logout") :- exit_system.
 run_users_sec("back") :- start_menu_sec.
 run_users_sec(_):- print_warning("Função não existe\n"), sleep(2), users_menu_sec.
 
+% Permite que as cláusulas de group_by_specialty/2 e format_specialties/1
+% sejam definidas em diferentes locais do arquivo
+:- discontiguous group_by_specialty/2.
+:- discontiguous format_specialties/1.
+
 % Menu de usuários
 users_menu_adm :-
     clear_screen(),
@@ -55,17 +60,15 @@ users_menu_sec :-
     print_bold_highlighted_blue("                                            ║ ║╚═╗║╣ ╠╦╝╚═╗\n"),
     print_bold_highlighted_blue("                                            ╚═╝╚═╝╚═╝╩╚═╚═╝\n"), 
     print_bold(                 "       (1)                 (2)                    (3)                       (4)                      (5)\n"),
-    print_highlighted_yellow(   "    VER USUÁRIO         VER MÉDICO        VER USUÁRIO POR FUNÇÃO        LISTA MÉDICOS      VER MEDICOS ESPECIALIDADE\n\n"),
-                                                              
+    print_highlighted_yellow(   "    VER USUÁRIO         VER MÉDICO        VER USUÁRIO POR FUNÇÃO        LISTA MÉDICOS      VER MEDICOS ESPECIALIDADE\n\n"),                                                    
 
     write("Opção:\n> "), 
     read_line_to_string(user_input, Option),
     run_users(Option).
 
-
 % Busca um usuário pelo ID
 get_user(Id, User) :-
-    (is_user(Id) -> true; print_error("USUÁRIO NÃO EXISTE!")),
+    (is_user(Id) -> true; print_error("USUÁRIO NÃO EXISTE!\n ")),
     read_json("../db/users.JSON", Users),
     select(User, Users, _),
     get_dict(id, User, Id),!.
@@ -90,12 +93,10 @@ menu_view_doctor_sec:-
     read_line_to_string(user_input, Option),
     run_users_sec(Option).
 
-
-
 % Visualiza um medico pelo ID
 view_doctor(Id) :-
     get_user(Id, User),
-    (get_dict(funcao, User, "MEDICO") -> true ; print_error("ID NÃO PERTENCE A UM MÉDICO!")),
+    (get_dict(funcao, User, "MEDICO") -> true ; print_error("ID NÃO PERTENCE A UM MÉDICO!\n ")),
     get_dict(funcao, User, "MEDICO"),
     get_dict(nome, User, Name),
     get_dict(especialidade, User, Area),
@@ -113,7 +114,6 @@ view_doctor(Id) :-
     print_bold("\nPacientes Atendidos: "),
     write(PatientCount),
     write("\n"),!.
-
 
 menu_view_user_adm:-
     print_bold_highlighted_blue("ID USUÁRIO: "),
@@ -170,13 +170,13 @@ menu_view_users_by_function_sec:-
 view_users_by_function(Function) :-
     read_json("../db/users.JSON", Users),
     include(is_function(Function), Users, FilteredUsers),
-    (FilteredUsers == [] -> print_error("NENHUM USUÁRIO ENCONTRADO COM ESTA FUNÇÃO."); 
+    (FilteredUsers == [] -> print_error("NENHUM USUÁRIO ENCONTRADO COM ESTA FUNÇÃO.\n "); 
     format_users(FilteredUsers)).
 
 is_function(Function, User) :-
     get_dict(funcao, User, Function).
 
-% Formata a exibição de multiplos usuários
+% Formata a exibicao de multiplos usuários
 format_users([]) :- !.
 format_users([User | Rest]) :-
     format_user(User),
@@ -190,8 +190,6 @@ format_user(User) :-
     print_bold(Header),
     print_bold(Text),
     write("\n").
-
-
 
 menu_view_medicos_adm:-
     view_medicos,
@@ -214,33 +212,20 @@ menu_view_medicos_sec:-
 view_medicos :-
     read_json("../db/users.JSON", Users),
     include(is_doctor, Users, Medicos),
-    (Medicos == [] -> print_error("NENHUM MÉDICO ENCONTRADO."); 
+    (Medicos == [] -> print_error("NENHUM MÉDICO ENCONTRADO.\n "); 
     format_medicos(Medicos)).
 
+% Verifica se o usuário é um medico
 is_doctor(User) :-
-    get_dict(funcao, User, "MEDICO").
+    User.funcao == "MEDICO".
 
-format_medicos([]) :- !.
-format_medicos([Medico | Rest]) :-
-    format_medico(Medico),
-    format_medicos(Rest).
-
-format_medico(Medico) :-
-    get_dict(nome, Medico, Name),
-    get_dict(especialidade, Medico, Especialidade),
-    get_dict(dias_atendimento, Medico, WorkDays),
-    get_dict(horarios_atendimento, Medico, Schedule),
-    string_concat("Nome: ", Name, Header),
-    print_bold(Header),
-    print_bold("\nEspecialidade: "),
-    write(Especialidade),
-    print_bold("\nDias de Atendimento: "),
-    write(WorkDays),
-    print_bold("\nHorários de Atendimento: "),
-    write(Schedule),
-    write("\n").
-
-
+group_by_specialty(Medicos, GroupedBySpecialty) :-
+    findall(Specialty-MedicosPerSpecialty,
+        (   member(Medico, Medicos),
+            Specialty = Medico.especialidade,
+            findall(M, (member(M, Medicos), M.especialidade == Specialty), MedicosPerSpecialty)
+        ),
+        GroupedBySpecialty).
 
 menu_view_atuation_adm:-
     view_atuation,
@@ -258,17 +243,17 @@ menu_view_atuation_sec:-
     read_line_to_string(user_input, Option),
     run_users_sec(Option).
 
-
-% Visualiza a atuação de medicos por especialidade
+% Visualiza a atuação dos medicos agrupados por especialidade
 view_atuation :-
     read_json("../db/users.JSON", Users),
     include(is_doctor, Users, Medicos),
     group_by_specialty(Medicos, GroupedBySpecialty),
-    format_specialties(GroupedBySpecialty).
-
-group_by_specialty(Medicos, Grouped) :-
-    sort(2, @=<, Medicos, SortedMedicos),
-    group_by(especialidade, SortedMedicos, Grouped).
+    length(GroupedBySpecialty, Total),
+    Half is Total // 2,  % Calcula a metade
+    length(FirstHalf, Half),  % Cria uma lista com o tamanho da metade
+    append(FirstHalf, _, GroupedBySpecialty),  % Divide a lista
+    format_specialties(FirstHalf),  % Formata e exibe apenas a metade
+    !.
 
 group_by(_, [], []).
 group_by(Key, [First | Rest], [[First | Same] | Groups]) :-
@@ -281,13 +266,10 @@ same_value(Key, Value, Item) :-
     get_dict(Key, Item, Value).
 
 format_specialties([]) :- !.
-format_specialties([[First | Rest] | Groups]) :-
-    get_dict(especialidade, First, Especialidade),
-    print_bold(Especialidade),
-    write(":\n"),
-    format_names([First | Rest]),
-    write("\n"),
-    format_specialties(Groups).
+format_specialties([Specialty-MedicosPerSpecialty | Rest]) :-
+    format('Especialidade: ~w~n', [Specialty]),
+    format_medicos(MedicosPerSpecialty),
+    format_specialties(Rest).
 
 format_names([]) :- !.
 format_names([User | Rest]) :-
@@ -295,3 +277,8 @@ format_names([User | Rest]) :-
     print_success(Name),
     write("\n"),
     format_names(Rest).
+
+format_medicos([]).
+format_medicos([Medico | Rest]) :-
+    format('  Médico: ~w, Atendimentos: ~w~n', [Medico.nome, Medico.pacientes_atendidos]),
+    format_medicos(Rest).
