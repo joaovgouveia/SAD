@@ -56,8 +56,8 @@ start_menu_adm:-
     print_bold_highlighted_blue("                                                                                  ADMINISTRADOR\n\n"),                        
 
 
-    print_bold("         (1)                       (2)                      (3)                     (4)                    (5)                      (6)                       (7)                  (8)\n"),
-    print_highlighted_yellow("     APPOINTMENT                MEDICATION                DISEASES                SYMPTOM                PATIENT                PRESCRIPTION                DIAGNOSIS             USERS\n\n"),
+    print_bold("      (1)                     (2)                    (3)                   (4)                  (5)                    (6)                     (7)                (8)                (9)\n"),
+    print_highlighted_yellow("  APPOINTMENT              MEDICATION              DISEASES              SYMPTOM              PATIENT              PRESCRIPTION             DIAGNOSIS            USERS            DASHBOARD\n\n"),
     write("Opção:\n> "),
     read_line_to_string(user_input, Option),
     run_adm(Option).
@@ -84,8 +84,8 @@ start_menu_adm:-
     print_bold_highlighted_blue("                                                                                     MÉDICO\n\n"),                        
 
 
-    print_bold("                              (1)                       (2)                      (3)                     (4)                    (5)                      (6)   \n"),
-    print_highlighted_yellow("                          APPOINTMENT                MEDICATION                SYMPTOM                 PATIENT              PRESCRIPTION              DIAGNOSIS\n\n"),
+    print_bold("                           (1)                     (2)                    (3)                   (4)                  (5)                    (6)                (7)\n"),
+    print_highlighted_yellow("                       APPOINTMENT              MEDICATION              SYMPTOM               PATIENT            PRESCRIPTION            DIAGNOSIS          DASHBOARD\n\n"),
     write("Opção:\n> "),
     read_line_to_string(user_input, Option),
     run_med(Option).
@@ -113,8 +113,8 @@ start_menu_sec:-
     print_bold_highlighted_blue("                                                                                   SECRETÁRIA\n\n"),                        
 
 
-    print_bold("         (1)                       (2)                      (3)                     (4)                    (5)                      (6)                       (7)                  (8)\n"),
-    print_highlighted_yellow("     APPOINTMENT                MEDICATION                DISEASES                SYMPTOM                PATIENT                PRESCRIPTION                DIAGNOSIS             USERS\n\n"),
+    print_bold("      (1)                     (2)                    (3)                   (4)                  (5)                    (6)                     (7)                (8)                (9)\n"),
+    print_highlighted_yellow("  APPOINTMENT              MEDICATION              DISEASES              SYMPTOM              PATIENT              PRESCRIPTION             DIAGNOSIS            USERS            DASHBOARD\n\n"),
     write("Opção:\n> "),
     read_line_to_string(user_input, Option),
     run_sec(Option).

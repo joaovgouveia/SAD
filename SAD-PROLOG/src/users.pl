@@ -1,6 +1,7 @@
 :- module(users, [
     users_menu_adm/0,
-    users_menu_sec/0
+    users_menu_sec/0,
+    view_doctor/1
 ]).
 
 :- use_module("../utils/utils").

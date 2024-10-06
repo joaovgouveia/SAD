@@ -1,9 +1,30 @@
-:- module(dashboard, [show_dashboard/0]).
+:- module(dashboard, [show_dashboard/0, dashboard_menu_adm/0, dashboard_menu_med/0, dashboard_menu_sec/0]).
 
 :- use_module("../utils/utils").
 :- use_module("./users.pl").
 :- use_module(library(readutil)).
 :- set_prolog_flag(encoding, utf8).
+
+dashboard_menu_adm:-
+    clear_screen(),
+    show_dashboard,
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    start_menu_adm.
+
+dashboard_menu_med:-
+    clear_screen(),
+    show_dashboard,
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    start_menu_adm.
+
+dashboard_menu_sec:-
+    clear_screen(),
+    show_dashboard,
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    start_menu_adm.
 
 
 show_dashboard :-
@@ -22,9 +43,9 @@ system_counts_field :-
     count_doctors(DoctorCount),
     count_patients(PatientCount),
     print_bold("Quantidade Médicos: "),
-    print_highlighted(DoctorCount),
+    print_bold_highlighted_blue(DoctorCount),
     print_bold("\nQuantidade Pacientes: "),
-    print_highlighted(PatientCount),
+    print_bold_highlighted_blue(PatientCount),
     write("\n").
 
 trending_diseases_header :-
@@ -40,7 +61,7 @@ show_trending_diseases :-
     trending_disease_amount(Diseases, Value),
     get_trending_diseases(Diseases, Value, TrendingDiseases),
     print_bold("Quantidade de Casos (de cada Doença): "),
-    print_highlighted(Value),
+    print_bold_highlighted_blue(Value),
     print_diseases(TrendingDiseases).
 
 most_appointments_field :-
