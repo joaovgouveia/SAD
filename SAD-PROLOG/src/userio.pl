@@ -25,7 +25,11 @@ menu:-
 
 
 
-start_menu:-
+
+
+
+
+start_menu_adm:-
     clear_screen(),
     
 
@@ -38,15 +42,72 @@ start_menu:-
     print_bold_highlighted_blue("                                                                             ╚════██║██╔══██║██║  ██║\n"),
     print_bold_highlighted_blue("                                                                             ███████║██║  ██║██████╔╝\n"),
     print_bold_highlighted_blue("                                                                             ╚══════╝╚═╝  ╚═╝╚═════╝ \n"),
-                            
-    
     print_bold_highlighted_blue("                                             ┌─┐┬┌─┐┌┬┐┌─┐┌┬┐┌─┐  ┌─┐┬ ┬┌┬┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌─┐  ┌┬┐┌─┐  ┌┬┐┬┌─┐┌─┐┌┐┌┌─┐┌─┐┌┬┐┬┌─┐┌─┐\n"),
     print_bold_highlighted_blue("                                             └─┐│└─┐ │ ├┤ │││├─┤  ├─┤│ │ │ │ ││││├─┤ │ ││  │ │   ││├┤    │││├─┤│ ┬││││ │└─┐ │ ││  │ │\n"),
     print_bold_highlighted_blue("                                             └─┘┴└─┘ ┴ └─┘┴ ┴┴ ┴  ┴ ┴└─┘ ┴ └─┘┴ ┴┴ ┴ ┴ ┴└─┘└─┘  ─┴┘└─┘  ─┴┘┴┴ ┴└─┘┘└┘└─┘└─┘ ┴ ┴└─┘└─┘\n\n"),
+    print_bold_highlighted_blue("                                                                                  ADMINISTRADOR\n"),                        
 
 
     print_bold("         (1)                       (2)                      (3)                     (4)                    (5)                      (6)                       (7)                  (8)\n"),
-    print_highlighted_yellow("     APPOINTMENT                MEDICATION                DISEASES                SYMPTOM                PATIENT                PRESCRIPTON                DIAGNOSIS              USERS\n\n"),
-    write("Opção:\n>"),
+    print_highlighted_yellow("     APPOINTMENT                MEDICATION                DISEASES                SYMPTOM                PATIENT                PRESCRIPTION                DIAGNOSIS              USERS\n\n"),
+    write("Opção:\n> "),
     read_line_to_string(user_input, Option),
-    run(Option).
+    run_adm(Option).
+
+
+% ================================================================================================================================================================================================================================
+
+    start_menu_med:-
+    clear_screen(),
+    
+
+
+    print_bold_highlighted_black("                                                                                                                                                                          (logout) "),
+    write("→ SAIR\n"),
+    print_bold_highlighted_blue("                                                                             ███████╗ █████╗ ██████╗ \n"),
+    print_bold_highlighted_blue("                                                                             ██╔════╝██╔══██╗██╔══██╗\n"),
+    print_bold_highlighted_blue("                                                                             ███████╗███████║██║  ██║\n"),
+    print_bold_highlighted_blue("                                                                             ╚════██║██╔══██║██║  ██║\n"),
+    print_bold_highlighted_blue("                                                                             ███████║██║  ██║██████╔╝\n"),
+    print_bold_highlighted_blue("                                                                             ╚══════╝╚═╝  ╚═╝╚═════╝ \n"),                            
+    print_bold_highlighted_blue("                                             ┌─┐┬┌─┐┌┬┐┌─┐┌┬┐┌─┐  ┌─┐┬ ┬┌┬┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌─┐  ┌┬┐┌─┐  ┌┬┐┬┌─┐┌─┐┌┐┌┌─┐┌─┐┌┬┐┬┌─┐┌─┐\n"),
+    print_bold_highlighted_blue("                                             └─┐│└─┐ │ ├┤ │││├─┤  ├─┤│ │ │ │ ││││├─┤ │ ││  │ │   ││├┤    │││├─┤│ ┬││││ │└─┐ │ ││  │ │\n"),
+    print_bold_highlighted_blue("                                             └─┘┴└─┘ ┴ └─┘┴ ┴┴ ┴  ┴ ┴└─┘ ┴ └─┘┴ ┴┴ ┴ ┴ ┴└─┘└─┘  ─┴┘└─┘  ─┴┘┴┴ ┴└─┘┘└┘└─┘└─┘ ┴ ┴└─┘└─┘\n\n"),
+    print_bold_highlighted_blue("                                                                                     MÉDICO\n"),                        
+
+
+    print_bold                 ("                              (1)                       (2)                      (3)                     (4)                    (5)                      (6)   \n"),
+    print_highlighted_yellow   ("                          APPOINTMENT                MEDICATION                SYMPTOM                 PATIENT              PRESCRIPTION              DIAGNOSIS\n\n"),
+    write("Opção:\n> "),
+    read_line_to_string(user_input, Option),
+    run_med(Option).
+
+
+% ===================================================================================================================================================================================================================================
+
+
+start_menu_sec:-
+    clear_screen(),
+    
+
+
+    print_bold_highlighted_black("                                                                                                                                                                          (logout) "),
+    write("→ SAIR\n"),
+    print_bold_highlighted_blue("                                                                             ███████╗ █████╗ ██████╗ \n"),
+    print_bold_highlighted_blue("                                                                             ██╔════╝██╔══██╗██╔══██╗\n"),
+    print_bold_highlighted_blue("                                                                             ███████╗███████║██║  ██║\n"),
+    print_bold_highlighted_blue("                                                                             ╚════██║██╔══██║██║  ██║\n"),
+    print_bold_highlighted_blue("                                                                             ███████║██║  ██║██████╔╝\n"),
+    print_bold_highlighted_blue("                                                                             ╚══════╝╚═╝  ╚═╝╚═════╝ \n"),                            
+    print_bold_highlighted_blue("                                             ┌─┐┬┌─┐┌┬┐┌─┐┌┬┐┌─┐  ┌─┐┬ ┬┌┬┐┌─┐┌┬┐┌─┐┌┬┐┬┌─┐┌─┐  ┌┬┐┌─┐  ┌┬┐┬┌─┐┌─┐┌┐┌┌─┐┌─┐┌┬┐┬┌─┐┌─┐\n"),
+    print_bold_highlighted_blue("                                             └─┐│└─┐ │ ├┤ │││├─┤  ├─┤│ │ │ │ ││││├─┤ │ ││  │ │   ││├┤    │││├─┤│ ┬││││ │└─┐ │ ││  │ │\n"),
+    print_bold_highlighted_blue("                                             └─┘┴└─┘ ┴ └─┘┴ ┴┴ ┴  ┴ ┴└─┘ ┴ └─┘┴ ┴┴ ┴ ┴ ┴└─┘└─┘  ─┴┘└─┘  ─┴┘┴┴ ┴└─┘┘└┘└─┘└─┘ ┴ ┴└─┘└─┘\n\n"),
+    print_bold_highlighted_blue("                                                                                   SECRETÁRIA\n"),                        
+
+
+    print_bold                 ("         (1)                       (2)                      (3)                     (4)                    (5)                      (6)                       (7)                  (8)\n"),
+    print_highlighted_yellow   ("     APPOINTMENT                MEDICATION                DISEASES                SYMPTOM                PATIENT                PRESCRIPTION                DIAGNOSIS              USERS\n\n"),
+    write("Opção:\n> "),
+    read_line_to_string(user_input, Option),
+    run_sec(Option).
+

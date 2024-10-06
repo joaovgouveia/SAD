@@ -7,18 +7,44 @@
 :- set_prolog_flag(encoding, utf8).
 :- use_module(library(system)).
 
-% USERS RUN
-run_users("1") :- menu_view_user.
-run_users("2") :- menu_view_doctor.
-run_users("3") :- menu_view_users_by_function.
-run_users("4") :- menu_view_medicos.
-run_users("5") :- menu_view_atuation.
-run_users("logout") :- exit_system.
-run_users("back") :- start_menu.
-run_users(_):- print_warning("Função não existe\n"), sleep(2), users_menu.
+% USERS RUN ADM
+run_users_adm("1") :- menu_view_user_adm.
+run_users_adm("2") :- menu_view_doctor_adm.
+run_users_adm("3") :- menu_view_users_by_function_adm.
+run_users_adm("4") :- menu_view_medicos_adm.
+run_users_adm("5") :- menu_view_atuation_adm.
+run_users_adm("logout") :- exit_system.
+run_users_adm("back") :- start_menu_adm.
+run_users_adm(_):- print_warning("Função não existe\n"), sleep(2), users_menu_adm.
+
+% USERS RUN SEC
+run_users_sec("1") :- menu_view_user_sec.
+run_users_sec("2") :- menu_view_doctor_sec.
+run_users_sec("3") :- menu_view_users_by_function_sec.
+run_users_sec("4") :- menu_view_medicos_sec.
+run_users_sec("5") :- menu_view_atuation_sec.
+run_users_sec("logout") :- exit_system.
+run_users_sec("back") :- start_menu_sec.
+run_users_sec(_):- print_warning("Função não existe\n"), sleep(2), users_menu_sec.
 
 % Menu de usuários
-users_menu :-
+users_menu_adm :-
+    clear_screen(),
+    write(" ← VOLTAR"),
+    print_bold_highlighted_black(" (back)\n"),
+  
+    print_bold_highlighted_blue("                                            ╦ ╦╔═╗╔═╗╦═╗╔═╗\n"),
+    print_bold_highlighted_blue("                                            ║ ║╚═╗║╣ ╠╦╝╚═╗\n"),
+    print_bold_highlighted_blue("                                            ╚═╝╚═╝╚═╝╩╚═╚═╝\n"), 
+    print_bold(                 "       (1)                 (2)                    (3)                       (4)                      (5)\n"),
+    print_highlighted_yellow(   "    VER USUÁRIO         VER MÉDICO        VER USUÁRIO POR FUNÇÃO        LISTA MÉDICOS      VER MEDICOS ESPECIALIDADE\n\n"),
+                                                              
+
+    write("Opção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_users(Option).
+
+users_menu_sec :-
     clear_screen(),
     write(" ← VOLTAR"),
     print_bold_highlighted_black(" (back)\n"),
@@ -42,7 +68,7 @@ get_user(Id, User) :-
     select(User, Users, _),
     get_dict(id, User, Id),!.
 
-menu_view_doctor:-
+menu_view_doctor_adm:-
     print_bold_highlighted_blue("ID MÉDICO: "),
     read_line_to_string(user_input, IdUser),
     view_doctor(IdUser),
@@ -50,7 +76,17 @@ menu_view_doctor:-
     read_line_to_string(user_input, _),
     write("\nOpção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_users(Option).
+    run_users_adm(Option).
+
+menu_view_doctor_sec:-
+    print_bold_highlighted_blue("ID MÉDICO: "),
+    read_line_to_string(user_input, IdUser),
+    view_doctor(IdUser),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_users_sec(Option).
 
 
 
@@ -77,7 +113,7 @@ view_doctor(Id) :-
     write("\n"),!.
 
 
-menu_view_user:-
+menu_view_user_adm:-
     print_bold_highlighted_blue("ID USUÁRIO: "),
     read_line_to_string(user_input, IdUser),
     view_user(IdUser),
@@ -85,7 +121,17 @@ menu_view_user:-
     read_line_to_string(user_input, _),
     write("\nOpção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_users(Option).
+    run_users_adm(Option).
+
+menu_view_user_sec:-
+    print_bold_highlighted_blue("ID USUÁRIO: "),
+    read_line_to_string(user_input, IdUser),
+    view_user(IdUser),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_users_sec(Option).
 
 % Visualiza um usuário pelo ID
 view_user(Id) :-
@@ -98,7 +144,7 @@ view_user(Id) :-
     print_bold(Text),
     write("\n"),!.
 
-menu_view_users_by_function:-
+menu_view_users_by_function_adm:-
     print_bold_highlighted_blue("FUNÇÃO USUÁRIO: "),
     read_line_to_string(user_input, Funcao),
     view_users_by_function(Funcao),
@@ -106,7 +152,17 @@ menu_view_users_by_function:-
     read_line_to_string(user_input, _),
     write("\nOpção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_users(Option).
+    run_users_adm(Option).
+
+menu_view_users_by_function_sec:-
+    print_bold_highlighted_blue("FUNÇÃO USUÁRIO: "),
+    read_line_to_string(user_input, Funcao),
+    view_users_by_function(Funcao),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_users_sec(Option).
 
 % Visualiza usuários por função
 view_users_by_function(Function) :-
@@ -135,13 +191,22 @@ format_user(User) :-
 
 
 
-menu_view_medicos:-
+menu_view_medicos_adm:-
     view_medicos,
     write("\nPressione [enter] para voltar para o menu "),
     read_line_to_string(user_input, _),
     write("\nOpção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_users(Option).
+    run_users_adm(Option).
+
+
+menu_view_medicos_sec:-
+    view_medicos,
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_users_sec(Option).
 
 % Visualiza todos os medicos
 view_medicos :-
@@ -175,13 +240,21 @@ format_medico(Medico) :-
 
 
 
-menu_view_atuation:-
+menu_view_atuation_adm:-
     view_atuation,
     write("\nPressione [enter] para voltar para o menu "),
     read_line_to_string(user_input, _),
     write("\nOpção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_users(Option).
+    run_users_adm(Option).
+
+menu_view_atuation_sec:-
+    view_atuation,
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_users_sec(Option).
 
 
 % Visualiza a atuação de medicos por especialidade

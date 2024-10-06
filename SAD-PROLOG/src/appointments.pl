@@ -1,6 +1,8 @@
 :- module(appointments, [
-    appointments_menu/0
-    ]).
+    appointments_menu_adm/0,
+    appointments_menu_med/0,
+    appointments_menu_sec/0
+]).
 
 :- use_module("../utils/utils").
 :- use_module("./userio").
@@ -11,16 +13,36 @@
 :- use_module(library(system)).
 
 
-% APPOINTMENT RUN
-run_appointment("1") :- menu_write_appointment.
-run_appointment("2") :- menu_check_schedule.
-run_appointment("3") :- menu_update_appointment.
-run_appointment("logout") :- exit_system.
-run_appointment("back") :- start_menu.
-run_appointment(_):- print_warning("Função não existe\n"), sleep(2), appointments_menu.
+% APPOINTMENT RUN ADM
+run_appointment_adm("1") :- menu_write_appointment.
+run_appointment_adm("2") :- menu_check_schedule.
+run_appointment_adm("3") :- menu_update_appointment_adm.
+run_appointment_adm("logout") :- exit_system.
+run_appointment_adm("back") :- start_menu_adm.
+run_appointment_adm(_):- print_warning("Função não existe\n"), sleep(2), appointments_menu_adm.
 
 
-appointments_menu:-
+
+% APPOINTMENT RUN MED
+run_appointment_med("1") :- menu_update_appointment_med.
+run_appointment_med("logout") :- exit_system.
+run_appointment_med("back") :- start_menu_med.
+run_appointment_med(_):- print_warning("Função não existe\n"), sleep(2), appointments_menu_med.
+
+
+
+% APPOINTMENT RUN SEC
+run_appointment_sec("1") :- menu_write_appointment.
+run_appointment_sec("2") :- menu_check_schedule.
+run_appointment_sec("3") :- menu_update_appointment_sec.
+run_appointment_sec("logout") :- exit_system.
+run_appointment_sec("back") :- start_menu_sec.
+run_appointment_sec(_):- print_warning("Função não existe\n"), sleep(2), appointments_menu_sec.
+
+
+
+
+appointments_menu_adm:-
     clear_screen(),
     write(" ← VOLTAR"),
     print_bold_highlighted_black(" (back)\n"),
@@ -28,13 +50,56 @@ appointments_menu:-
     print_bold_highlighted_blue("                                     ╔═╗╔═╗╔═╗╔═╗ ╦ ╔╗╔╔╦╗╔╦╗╔═╗╔╗╔╔╦╗\n"),
     print_bold_highlighted_blue("                                     ╠═╣╠═╝╠═╝║ ║ ║ ║║║ ║ ║║║║╣ ║║║ ║ \n"),
     print_bold_highlighted_blue("                                     ╩ ╩╩  ╩  ╚═╝ ╩ ╝╚╝ ╩ ╩ ╩╚═╝╝╚╝ ╩ \n\n"), 
-    print_bold("                     (1)                           (2)                            (3)\n"),
-    print_highlighted_yellow("              ADICIONAR CONSULTA        VER CONSULTAS DISPONÍVEIS       MUDAR STATUS DA CONSULTA\n\n"),
+    print_bold                 ("                     (1)                           (2)                            (3)\n"),
+    print_highlighted_yellow   ("              ADICIONAR CONSULTA        VER CONSULTAS DISPONÍVEIS       MUDAR STATUS DA CONSULTA\n\n"),
                                                               
 
     write("Opção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_appointment(Option).
+    run_appointment_adm(Option).
+
+% ========================================================================================================================================================
+
+appointments_menu_med:-
+    clear_screen(),
+    write(" ← VOLTAR"),
+    print_bold_highlighted_black(" (back)\n"),
+  
+    print_bold_highlighted_blue("                                     ╔═╗╔═╗╔═╗╔═╗ ╦ ╔╗╔╔╦╗╔╦╗╔═╗╔╗╔╔╦╗\n"),
+    print_bold_highlighted_blue("                                     ╠═╣╠═╝╠═╝║ ║ ║ ║║║ ║ ║║║║╣ ║║║ ║ \n"),
+    print_bold_highlighted_blue("                                     ╩ ╩╩  ╩  ╚═╝ ╩ ╝╚╝ ╩ ╩ ╩╚═╝╝╚╝ ╩ \n\n"), 
+    print_bold                 ("                                                    (1)\n"),
+    print_highlighted_yellow   ("                                         MUDAR STATUS DA CONSULTA\n\n"),
+                                                              
+
+    write("Opção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_appointment_med(Option).
+
+% ========================================================================================================================================================
+
+
+appointments_menu_sec:-
+    clear_screen(),
+    write(" ← VOLTAR"),
+    print_bold_highlighted_black(" (back)\n"),
+  
+    print_bold_highlighted_blue("                                     ╔═╗╔═╗╔═╗╔═╗ ╦ ╔╗╔╔╦╗╔╦╗╔═╗╔╗╔╔╦╗\n"),
+    print_bold_highlighted_blue("                                     ╠═╣╠═╝╠═╝║ ║ ║ ║║║ ║ ║║║║╣ ║║║ ║ \n"),
+    print_bold_highlighted_blue("                                     ╩ ╩╩  ╩  ╚═╝ ╩ ╝╚╝ ╩ ╩ ╩╚═╝╝╚╝ ╩ \n\n"), 
+    print_bold                 ("                     (1)                           (2)                            (3)\n"),
+    print_highlighted_yellow   ("              ADICIONAR CONSULTA        VER CONSULTAS DISPONÍVEIS       MUDAR STATUS DA CONSULTA\n\n"),
+                                    
+    write("Opção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_appointment_sec(Option).
+
+% ========================================================================================================================================================
+
+
+
+
+
 
 % Função auxiliar de checagem de data
 quebrar_data(DataString, Dia, Mes, Ano) :-
@@ -216,14 +281,34 @@ existe_consulta_atualizavel(IdConsulta, DadosConsultas) :-
 
 
 % menu_update_appointment
-menu_update_appointment:-
+menu_update_appointment_adm:-
     print_bold_highlighted_blue("ID CONSULTA: "),
     print_highlighted_black("Nome_do_Medico_DD/MM/AAAA_HH:MM\n "),
     read_line_to_string(user_input, IdConsulta),
     print_bold_highlighted_blue("NOVO STATUS: "),
     read_line_to_string(user_input, NovoStatus),
     update_appointment(IdConsulta, NovoStatus), sleep(2),
-    appointments_menu.
+    appointments_menu_adm.
+
+% menu_update_appointment
+menu_update_appointment_med:-
+    print_bold_highlighted_blue("ID CONSULTA: "),
+    print_highlighted_black("Nome_do_Medico_DD/MM/AAAA_HH:MM\n "),
+    read_line_to_string(user_input, IdConsulta),
+    print_bold_highlighted_blue("NOVO STATUS: "),
+    read_line_to_string(user_input, NovoStatus),
+    update_appointment(IdConsulta, NovoStatus), sleep(2),
+    appointments_menu_med.
+
+% menu_update_appointment
+menu_update_appointment_sec:-
+    print_bold_highlighted_blue("ID CONSULTA: "),
+    print_highlighted_black("Nome_do_Medico_DD/MM/AAAA_HH:MM\n "),
+    read_line_to_string(user_input, IdConsulta),
+    print_bold_highlighted_blue("NOVO STATUS: "),
+    read_line_to_string(user_input, NovoStatus),
+    update_appointment(IdConsulta, NovoStatus), sleep(2),
+    appointments_menu_sec.
 
 
 

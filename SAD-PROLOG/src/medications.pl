@@ -7,18 +7,35 @@
 :- set_prolog_flag(encoding, utf8).
 :- use_module(library(system)).
 
-% MEDICATION RUN
-run_medication("1") :- menu_create_medication.
-run_medication("2") :- menu_update_medication.
-run_medication("3") :- menu_view_medication_bula.
-run_medication("4") :- menu_list_medications.
-run_medication("5") :- menu_delete_medication.
-run_medication("logout") :- exit_system.
-run_medication("back") :- start_menu.
-run_medication(_):- print_warning("Função não existe\n"), sleep(2), medications_menu.
+% MEDICATION RUN ADM
+run_medication_adm("1") :- menu_create_medication.
+run_medication_adm("2") :- menu_update_medication.
+run_medication_adm("3") :- menu_view_medication_bula_adm.
+run_medication_adm("4") :- menu_list_medications_adm.
+run_medication_adm("5") :- menu_delete_medication.
+run_medication_adm("logout") :- exit_system.
+run_medication_adm("back") :- start_menu_adm.
+run_medication_adm(_):- print_warning("Função não existe\n"), sleep(2), medications_menu_adm.
 
 
-medications_menu :-
+% MEDICATION RUN MED
+run_medication_med("1") :- menu_view_medication_bula_med.
+run_medication_med("2") :- menu_list_medications_med.
+run_medication_med("logout") :- exit_system.
+run_medication_med("back") :- start_menu_med.
+run_medication_med(_):- print_warning("Função não existe\n"), sleep(2), medications_menu_med.
+
+
+% MEDICATION RUN SEC
+run_medication_sec("1") :- menu_view_medication_bula_sec.
+run_medication_sec("2") :- menu_list_medications_sec.
+run_medication_sec("logout") :- exit_system.
+run_medication_sec("back") :- start_menu_sec.
+run_medication_sec(_):- print_warning("Função não existe\n"), sleep(2), medications_menu_sec.
+
+
+% =====================================================================================================================================================================
+medications_menu_adm :-
     clear_screen(),
     write(" ← VOLTAR"),
     print_bold_highlighted_black(" (back)\n"),
@@ -33,7 +50,44 @@ medications_menu :-
 
     write("Opção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_medication(Option).
+    run_medication_adm(Option).
+
+% =====================================================================================================================================================================
+medications_menu_med :-
+    clear_screen(),
+    write(" ← VOLTAR"),
+    print_bold_highlighted_black(" (back)\n"),
+  
+
+    print_bold_highlighted_blue("                                     ╔╦╗╔═╗╔╦╗╦╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗\n"),
+    print_bold_highlighted_blue("                                     ║║║║╣  ║║║║  ╠═╣ ║ ║║ ║║║║╚═╗\n"),
+    print_bold_highlighted_blue("                                     ╩ ╩╚═╝═╩╝╩╚═╝╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝\n"), 
+    print_bold(                 "                                       (3)                   (4)       \n"),
+    print_highlighted_yellow(   "                                     VER BULA         LISTA MEDICAMENTO\n\n"),
+                                                              
+
+    write("Opção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_medication_med(Option).
+
+% =====================================================================================================================================================================
+medications_menu_sec :-
+    clear_screen(),
+    write(" ← VOLTAR"),
+    print_bold_highlighted_black(" (back)\n"),
+  
+
+    print_bold_highlighted_blue("                                     ╔╦╗╔═╗╔╦╗╦╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗\n"),
+    print_bold_highlighted_blue("                                     ║║║║╣  ║║║║  ╠═╣ ║ ║║ ║║║║╚═╗\n"),
+    print_bold_highlighted_blue("                                     ╩ ╩╚═╝═╩╝╩╚═╝╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝\n"), 
+    print_bold(                 "                                       (3)                   (4)       \n"),
+    print_highlighted_yellow(   "                                     VER BULA         LISTA MEDICAMENTO\n\n"),
+                                                              
+
+    write("Opção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_medication_sec(Option).
+
 
 
 menu_create_medication:-
@@ -105,7 +159,7 @@ format_medication(Medication, FormattedMedication) :-
 
 
 
-menu_view_medication_bula:-
+menu_view_medication_bula_adm:-
     print_bold_highlighted_blue("NOME MEDICAMENTO:\n "),
     read_line_to_string(user_input, NomeMed),
     print_bold_highlighted_blue("DOSAGEM:\n "),
@@ -115,7 +169,31 @@ menu_view_medication_bula:-
     read_line_to_string(user_input, _),
     write("\nOpção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_medication(Option).
+    run_medication_adm(Option).
+
+menu_view_medication_bula_med:-
+    print_bold_highlighted_blue("NOME MEDICAMENTO:\n "),
+    read_line_to_string(user_input, NomeMed),
+    print_bold_highlighted_blue("DOSAGEM:\n "),
+    read_line_to_string(user_input, Dosagem),
+    view_medication_bula(NomeMed, Dosagem),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_medication_med(Option).
+
+menu_view_medication_bula_sec:-
+    print_bold_highlighted_blue("NOME MEDICAMENTO:\n "),
+    read_line_to_string(user_input, NomeMed),
+    print_bold_highlighted_blue("DOSAGEM:\n "),
+    read_line_to_string(user_input, Dosagem),
+    view_medication_bula(NomeMed, Dosagem),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_medication_sec(Option).
 
 % Funcao principal de visualizacao da bula do medicamento
 view_medication_bula(Nome, Dosagem) :-
@@ -129,13 +207,29 @@ view_medication_bula(Nome, Dosagem) :-
     write("\n"),
     !.
 
-menu_list_medications:-
+menu_list_medications_adm:-
     list_medications,
     write("\nPressione [enter] para voltar para o menu "),
     read_line_to_string(user_input, _),
     write("\nOpção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_medication(Option).
+    run_medication_adm(Option).
+
+menu_list_medications_med:-
+    list_medications,
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_medication_med(Option).
+
+menu_list_medications_sec:-
+    list_medications,
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_medication_sec(Option).
 
 % Funcao principal de listagem de medicamentos
 list_medications :-

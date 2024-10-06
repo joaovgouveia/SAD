@@ -7,13 +7,25 @@
 :- set_prolog_flag(encoding, utf8).
 :- use_module(library(system)).
 
-% DIAGNOSIS RUN
-run_diagnosis("1") :- menu_diagnosis.
-run_diagnosis("logout") :- exit_system.
-run_diagnosis("back") :- start_menu.
-run_diagnosis(_):- print_warning("Função não existe\n"), sleep(2), diagnosis_menu.
+% DIAGNOSIS RUN ADM
+run_diagnosis_adm("1") :- menu_diagnosis.
+run_diagnosis_adm("logout") :- exit_system.
+run_diagnosis_adm("back") :- start_menu_adm.
+run_diagnosis_adm(_):- print_warning("Função não existe\n"), sleep(2), diagnosis_menu_adm.
 
-diagnosis_menu :-
+% DIAGNOSIS RUN MED
+run_diagnosis_med("1") :- menu_diagnosis.
+run_diagnosis_med("logout") :- exit_system.
+run_diagnosis_med("back") :- start_menu_med.
+run_diagnosis_med(_):- print_warning("Função não existe\n"), sleep(2), diagnosis_menu_med.
+
+% DIAGNOSIS RUN MED
+run_diagnosis_sec("1") :- menu_diagnosis.
+run_diagnosis_sec("logout") :- exit_system.
+run_diagnosis_sec("back") :- start_menu_sec.
+run_diagnosis_sec(_):- print_warning("Função não existe\n"), sleep(2), diagnosis_menu_sec.
+
+diagnosis_menu_adm :-
     clear_screen(),
     write(" ← VOLTAR"),
     print_bold_highlighted_black(" (back)\n"),
@@ -27,7 +39,43 @@ diagnosis_menu :-
 
     write("Opção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_diagnosis(Option).
+    run_diagnosis_adm(Option).
+
+% ======================================================================================================================
+
+diagnosis_menu_med :-
+    clear_screen(),
+    write(" ← VOLTAR"),
+    print_bold_highlighted_black(" (back)\n"),
+  
+    print_bold_highlighted_blue("                                       ╔╦╗╦╔═╗╔═╗╔╗╔╔═╗╔═╗╦╔═╗\n"),
+    print_bold_highlighted_blue("                                        ║║║╠═╣║ ╦║║║║ ║╚═╗║╚═╗\n"),
+    print_bold_highlighted_blue("                                       ═╩╝╩╩ ╩╚═╝╝╚╝╚═╝╚═╝╩╚═╝\n"), 
+    print_bold(                 "                                                  (1)\n"),
+    print_highlighted_yellow(   "                                           GERA DIAGNÓSTICO\n\n"),
+                                                              
+
+    write("Opção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_diagnosis_med(Option).
+
+% ======================================================================================================================
+
+diagnosis_menu_sec :-
+    clear_screen(),
+    write(" ← VOLTAR"),
+    print_bold_highlighted_black(" (back)\n"),
+  
+    print_bold_highlighted_blue("                                       ╔╦╗╦╔═╗╔═╗╔╗╔╔═╗╔═╗╦╔═╗\n"),
+    print_bold_highlighted_blue("                                        ║║║╠═╣║ ╦║║║║ ║╚═╗║╚═╗\n"),
+    print_bold_highlighted_blue("                                       ═╩╝╩╩ ╩╚═╝╝╚╝╚═╝╚═╝╩╚═╝\n"), 
+    print_bold(                 "                                                  (1)\n"),
+    print_highlighted_yellow(   "                                           GERA DIAGNÓSTICO\n\n"),
+                                                              
+
+    write("Opção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_diagnosis_sec(Option).
 
 
 filter_diseases(Symptoms, Diseases, R) :-
@@ -57,7 +105,7 @@ most_probable([D1,D2|T], Symptoms, MostProbable) :-
         most_probable([D1|T], Symptoms, MostProbable);
         most_probable([D2|T], Symptoms, MostProbable)).
 
-menu_diagnosis:-
+menu_diagnosis_adm:-
     print_bold_highlighted_blue("SINTOMA(S): \n"),
     read_line_to_string(user_input, Sintoma),
     diagnosis(Sintoma),
@@ -65,7 +113,27 @@ menu_diagnosis:-
     read_line_to_string(user_input, _),
     write("\nOpção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_diagnosis(Option).
+    run_diagnosis_adm(Option).
+
+menu_diagnosis_med:-
+    print_bold_highlighted_blue("SINTOMA(S): \n"),
+    read_line_to_string(user_input, Sintoma),
+    diagnosis(Sintoma),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_diagnosis_med(Option).
+
+menu_diagnosis_sec:-
+    print_bold_highlighted_blue("SINTOMA(S): \n"),
+    read_line_to_string(user_input, Sintoma),
+    diagnosis(Sintoma),
+    write("\nPressione [enter] para voltar para o menu "),
+    read_line_to_string(user_input, _),
+    write("\nOpção:\n> "), 
+    read_line_to_string(user_input, Option),
+    run_diagnosis_sec(Option).
 
 % Função de diagnóstico
 diagnosis(Symptoms) :- 
