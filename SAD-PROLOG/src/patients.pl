@@ -91,8 +91,8 @@ menu_create_patient_adm:-
     print_bold_highlighted_blue("IDADE:\n "),
     read_line_to_string(user_input, Age),
     create_patient(Id, Name, Age),
-    read_line_to_string(user_input, Option),
-    run_appointment_adm(Option).
+    sleep(2),
+    patients_menu_adm.
 
 menu_create_patient_sec:-
     print_bold_highlighted_blue("CPF:\n "),
@@ -102,8 +102,8 @@ menu_create_patient_sec:-
     print_bold_highlighted_blue("IDADE:\n "),
     read_line_to_string(user_input, Age),
     create_patient(Id, Name, Age),
-    read_line_to_string(user_input, Option),
-    run_appointment_sec(Option).
+    sleep(2),
+    patients_menu_sec.
 
 % Cria um paciente
 create_patient(Id, Name, Age):-
@@ -123,11 +123,10 @@ create_patient(Id, Name, Age):-
 menu_update_patient_adm:-
     print_bold_highlighted_blue("CPF:\n "),
     read_line_to_string(user_input, Id),
-    print_bold_highlighted_blue("NOME:\n "),
+    print_bold_highlighted_blue("NOVO NOME:\n "),
     read_line_to_string(user_input, Nome),
-    update_patient(Id, Nome),
-    read_line_to_string(user_input, Option),
-    run_appointment_adm(Option).
+    update_patient(Id, Nome),sleep(2),
+    patients_menu_adm.
 
 
 menu_update_patient_sec:-
@@ -136,8 +135,8 @@ menu_update_patient_sec:-
     print_bold_highlighted_blue("NOVO NOME:\n "),
     read_line_to_string(user_input, Nome),
     update_patient(Id, Nome),
-    read_line_to_string(user_input, Option),
-    run_appointment_sec(Option).
+    sleep(2),
+    patients_menu_sec.
 
 % Atualiza um paciente
 update_patient(Id, Name):-
@@ -149,7 +148,6 @@ update_patient(Id, Name):-
     append(Rest, [NewPatient], NewData),
     print_success("PACIENTE ATUALIZADO COM SUCESSO!\n"),
     write_json("../db/patients.JSON", NewData),!.
-
 
 menu_read_patient_adm:-
     print_bold_highlighted_blue("CPF:\n "),
@@ -203,15 +201,15 @@ menu_delete_patient_adm:-
     print_bold_highlighted_blue("CPF:\n "),
     read_line_to_string(user_input, Id),
     delete_patient(Id),
-    read_line_to_string(user_input, Option),
-    run_appointment_adm(Option).
+    sleep(2),
+    patients_menu_adm.
 
 menu_delete_patient_sec:-
     print_bold_highlighted_blue("CPF:\n "),
     read_line_to_string(user_input, Id),
     delete_patient(Id),
-    read_line_to_string(user_input, Option),
-    run_appointment_sec(Option).
+    sleep(2),
+    patients_menu_sec.
 
 % Deleta um paciente
 delete_patient(Id):-

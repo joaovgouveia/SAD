@@ -49,7 +49,7 @@ users_menu_adm :-
 
     write("Opção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_users(Option).
+    run_users_adm(Option).
 
 users_menu_sec :-
     clear_screen(),
@@ -64,7 +64,7 @@ users_menu_sec :-
 
     write("Opção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_users(Option).
+    run_users_sec(Option).
 
 % Busca um usuário pelo ID
 get_user(Id, User) :-

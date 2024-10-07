@@ -226,7 +226,7 @@ menu_write_appointment:-
     print_bold_highlighted_blue("CPF:\n "),
     read_line_to_string(user_input, IdPaciente),    
     write_appointment(Medico, Data, Horario, Diagnostico, IdPaciente), sleep(2),    
-    appointments_menu.
+    appointments_menu_adm.
 
 
 % Função principal de criação de consulta
@@ -522,7 +522,7 @@ menu_check_schedule:-
     read_line_to_string(user_input, _),
     write("\nOpção:\n> "), 
     read_line_to_string(user_input, Option),
-    run_appointment(Option).
+    run_appointment_adm(Option).
 
 
 

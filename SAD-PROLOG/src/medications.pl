@@ -19,14 +19,12 @@ run_medication_adm("logout") :- exit_system.
 run_medication_adm("back") :- start_menu_adm.
 run_medication_adm(_):- print_warning("Função não existe\n"), sleep(2), medications_menu_adm.
 
-
 % MEDICATION RUN MED
 run_medication_med("1") :- menu_view_medication_bula_med.
 run_medication_med("2") :- menu_list_medications_med.
 run_medication_med("logout") :- exit_system.
 run_medication_med("back") :- start_menu_med.
 run_medication_med(_):- print_warning("Função não existe\n"), sleep(2), medications_menu_med.
-
 
 % MEDICATION RUN SEC
 run_medication_sec("1") :- menu_view_medication_bula_sec.
@@ -35,20 +33,17 @@ run_medication_sec("logout") :- exit_system.
 run_medication_sec("back") :- start_menu_sec.
 run_medication_sec(_):- print_warning("Função não existe\n"), sleep(2), medications_menu_sec.
 
-
 % =====================================================================================================================================================================
 medications_menu_adm :-
     clear_screen(),
     write(" ← VOLTAR"),
     print_bold_highlighted_black(" (back)\n"),
-  
 
     print_bold_highlighted_blue("                                     ╔╦╗╔═╗╔╦╗╦╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗\n"),
     print_bold_highlighted_blue("                                     ║║║║╣  ║║║║  ╠═╣ ║ ║║ ║║║║╚═╗\n"),
     print_bold_highlighted_blue("                                     ╩ ╩╚═╝═╩╝╩╚═╝╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝\n"), 
     print_bold(                 "        (1)                    (2)                   (3)                   (4)                          (5)\n"),
-    print_highlighted_yellow(   "ADICIONAR MEDICAÇÃO       ATUALIZAR BULA           VER BULA         LISTA MEDICAMENTO           REMOVE MEDICAMENTO\n\n"),
-                                                              
+    print_highlighted_yellow(   "ADICIONAR MEDICAÇÃO       ATUALIZAR BULA           VER BULA         LISTA MEDICAMENTO           REMOVE MEDICAMENTO\n\n"),                                                         
 
     write("Opção:\n> "), 
     read_line_to_string(user_input, Option),
@@ -59,14 +54,13 @@ medications_menu_med :-
     clear_screen(),
     write(" ← VOLTAR"),
     print_bold_highlighted_black(" (back)\n"),
-  
+
 
     print_bold_highlighted_blue("                                     ╔╦╗╔═╗╔╦╗╦╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗\n"),
     print_bold_highlighted_blue("                                     ║║║║╣  ║║║║  ╠═╣ ║ ║║ ║║║║╚═╗\n"),
     print_bold_highlighted_blue("                                     ╩ ╩╚═╝═╩╝╩╚═╝╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝\n"), 
     print_bold(                 "                                       (3)                   (4)       \n"),
-    print_highlighted_yellow(   "                                     VER BULA         LISTA MEDICAMENTO\n\n"),
-                                                              
+    print_highlighted_yellow(   "                                     VER BULA         LISTA MEDICAMENTO\n\n"),                                               
 
     write("Opção:\n> "), 
     read_line_to_string(user_input, Option),
@@ -77,20 +71,16 @@ medications_menu_sec :-
     clear_screen(),
     write(" ← VOLTAR"),
     print_bold_highlighted_black(" (back)\n"),
-  
 
     print_bold_highlighted_blue("                                     ╔╦╗╔═╗╔╦╗╦╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗\n"),
     print_bold_highlighted_blue("                                     ║║║║╣  ║║║║  ╠═╣ ║ ║║ ║║║║╚═╗\n"),
     print_bold_highlighted_blue("                                     ╩ ╩╚═╝═╩╝╩╚═╝╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝\n"), 
     print_bold(                 "                                       (3)                   (4)       \n"),
-    print_highlighted_yellow(   "                                     VER BULA         LISTA MEDICAMENTO\n\n"),
-                                                              
+    print_highlighted_yellow(   "                                     VER BULA         LISTA MEDICAMENTO\n\n"),                                                 
 
     write("Opção:\n> "), 
     read_line_to_string(user_input, Option),
     run_medication_sec(Option).
-
-
 
 menu_create_medication:-
     print_bold_highlighted_blue("NOME MEDICAMENTO:\n "),
@@ -100,8 +90,7 @@ menu_create_medication:-
     print_bold_highlighted_blue("DOSAGEM:\n "),
     read_line_to_string(user_input, Dosagem),
     create_medication(NomeMed, Bula, Dosagem), sleep(2),
-    medications_menu.
-
+    medications_menu_adm.
 
 % Funcao principal de criacao de medicamento
 create_medication(Nome, Bula, Dosagem):-
@@ -120,7 +109,6 @@ eh_medicamento(Nome, Dosagem, Medications) :-
     get_dict(nome, Medication, Nome),
     get_dict(dosagem, Medication, Dosagem).
 
-
 menu_update_medication:-
     print_bold_highlighted_blue("NOME MEDICAMENTO:\n "),
     read_line_to_string(user_input, NomeMed),
@@ -129,8 +117,7 @@ menu_update_medication:-
     print_bold_highlighted_blue("NOVA BULA:\n "),
     read_line_to_string(user_input, NewBula),
     update_medication(NomeMed, Dosagem, NewBula), sleep(2),
-    medications_menu.
-
+    medications_menu_adm.
 
 % Funcao principal de atualizacao da bula de um medicamento
 update_medication(Nome, Dosagem, NewBula) :-
@@ -145,7 +132,6 @@ update_medication(Nome, Dosagem, NewBula) :-
     print_success("BULA DA MEDICAÇÃO ATUALIZADA COM SUCESSO!\n"),
     !.
 
-
 format_medications([], Formatted, Formatted).
 format_medications([Medication|Rest], FormattedTemp, FormattedResult) :-
     format_medication(Medication, FormattedMedication),
@@ -158,8 +144,6 @@ format_medication(Medication, FormattedMedication) :-
     get_dict(bula, Medication, Bula),
     format(string(FormattedMedication), "\nMedicamento: ~w\nDosagem: ~w\nBula: ~w\n",
            [Nome, Dosagem, Bula]).
-
-
 
 menu_view_medication_bula_adm:-
     print_bold_highlighted_blue("NOME MEDICAMENTO:\n "),
@@ -246,7 +230,7 @@ menu_delete_medication:-
     print_bold_highlighted_blue("DOSAGEM:\n "),
     read_line_to_string(user_input, Dosagem),
     delete_medication(NomeMed, Dosagem), sleep(2),
-    medications_menu.
+    medications_menu_adm.
 
 
 % Funcao principal de remocao de medicamentos

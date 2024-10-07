@@ -10,19 +10,19 @@
 :- use_module(library(system)).
 
 % DIAGNOSIS RUN ADM
-run_diagnosis_adm("1") :- menu_diagnosis.
+run_diagnosis_adm("1") :- menu_diagnosis_adm.
 run_diagnosis_adm("logout") :- exit_system.
 run_diagnosis_adm("back") :- start_menu_adm.
 run_diagnosis_adm(_):- print_warning("Função não existe\n"), sleep(2), diagnosis_menu_adm.
 
 % DIAGNOSIS RUN MED
-run_diagnosis_med("1") :- menu_diagnosis.
+run_diagnosis_med("1") :- menu_diagnosis_sec.
 run_diagnosis_med("logout") :- exit_system.
 run_diagnosis_med("back") :- start_menu_med.
 run_diagnosis_med(_):- print_warning("Função não existe\n"), sleep(2), diagnosis_menu_med.
 
 % DIAGNOSIS RUN MED
-run_diagnosis_sec("1") :- menu_diagnosis.
+run_diagnosis_sec("1") :- menu_diagnosis_med.
 run_diagnosis_sec("logout") :- exit_system.
 run_diagnosis_sec("back") :- start_menu_sec.
 run_diagnosis_sec(_):- print_warning("Função não existe\n"), sleep(2), diagnosis_menu_sec.
