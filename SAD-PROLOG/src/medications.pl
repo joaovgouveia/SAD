@@ -59,7 +59,7 @@ medications_menu_med :-
     print_bold_highlighted_blue("                                     ╔╦╗╔═╗╔╦╗╦╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗\n"),
     print_bold_highlighted_blue("                                     ║║║║╣  ║║║║  ╠═╣ ║ ║║ ║║║║╚═╗\n"),
     print_bold_highlighted_blue("                                     ╩ ╩╚═╝═╩╝╩╚═╝╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝\n"), 
-    print_bold(                 "                                       (3)                   (4)       \n"),
+    print_bold(                 "                                       (1)                   (2)       \n"),
     print_highlighted_yellow(   "                                     VER BULA         LISTA MEDICAMENTO\n\n"),                                               
 
     write("Opção:\n> "), 
@@ -75,7 +75,7 @@ medications_menu_sec :-
     print_bold_highlighted_blue("                                     ╔╦╗╔═╗╔╦╗╦╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗\n"),
     print_bold_highlighted_blue("                                     ║║║║╣  ║║║║  ╠═╣ ║ ║║ ║║║║╚═╗\n"),
     print_bold_highlighted_blue("                                     ╩ ╩╚═╝═╩╝╩╚═╝╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝\n"), 
-    print_bold(                 "                                       (3)                   (4)       \n"),
+    print_bold(                 "                                       (1)                   (2)       \n"),
     print_highlighted_yellow(   "                                     VER BULA         LISTA MEDICAMENTO\n\n"),                                                 
 
     write("Opção:\n> "), 

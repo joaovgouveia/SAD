@@ -276,9 +276,7 @@ update_status(IdConsulta, NovoStatus, DadosConsultas) :-
 existe_consulta_atualizavel(IdConsulta, DadosConsultas) :-
     member(Doc, DadosConsultas),
     get_dict(id_consulta, Doc, IdConsulta),
-    get_dict(status_consulta, Doc, StatusConsulta),
-    StatusConsulta == "Em andamento".
-
+    get_dict(status_consulta, Doc, "Em andamento").
 
 % menu_update_appointment
 menu_update_appointment_adm:-
@@ -309,8 +307,6 @@ menu_update_appointment_sec:-
     read_line_to_string(user_input, NovoStatus),
     update_appointment(IdConsulta, NovoStatus), sleep(2),
     appointments_menu_sec.
-
-
 
 % Função principal de atualização de consulta
 update_appointment(IdConsulta, NovoStatus) :-
@@ -524,9 +520,6 @@ menu_check_schedule:-
     read_line_to_string(user_input, Option),
     run_appointment_adm(Option).
 
-
-
-
 % Função principal de criação de tabela de horários disponíveis para atendimento
 check_schedule(Medico) :-
     (eh_medico(Medico) -> true ; print_error("MÉDICO NÃO ENCONTRADO OU NÃO É MÉDICO\n")),
@@ -541,7 +534,3 @@ check_schedule(Medico) :-
     print_highlighted_blue(Tittle),
     print_bold_highlighted_blue(FormattedDays),
     !.
-
-
-
-
