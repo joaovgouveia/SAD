@@ -78,5 +78,101 @@
     "medicamento_frequencia": "uma vez ao dia",
     "medicamento_tipo": "Anti-histamínico",
     "medicamento_observacoes": "Menos propenso a causar sonolência comparado a outros anti-histamínicos."
+  },
+  {
+    "sintoma": "convulsoes",
+    "medicamento_nome": "Diazepam",
+    "medicamento_dosagem": "5-10 mg",
+    "medicamento_frequencia": "segundo orientação médica",
+    "medicamento_tipo": "Anticonvulsivante",
+    "medicamento_observacoes": "Somente sob orientação médica. Pode causar sonolência."
+  },
+  {
+    "sintoma": "tontura",
+    "medicamento_nome": "Meclizina",
+    "medicamento_dosagem": "25-50 mg",
+    "medicamento_frequencia": "uma vez ao dia",
+    "medicamento_tipo": "Antivertiginoso",
+    "medicamento_observacoes": "Pode causar sonolência."
+  },
+  {
+    "sintoma": "dor_nas_costas",
+    "medicamento_nome": "Naproxeno",
+    "medicamento_dosagem": "250-500 mg",
+    "medicamento_frequencia": "a cada 12 horas",
+    "medicamento_tipo": "Anti-inflamatório",
+    "medicamento_observacoes": "Não exceder 1000 mg por dia."
+  },
+  {
+    "sintoma": "desmaio",
+    "medicamento_nome": "Hidratante e descanso",
+    "medicamento_dosagem": "N/A",
+    "medicamento_frequencia": "N/A",
+    "medicamento_tipo": "Descanso",
+    "medicamento_observacoes": "Consultar um médico para avaliação detalhada."
+  },
+  {
+    "sintoma": "vomitos",
+    "medicamento_nome": "Metoclopramida",
+    "medicamento_dosagem": "10 mg",
+    "medicamento_frequencia": "a cada 8 horas",
+    "medicamento_tipo": "Antiemético",
+    "medicamento_observacoes": "Somente sob orientação médica."
+  },
+  {
+    "sintoma": "inchaco",
+    "medicamento_nome": "Ibuprofeno",
+    "medicamento_dosagem": "400 mg",
+    "medicamento_frequencia": "a cada 6-8 horas",
+    "medicamento_tipo": "Anti-inflamatório",
+    "medicamento_observacoes": "Não exceder 1200 mg por dia."
+  },
+  {
+    "sintoma": "dor_no_peito",
+    "medicamento_nome": "Aspirina",
+    "medicamento_dosagem": "75-325 mg",
+    "medicamento_frequencia": "uma vez ao dia",
+    "medicamento_tipo": "Antiplaquetário",
+    "medicamento_observacoes": "Somente sob orientação médica."
+  },
+  {
+    "sintoma": "vontade_de_urinar",
+    "medicamento_nome": "Oxibutinina",
+    "medicamento_dosagem": "5 mg",
+    "medicamento_frequencia": "2-3 vezes ao dia",
+    "medicamento_tipo": "Anticolinérgico",
+    "medicamento_observacoes": "Somente sob orientação médica."
+  },
+  {
+    "sintoma": "falta_de_ar",
+    "medicamento_nome": "Salbutamol",
+    "medicamento_dosagem": "100 mcg",
+    "medicamento_frequencia": "conforme necessário",
+    "medicamento_tipo": "Broncodilatador",
+    "medicamento_observacoes": "Usar sob orientação médica."
+  },
+  {
+    "sintoma": "urina_com_sangue",
+    "medicamento_nome": "Nitrofurantoína",
+    "medicamento_dosagem": "100 mg",
+    "medicamento_frequencia": "2 vezes ao dia",
+    "medicamento_tipo": "Antibiótico",
+    "medicamento_observacoes": "Somente sob orientação médica."
+  },
+  {
+    "sintoma": "ganho_de_peso",
+    "medicamento_nome": "Orlistat",
+    "medicamento_dosagem": "120 mg",
+    "medicamento_frequencia": "3 vezes ao dia",
+    "medicamento_tipo": "Inibidor de lipase",
+    "medicamento_observacoes": "Somente sob orientação médica."
+  },
+  {
+    "sintoma": "tremores",
+    "medicamento_nome": "Propranolol",
+    "medicamento_dosagem": "10-40 mg",
+    "medicamento_frequencia": "2-3 vezes ao dia",
+    "medicamento_tipo": "Betabloqueador",
+    "medicamento_observacoes": "Somente sob orientação médica."
   }
 ]
