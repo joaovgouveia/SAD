@@ -155,7 +155,7 @@ menu_diagnosis_sec:-
     ;
     print_error("NÚMERO INDEVIDO DE SINTOMAS INFORMADOS\n"), sleep(2), diagnosis_menu_sec).
 
-generate_symptoms_list(0, []).
+generate_symptoms_list(0, []) :- !.
 generate_symptoms_list(N, [S|Rest]) :-
     print_bold_highlighted_blue("SINTOMA: "),
     read_line_to_string(user_input, S),
